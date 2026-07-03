@@ -22,6 +22,15 @@
         /* BACKGROUND CANVAS */
         #bgCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 
+        /* PRE-FOOTER LINK (CRIAÇÃO DE SITES) */
+        #pre-footer-link {
+            position: fixed; bottom: 32px; width: 100%; text-align: center;
+            font-size: 0.8rem; color: rgba(255, 255, 255, 0.25); z-index: 50;
+            cursor: pointer; transition: color 0.3s, transform 0.3s;
+            text-decoration: none; font-style: italic; letter-spacing: 0.5px;
+        }
+        #pre-footer-link:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); transform: scale(1.02); }
+
         /* BOTÕES GLOBAIS (HAMBÚRGUER E ÍCONE HUB) */
         #hamburger-btn {
             position: fixed; top: 28px; left: 25px; width: 30px; height: 22px;
@@ -77,7 +86,7 @@
         }
         #classic-menu-overlay a:hover { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); transform: scale(1.08); }
 
-        /* MENU 3D (ENGRENAGEM / LETREIRO - BORDAS DESTACADAS) */
+        /* MENU 3D (ENGRENAGEM / LETREIRO) */
         #menu-wrapper {
             position: fixed; top: 0; width: 100%; height: 80px;
             background: rgba(3, 5, 10, 0.85); backdrop-filter: blur(5px);
@@ -120,7 +129,7 @@
         }
         .slide.passed { opacity: 0; transform: translateZ(1500px) scale(2); pointer-events: none; }
 
-        /* CUSTOMIZAÇÃO DE TEXTOS E SCROLL */
+        /* SCROLL BAR */
         .slide::-webkit-scrollbar { width: 8px; }
         .slide::-webkit-scrollbar-thumb { background: var(--neon-green); border-radius: 4px; }
         
@@ -219,28 +228,39 @@
         .whatsapp-btn { border-color: #25D366; color: #25D366; display: flex; justify-content: center; align-items: center; }
         .whatsapp-btn:hover { background: #25D366 !important; color: var(--dark-bg) !important; box-shadow: 0 0 20px rgba(37,211,102,0.6); border-color: #25D366;}
 
-        /* RESPONSIVIDADE ULTRA-FLEXÍVEL E CORREÇÕES DO MENU 3D PARA MOBILE */
+        /* RESPONSIVIDADE OTIMIZADA PARA O EFEITO ZOOMED-OUT */
         @media (max-width: 768px) {
-            .slide { width: 88%; padding: 30px 20px; max-height: 80vh; margin-top: 40px; }
-            h1 { font-size: 1.8rem; } h2 { font-size: 1.3rem; } p, ul { font-size: 0.95rem; }
-            .services-grid, .hub-grid, .contact-grid, .content-split, .compact-grid { grid-template-columns: 1fr; gap: 15px; margin-top: 20px; }
+            /* Deixa o card centralizado e com respiro nas bordas laterais para parecer menor e mais limpo */
+            .slide { width: 92%; padding: 30px 25px; max-height: 80vh; margin-top: 35px; }
+            h1 { font-size: 1.6rem; } 
+            h2 { font-size: 1.1rem; margin-bottom: 20px;} 
+            p, ul { font-size: 0.9rem; } /* Textos levemente menores */
+            
+            .services-grid, .hub-grid, .contact-grid, .content-split, .compact-grid { grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
+            
+            /* Cards de serviços enxutos */
             .service-card { padding: 15px; }
-            .cta-button, .cta-secondary { display: block; text-align: center; padding: 15px 20px; width: 100%; box-sizing: border-box; }
-            #classic-menu-overlay a { font-size: 1.2rem; }
-            .slide-footer-row { flex-direction: column; text-align: center; gap: 15px; }
+            .service-card h3 { font-size: 1rem; margin-bottom: 8px;}
+            .service-card::after { opacity: 0.8; transform: translateX(0); font-size: 1.2rem;} /* Setas visíveis no mobile */
+
+            /* Botões organizados */
+            .cta-button, .cta-secondary { display: block; text-align: center; padding: 12px 20px; width: 100%; box-sizing: border-box; font-size: 0.85rem;}
+            .slide-footer-row { flex-direction: column; text-align: center; gap: 10px; }
             .form-actions { flex-direction: column; }
+            
+            #classic-menu-overlay a { font-size: 1.1rem; }
             #fixed-contact-btn { bottom: 20px; right: 20px; padding: 10px 15px; font-size: 0.8rem; border-width: 1px;}
+            #pre-footer-link { bottom: 35px; font-size: 0.75rem; padding: 0 10px; line-height: 1.4;}
             #biotech-btn { top: 22px; right: 20px; width: 30px; height: 30px; }
         }
+        
         @media (max-width: 480px) {
-            h1 { font-size: 1.5rem; } h2 { font-size: 1.1rem; }
-            .slide { padding: 25px 15px; max-height: 75vh; }
-            #hamburger-btn { left: 15px; top: 25px;}
-            #biotech-btn { right: 15px; top: 20px;}
-            .form-control { font-size: 0.9rem; padding: 8px 12px; }
-            #classic-menu-overlay a { font-size: 1.1rem; letter-spacing: 1px; }
-            
-            /* Ajuste drástico na largura dos itens do menu para não sobrepor */
+            h1 { font-size: 1.4rem; } 
+            h2 { font-size: 1rem; }
+            .slide { padding: 25px 20px; max-height: 75vh; }
+            #hamburger-btn { left: 20px; top: 25px;}
+            #biotech-btn { right: 20px; top: 20px;}
+            .form-control { font-size: 0.85rem; padding: 8px 12px; }
             .menu-item { width: 160px; left: -80px; font-size: 0.75rem; }
         }
     </style>
@@ -264,6 +284,10 @@
     </a>
 
     <a id="fixed-contact-btn" onclick="navigateTo(3)">💬 Solicitar Orçamento</a>
+
+    <a id="pre-footer-link" onclick="navigateTo(18)">
+        Gostou do meu site? Eu posso fazer um para o seu negócio! Clique aqui e peça o seu!
+    </a>
 
     <div id="classic-menu-overlay">
         <a onclick="navigateFromClassic(0)">Início</a>
@@ -511,7 +535,7 @@
             </div>
             <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
                 <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
-                <a onclick="navigateTo(19)" class="cta-button" style="margin-top: 0;">Contato Web Design</a>
+                <a onclick="navigateTo(19)" class="cta-button" style="margin-top: 0; border-color: var(--neon-blue); color: var(--neon-blue);">Contato Web Design</a>
             </div>
         </div>
 
@@ -755,7 +779,7 @@
                     </ul>
                     <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
                         <a onclick="navigateTo(6)" class="cta-secondary" style="margin-top: 0;">Ver Mais</a>
-                        <a onclick="navigateTo(19)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                     </div>
                 </div>
                 <div>
@@ -859,9 +883,9 @@
         // ==========================================
         document.addEventListener("DOMContentLoaded", () => {
             const footerHTML = `
-                <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(0, 255, 204, 0.2); text-align: center;">
-                    <p style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.2); margin: 0;">
-                        &copy; 2026 Mike Jonathan dos Santos Brito - Engenheiro de Biotecnologia | CREA-SP: 5071801530<span style="display:none"></span>
+                <div style="margin-top: 50px; padding-top: 20px; padding-bottom: 70px; border-top: 1px solid rgba(0, 255, 204, 0.2); text-align: center;">
+                    <p style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.2); margin: 0; line-height: 1.5;">
+                        &copy; 2026 Mike Jonathan dos Santos Brito<br>Engenheiro de Biotecnologia | CREA-SP: 5071801530<span style="display:none"></span>
                     </p>
                 </div>
             `;
@@ -948,7 +972,6 @@
             }
             currentSlide = index;
 
-            // Altera a cor do ícone SVG se estiver no Catálogo Geral (2)
             const biotechBtn = document.getElementById('biotech-btn');
             if(index === 2) { biotechBtn.classList.add('active-dna'); } 
             else { biotechBtn.classList.remove('active-dna'); }
@@ -971,18 +994,15 @@
             { id: 20, text: "Credenciais" }, { id: 3, text: "Contato" }
         ];
 
-        // Removida a duplicação - 8 itens cabem perfeitamente num círculo visual com o raio correto
         const carouselData = [...menuItensConfig]; 
         const carouselEl = document.getElementById('carousel');
         
-        // Ajuste dinâmico do raio para responsividade
         const setRadius = () => {
             if (window.innerWidth <= 480) return 240;
             if (window.innerWidth <= 768) return 300;
             return 350;
         };
         let radius = setRadius();
-        
         const theta = 360 / carouselData.length; 
 
         function buildCarousel() {
