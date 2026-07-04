@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioteka Soluções</title>
+    <meta name="description" content="Consultoria em Engenharia Biotecnológica: Adequação Regulatória, Otimização de Bioprocessos, Perícia Judicial, Análise de Dados e Soluções Digitais sob medida.">
+    <style>
+        /* RESET E VARIÁVEIS MODERNAS */
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-green: #00ffcc;
+            --dark-bg: #03050a;
+            --slide-bg: #0a111a; 
+        }
+        body, html {
+            margin: 0; padding: 0; width: 100vw; height: 100vh; overflow: hidden;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--dark-bg); color: #ffffff;
+            user-select: none; -webkit-user-select: none;
+        }
+
+        /* BACKGROUND CANVAS */
+        #bgCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;}
+
+        /* ==========================================
+           TELA DE ABERTURA (SPLASH SCREEN VIDRO)
+           ========================================== */
+        #splash-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 9999; display: flex; flex-direction: column;
+            cursor: pointer; overflow: hidden;
+        }
+        .splash-panel {
+            position: absolute; left: 0; width: 100%; height: 50vh;
+            background: rgba(0, 255, 204, 0.05);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .splash-top {
+            top: 0; border-bottom: 2px solid var(--neon-green);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
+        }
+        .splash-bottom {
+            bottom: 0; border-top: 2px solid var(--neon-green);
+            box-shadow: 0 -10px 30px rgba(0, 255, 204, 0.15);
+        }
+        
+        /* NOVO LAYOUT DO CONTEÚDO DO SPLASH PARA ALINHAMENTO NA LINHA */
+        .splash-content-wrapper {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
+            display: flex; flex-direction: column; z-index: 10000; pointer-events: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .splash-text-top {
+            height: 50vh; display: flex; align-items: flex-end; justify-content: center;
+            padding-bottom: 10px; box-sizing: border-box; text-align: center;
+        }
+        .splash-text-bottom {
+            height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            padding-top: 20px; box-sizing: border-box; text-align: center;
+        }
+
+        .splash-text-top h1 { font-size: 3.8rem; color: var(--neon-blue); text-shadow: 0 0 20px rgba(0, 243, 255, 0.6); margin: 0; letter-spacing: 2px; line-height: 1;}
+        .splash-text-bottom p { font-size: 1.2rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 3px; margin: 0; text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);}
+        .tap-text { display: block; font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 40px; animation: pulseAlpha 2s infinite; text-transform: uppercase; letter-spacing: 1px;}
+
+        @keyframes pulseAlpha { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        /* Animação de Divisão */
+        #splash-screen.splitting .splash-content-wrapper { opacity: 0; transform: scale(0.9); }
+        #splash-screen.splitting .splash-top { transform: translateY(-100%); }
+        #splash-screen.splitting .splash-bottom { transform: translateY(100%); }
+
+        /* MENU 3D (ENGRENAGEM / LETREIRO - NO TOPO ABSOLUTO) */
+        #menu-wrapper {
+            position: fixed; top: 0; width: 100%; height: 60px;
+            background: rgba(3, 5, 10, 0.85); backdrop-filter: blur(5px);
+            border-top: 2px solid rgba(0, 255, 204, 0.5); border-bottom: 2px solid rgba(0, 255, 204, 0.5);
+            box-shadow: 0 10px 25px -10px rgba(0, 255, 204, 0.3), inset 0 10px 25px -10px rgba(0, 255, 204, 0.15);
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 15%, black 85%, transparent 100%);
+            mask-image: linear-gradient(90deg, transparent 0%, black 15%, black 85%, transparent 100%);
+            z-index: 100; perspective: 1200px; display: flex; align-items: center; justify-content: center;
+            overflow: hidden; touch-action: none; cursor: grab;
+        }
+        #menu-wrapper:active { cursor: grabbing; }
+        
+        #carousel { position: relative; width: 0; height: 0; transform-style: preserve-3d; transform: translateZ(-500px); }
+        .menu-item {
+            position: absolute; top: -20px; left: -100px; width: 200px; height: 40px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            color: rgba(255, 255, 255, 0.6); font-weight: 600; font-size: 0.85rem; 
+            text-transform: uppercase; letter-spacing: 2px; cursor: pointer; text-align: center; 
+            backface-visibility: hidden; transition: color 0.15s linear, text-shadow 0.15s linear; 
+            will-change: color, text-shadow;
+        }
+        .menu-item svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;}
+        .menu-item:hover { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); }
+        .menu-item.active { color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue); }
+
+        /* LOGOTIPO DO SITE COM BASE 3D */
+        #logo-wrapper {
+            position: fixed; top: 65px; left: 0; width: 100%; height: 100px;
+            display: flex; align-items: center; justify-content: center; z-index: 200; perspective: 800px;
+        }
+        .logo-3d-base {
+            position: absolute; width: 280px; height: 280px;
+            border: 2px solid rgba(0, 255, 204, 0.1); border-top: 2px solid var(--neon-blue); border-bottom: 2px solid var(--neon-green);
+            border-radius: 50%; transform: rotateX(75deg); box-shadow: 0 0 15px rgba(0, 243, 255, 0.2), inset 0 0 15px rgba(0, 243, 255, 0.2);
+            animation: rotateBase 10s linear infinite; pointer-events: none;
+        }
+        .logo-3d-base-inner {
+            position: absolute; width: 240px; height: 240px; border: 1px dashed rgba(0, 255, 204, 0.4); border-radius: 50%; 
+            transform: rotateX(75deg); animation: rotateBaseReverse 15s linear infinite; pointer-events: none;
+        }
+        @keyframes rotateBase { 0% { transform: rotateX(75deg) rotateZ(0deg); } 100% { transform: rotateX(75deg) rotateZ(360deg); } }
+        @keyframes rotateBaseReverse { 0% { transform: rotateX(75deg) rotateZ(360deg); } 100% { transform: rotateX(75deg) rotateZ(0deg); } }
+
+        #site-logo {
+            position: relative; z-index: 200; font-size: 2.3rem; font-weight: 900; 
+            text-transform: uppercase; letter-spacing: 2px; cursor: pointer; 
+            white-space: nowrap; display: flex; gap: 8px; transition: transform 0.3s;
+        }
+        #site-logo:hover { transform: scale(1.05); }
+        .logo-blue { color: var(--neon-blue); text-shadow: 0 0 12px rgba(0, 243, 255, 0.6); }
+        .logo-green { color: var(--neon-green); text-shadow: 0 0 12px rgba(0, 255, 204, 0.6); }
+
+        /* BOTÕES GLOBAIS */
+        #hamburger-btn {
+            position: fixed; top: 19px; left: 25px; width: 30px; height: 22px;
+            z-index: 200; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
+        }
+        #hamburger-btn span {
+            display: block; height: 3px; width: 100%; background: var(--neon-green);
+            border-radius: 3px; transition: all 0.3s ease-in-out; box-shadow: 0 0 5px var(--neon-green);
+        }
+        #hamburger-btn.open span:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
+        #hamburger-btn.open span:nth-child(2) { opacity: 0; }
+        #hamburger-btn.open span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
+
+        @keyframes pulseNeon {
+            0%, 100% { color: var(--neon-green); filter: drop-shadow(0 0 5px rgba(0, 255, 204, 0.4)); }
+            50% { color: var(--neon-blue); filter: drop-shadow(0 0 10px var(--neon-blue)); }
+        }
+        #biotech-btn {
+            position: fixed; top: 13px; right: 25px; width: 35px; height: 35px;
+            cursor: pointer; z-index: 200; transition: transform 0.3s, filter 0.3s, color 0.3s;
+            display: flex; align-items: center; justify-content: center; color: var(--neon-green);
+        }
+        #biotech-btn:not(.active-dna) { animation: pulseNeon 2.5s infinite; }
+        #biotech-btn svg { width: 100%; height: 100%; stroke: currentColor; }
+        #biotech-btn.active-dna { color: var(--neon-blue); filter: drop-shadow(0 0 12px var(--neon-blue)); animation: none; }
+        #biotech-btn:hover { transform: translateY(-3px) scale(1.05); }
+
+        #fixed-contact-btn {
+            position: fixed; bottom: 30px; right: 30px; background: rgba(0, 255, 204, 0.1);
+            color: var(--neon-green); border: 2px solid var(--neon-green); padding: 12px 25px;
+            border-radius: 30px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 1px; cursor: pointer; z-index: 150; transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.2); backdrop-filter: blur(5px);
+            display: flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+        #fixed-contact-btn:hover { background: var(--neon-green); color: var(--dark-bg); box-shadow: 0 0 25px var(--neon-green); transform: scale(1.05); }
+
+        #classic-menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(3, 5, 10, 0.95); backdrop-filter: blur(15px);
+            z-index: 150; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; gap: 25px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        #classic-menu-overlay.open { opacity: 1; pointer-events: all; }
+        #classic-menu-overlay a {
+            color: rgba(255, 255, 255, 0.8); font-size: 1.5rem; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 3px; cursor: pointer; display: inline-block; 
+            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s linear, text-shadow 0.15s linear;
+            font-weight: 600;
+        }
+        #classic-menu-overlay a:hover { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); transform: scale(1.08); }
+
+        /* CONTAINER DE TRANSIÇÃO ZUI */
+        #presentation-container {
+            position: fixed; top: 160px; left: 0; width: 100vw; height: calc(100vh - 160px); 
+            perspective: 1500px; display: flex; align-items: center; justify-content: center; 
+            z-index: 10; pointer-events: none; 
+        }
+
+        .slide {
+            position: absolute; width: 85%; max-width: 1000px; max-height: 85%; overflow-y: auto;
+            background: var(--slide-bg); border: 1px solid rgba(0, 255, 204, 0.3); border-radius: 20px;
+            padding: 40px 50px; box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);
+            opacity: 0; transform: translateZ(-2000px) scale(0.5); pointer-events: none;
+            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease-in-out;
+            display: flex; flex-direction: column;
+        }
+        .slide.active {
+            opacity: 1; transform: translateZ(0) scale(1); pointer-events: all;
+            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-in-out 0.3s;
+        }
+        .slide.passed { opacity: 0; transform: translateZ(1500px) scale(2); pointer-events: none; }
+
+        .slide-inner-content { flex: 1 0 auto; } 
+
+        .slide-footer { margin-top: 40px; flex-shrink: 0; padding-top: 20px; padding-bottom: 70px; border-top: 1px solid rgba(0, 255, 204, 0.1); text-align: center; }
+        .slide-footer p { font-size: 0.75rem; color: rgba(255, 255, 255, 0.3); margin: 0; line-height: 1.5; }
+        .discreet-link { color: rgba(0, 243, 255, 0.3); font-size: 0.7rem; text-decoration: none; cursor: pointer; transition: color 0.3s; display: inline-block; margin-top: 6px; font-style: italic;}
+        .discreet-link:hover { color: rgba(0, 243, 255, 0.8); }
+
+        .slide::-webkit-scrollbar { width: 8px; }
+        .slide::-webkit-scrollbar-thumb { background: var(--neon-green); border-radius: 4px; }
+        
+        h1, h2, h3, h4 { color: var(--neon-green); margin-top: 0; }
+        h1 { font-size: 2.3rem; text-shadow: 0 0 10px rgba(0, 255, 204, 0.3); margin-bottom: 10px;}
+        h2 { font-size: 1.6rem; color: var(--neon-blue); }
+        p { line-height: 1.6; font-size: 1.1rem; color: #ddd; }
+        ul { line-height: 1.8; color: #ccc; }
+        
+        .cta-button {
+            display: inline-block; margin-top: 20px; padding: 12px 25px; background: transparent;
+            color: var(--neon-green); border: 2px solid var(--neon-green); border-radius: 8px;
+            font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+            transition: 0.4s; text-decoration: none; text-align: center;
+        }
+        .cta-button:hover { background: var(--neon-green) !important; color: var(--dark-bg) !important; box-shadow: 0 0 20px var(--neon-green); }
+
+        .cta-secondary {
+            display: inline-block; margin-top: 20px; padding: 12px 25px; background: rgba(0,255,204,0.1);
+            color: var(--neon-green); border: 2px solid var(--neon-green); border-radius: 8px;
+            font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+            transition: 0.4s; text-decoration: none; text-align: center;
+        }
+        .cta-secondary:hover { background: var(--neon-green) !important; color: var(--dark-bg) !important; box-shadow: 0 0 20px var(--neon-green); }
+
+        .btn-voltar { border-color: rgba(255,255,255,0.4); color: rgba(255,255,255,0.8); margin-bottom: 20px; padding: 8px 20px; font-size: 0.8rem; display: inline-block; cursor: pointer;}
+        .btn-voltar:hover { background: rgba(255,255,255,0.1); color: #fff !important; box-shadow: none; }
+
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .service-card {
+            background: #111a26; border: 1px solid rgba(0, 243, 255, 0.2); padding: 20px; border-radius: 10px;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; cursor: pointer; position: relative;
+        }
+        .service-card:hover { transform: translateY(-5px); border-color: var(--neon-green); box-shadow: 0 5px 20px rgba(0, 255, 204, 0.1); }
+
+        .content-split { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; margin-top: 20px; }
+        .content-img { width: 100%; max-height: 350px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(0, 255, 204, 0.3); box-shadow: 0 0 25px rgba(0, 243, 255, 0.1); }
+
+        .compact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .compact-card { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 8px; border-left: 3px solid var(--neon-blue); display: flex; flex-direction: column;}
+        
+        .main-catalog-btn {
+            display: block; border: 2px solid var(--neon-green); background: rgba(0, 255, 204, 0.05); padding: 12px; border-radius: 8px; text-align: center; font-size: 1.05rem;
+            color: var(--neon-green); cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+        }
+        .main-catalog-btn:hover { background: var(--neon-green); color: var(--dark-bg); box-shadow: 0 0 20px var(--neon-green); text-shadow: none; }
+        .compact-card a { display: block; color: #ccc; font-size: 0.9rem; margin-bottom: 10px; cursor: pointer; transition: 0.3s; padding-left: 10px;}
+        .compact-card a:hover { color: #fff; transform: translateX(5px); color: var(--neon-blue); }
+
+        .chat-quick-btn { flex: 0 0 45px !important; height: 45px; margin: 0 !important; padding: 0 !important; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border-radius: 8px; }
+
+        /* FORMULÁRIO */
+        .contact-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; margin-top: 20px; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 15px; text-align: left; }
+        .form-group label { margin-bottom: 5px; color: var(--neon-blue); font-size: 0.9rem; font-weight: 600; }
+        .form-control { background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(0, 255, 204, 0.3); color: white; padding: 10px 15px; border-radius: 5px; font-family: inherit; font-size: 1rem; }
+        .form-control:focus { outline: none; border-color: var(--neon-green); box-shadow: 0 0 10px rgba(0,255,204,0.2); }
+        
+        .dropdown-check-list { display: inline-block; width: 100%; position: relative; }
+        .dropdown-check-list .anchor { position: relative; cursor: pointer; display: inline-block; padding: 10px 15px; border: 1px solid rgba(0, 255, 204, 0.3); background: rgba(0, 0, 0, 0.5); color: white; border-radius: 5px; width: 100%; box-sizing: border-box; transition: 0.3s; }
+        .dropdown-check-list .anchor:hover { border-color: var(--neon-green); }
+        .dropdown-check-list .anchor:after { content: '▼'; position: absolute; right: 15px; color: var(--neon-blue); }
+        .dropdown-check-list ul.items { padding: 15px; display: none; margin: 0; border: 1px solid rgba(0, 255, 204, 0.3); border-top: none; background: #0c1520; max-height: 200px; overflow-y: auto; border-radius: 0 0 5px 5px; position: absolute; width: 100%; z-index: 10; box-sizing: border-box; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .dropdown-check-list.visible ul.items { display: block; }
+        .dropdown-check-list ul.items::-webkit-scrollbar { width: 6px; }
+        .dropdown-check-list ul.items::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 3px; }
+        .items li { list-style: none; margin-bottom: 10px; font-size: 0.95rem; color: #ddd; display: flex; align-items: center;}
+        .items li input[type="checkbox"] { margin-right: 10px; cursor: pointer; accent-color: var(--neon-green); transform: scale(1.2);}
+
+        .form-actions { display: flex; gap: 15px; margin-top: 15px; }
+        .whatsapp-btn { border-color: #25D366; color: #25D366; display: flex; justify-content: center; align-items: center; }
+        .whatsapp-btn:hover { background: #25D366 !important; color: var(--dark-bg) !important; box-shadow: 0 0 20px rgba(37,211,102,0.6); border-color: #25D366;}
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            #menu-wrapper { height: 50px; }
+            #logo-wrapper { top: 60px; height: 80px; }
+            #presentation-container { top: 130px; height: calc(100vh - 130px); }
+            
+            #site-logo { font-size: 1.8rem; }
+            .logo-3d-base { width: 220px; height: 220px; }
+            .logo-3d-base-inner { width: 190px; height: 190px; }
+            
+            #hamburger-btn { top: 14px; }
+            #biotech-btn { top: 7px; right: 25px; width: 35px; height: 35px; }
+            #biotech-btn:hover { transform: none; }
+            
+            .slide { width: 92%; padding: 30px 25px; max-height: 85%; margin-top: 0; }
+            h1 { font-size: 1.6rem; } h2 { font-size: 1.1rem; margin-bottom: 20px;} 
+            p, ul { font-size: 0.9rem; }
+            
+            .services-grid, .hub-grid, .contact-grid, .content-split, .compact-grid { grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
+            .service-card { padding: 15px; }
+            .service-card h3 { font-size: 1rem; margin-bottom: 8px;}
+            
+            .cta-button, .cta-secondary { display: block; text-align: center; padding: 12px 20px; width: 100%; box-sizing: border-box; font-size: 0.85rem;}
+            #classic-menu-overlay a { font-size: 1.2rem; }
+            .slide-footer-row { flex-direction: column; text-align: center; gap: 10px; }
+            .form-actions { flex-direction: column; }
+            #fixed-contact-btn { bottom: 20px; right: 20px; padding: 10px 15px; font-size: 0.8rem; border-width: 1px;}
+            
+            .splash-text-top h1 { font-size: 2.5rem; }
+            .splash-text-bottom p { font-size: 0.9rem; letter-spacing: 1px; }
+            .home-pillars { flex-direction: column; gap: 10px; }
+        }
+        
+        @media (max-width: 480px) {
+            #menu-wrapper { height: 45px; }
+            #logo-wrapper { top: 60px; height: 70px; }
+            #presentation-container { top: 115px; height: calc(100vh - 115px); }
+            
+            #site-logo { font-size: 1.5rem; letter-spacing: 1px; }
+            .logo-3d-base { width: 190px; height: 190px; }
+            .logo-3d-base-inner { width: 160px; height: 160px; }
+            
+            #hamburger-btn { top: 12px; left: 15px;}
+            #biotech-btn { right: 20px; top: 5px; }
+            
+            h1 { font-size: 1.4rem; } h2 { font-size: 1rem; }
+            .slide { padding: 25px 20px; max-height: 85%; margin-top: 0;}
+            .slide-footer { padding-bottom: 90px; }
+            
+            .form-control { font-size: 0.85rem; padding: 8px 12px; }
+            .menu-item { width: 160px; left: -80px; font-size: 0.75rem; }
+            #classic-menu-overlay a { font-size: 1.1rem; letter-spacing: 1px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="splash-screen" onclick="closeSplash()">
+        <div class="splash-panel splash-top"></div>
+        <div class="splash-panel splash-bottom"></div>
+        <div class="splash-content-wrapper">
+            <div class="splash-text-top">
+                <h1>Bioteka Soluções</h1>
+            </div>
+            <div class="splash-text-bottom">
+                <p>Engenharia • Inovação • Conformidade</p>
+                <span class="tap-text">Toque em qualquer lugar para acessar</span>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="bgCanvas"></canvas>
+
+    <div id="hamburger-btn" onclick="toggleClassicMenu()">
+        <span></span><span></span><span></span>
+    </div>
+    
+    <a id="biotech-btn" onclick="navigateTo(2)" title="Catálogo de Serviços">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+            <line x1="12" y1="9" x2="12" y2="3"></line>
+            <line x1="9" y1="14" x2="4.5" y2="16.5"></line>
+            <line x1="15" y1="14" x2="19.5" y2="16.5"></line>
+        </svg>
+    </a>
+
+    <a id="fixed-contact-btn" onclick="navigateTo(3)">💬 Solicitar Orçamento</a>
+
+    <div id="logo-wrapper">
+        <div class="logo-3d-base"></div>
+        <div class="logo-3d-base-inner"></div>
+        <div id="site-logo" onclick="navigateTo(0)">
+            <span class="logo-blue">Bioteka</span>
+            <span class="logo-green">Soluções</span>
+        </div>
+    </div>
+
+    <div id="classic-menu-overlay">
+        <a onclick="navigateFromClassic(0)">Início</a>
+        <a onclick="navigateFromClassic(1)">Sobre o Engenheiro</a>
+        <a onclick="navigateFromClassic(2)">Serviços (Catálogo)</a>
+        <a onclick="navigateFromClassic(4)">Adequação Regulatória</a>
+        <a onclick="navigateFromClassic(5)">Otimização de Bioprocessos</a>
+        <a onclick="navigateFromClassic(6)">Soluções Digitais</a>
+        <a onclick="navigateFromClassic(19)">Credenciais Oficiais</a>
+        <a onclick="navigateFromClassic(3)">Contato</a>
+    </div>
+
+    <div id="menu-wrapper">
+        <div id="carousel"></div>
+    </div>
+
+    <div id="presentation-container">
+
+        <div class="slide active" id="slide-0">
+            <div class="slide-inner-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 55vh; padding-top: 20px;">
+                <h1 style="font-size: 1.8rem">Bem-vindo à Bioteka Soluções</h1>
+                <h2 style="margin-bottom: 30px; font-size: 1.4rem;">Inovação e Segurança para o seu Negócio</h2>
+                <p style="margin-bottom: 30px; max-width: 750px; font-size: 1.15rem; color: #fff;">
+                    Entendemos que a sua indústria não tem margem para erros empíricos ou riscos regulatórios. Oferecemos consultoria especializada em <strong>Engenharia Biotecnológica</strong> para blindar suas operações contra multas, padronizar seus lotes de produção e maximizar a lucratividade através de processos validados cientificamente.
+                </p>
+                <a onclick="navigateTo(2)" class="cta-button" style="font-size: 1.1rem; padding: 15px 40px; margin-top: 25px; box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);">Conheça nossos serviços</a>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-1">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Sobre o Engenheiro</h1>
+                <h2>Conectando a Pesquisa de Ponta à Escala Industrial</h2>
+                <div class="content-split">
+                    <div>
+                        <p>O mercado atual exige precisão absoluta e não possui margem para processos empíricos. Minha atuação é fundamentada na intersecção entre a pesquisa acadêmica de alto nível e as necessidades de produtividade e segurança financeira da indústria.</p>
+                        <p>Atuando em Biociências, aplico a teoria avançada diretamente na prática laboratorial e industrial. Desenvolvo desde a modelagem matemática para otimização de algoritmos de produção até o desenho de rotas sustentáveis complexas visando a economia circular e a extração de bioativos de alto valor comercial.</p>
+                        <p>O objetivo é traduzir a complexidade biotecnológica em análises precisas, conformidade legal contra autuações governamentais, rendimento financeiro e eficiência máxima para o seu negócio.</p>
+                        <a onclick="navigateTo(3)" class="cta-button" style="font-size: 0.8rem; padding: 10px 20px;">Contato Direto</a>
+                    </div>
+                    <div>
+                        <img src="1.png" class="content-img" alt="Foto profissional do Engenheiro de Biotecnologia">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-2">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Catálogo de Serviços</h1>
+                <h2>Visão Geral das Soluções Técnicas</h2>
+                <p style="margin-top: 25px">Selecione qualquer categoria abaixo para visualizar os detalhes e compreender como a engenharia biotecnológica pode escalar e proteger sua produção e pesquisa da forma mais lucrativa e segura.</p>
+
+                <div class="compact-grid">
+                    <div class="compact-card">
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px; font-size: 0.95rem;" onclick="navigateTo(4)">Adequação Regulatória</div>
+                            <a class="cta-button chat-quick-btn" onclick="navigateTo(3)" title="Contato Rápido">💬</a>
+                        </div>
+                        <a onclick="navigateTo(7)">↳ Responsabilidade Técnica (ART)</a>
+                        <a onclick="navigateTo(8)">↳ Planos de Resíduos (PGRS)</a>
+                        <a onclick="navigateTo(9)">↳ Boas Práticas de Fabricação</a>
+                        <a onclick="navigateTo(10)">↳ Perícia Judicial e Assistência</a>
+                    </div>
+                    <div class="compact-card">
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px; font-size: 0.95rem;" onclick="navigateTo(5)">Otimização de Bioprocessos</div>
+                            <a class="cta-button chat-quick-btn" onclick="navigateTo(3)" title="Contato Rápido">💬</a>
+                        </div>
+                        <a onclick="navigateTo(11)">↳ Previsibilidade de Produção</a>
+                        <a onclick="navigateTo(12)">↳ Bebidas Fermentadas</a>
+                        <a onclick="navigateTo(13)">↳ Fermentação de Panificados</a>
+                        <a onclick="navigateTo(14)">↳ Maturação de Laticínios</a>
+                        <a onclick="navigateTo(15)">↳ Controle Microbiológico</a>
+                        <a onclick="navigateTo(16)">↳ Valorização de Resíduos</a>
+                    </div>
+                    <div class="compact-card">
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px; font-size: 0.95rem;" onclick="navigateTo(6)">Soluções Digitais e Dados</div>
+                            <a class="cta-button chat-quick-btn" onclick="navigateTo(18)" title="Contato Rápido Web">💬</a>
+                        </div>
+                        <a onclick="navigateTo(17)">↳ Modelagem Estatística em R</a>
+                        <a onclick="navigateTo(18)">↳ Programação e Criação Web</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-3">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Contato Profissional</h1>
+                <h2>Solicite uma Análise de Viabilidade</h2>
+                
+                <div class="contact-grid">
+                    <div>
+                        <form id="contato-form-geral" action="https://formspree.io/f/mgojpzen" method="POST">
+                            <div class="form-group">
+                                <label>Seu Nome *</label>
+                                <input type="text" name="Nome" class="form-control" placeholder="Ex: João Silva" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Seu E-mail *</label>
+                                <input type="email" id="email-input-1" name="Email" class="form-control" placeholder="contato@empresa.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Seu Telefone / WhatsApp *</label>
+                                <input type="tel" id="telefone-input-1" name="Telefone" class="form-control telefone-mask" placeholder="(DD) 99999-9999" maxlength="15" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Serviços de Interesse *</label>
+                                <div id="service-dropdown" class="dropdown-check-list" tabindex="100">
+                                    <span class="anchor" onclick="toggleServiceDropdown()">Selecione uma ou mais opções...</span>
+                                    <ul class="items">
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Responsabilidade Técnica (ART)" /> Responsabilidade Técnica (ART)</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Planos de Resíduos (PGRS)" /> Planos de Resíduos (PGRS)</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Boas Práticas de Fabricação (BPF)" /> Boas Práticas de Fabricação (BPF)</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Perícia Judicial / Assistência Técnica" /> Perícia Judicial / Assistência Técnica</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Previsibilidade de Produção" /> Previsibilidade de Produção</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Otimização de Bebidas Fermentadas" /> Otimização de Bebidas Fermentadas</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Otimização em Panificação" /> Otimização em Panificação</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Otimização em Laticínios" /> Otimização em Laticínios</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Controle Microbiológico e Conservação" /> Controle Microbiológico e Conservação</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Valorização de Resíduos" /> Valorização de Resíduos</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Modelagem Matemática de Dados" /> Modelagem Matemática de Dados</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Programação e Criação de Sites" /> Programação e Criação de Sites</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Outros serviços / Dúvidas" /> Outros serviços / Dúvidas</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sua Mensagem *</label>
+                                <textarea name="Mensagem" class="form-control" rows="3" placeholder="Descreva brevemente a sua necessidade ou processo atual para avaliarmos a melhor solução..." required></textarea>
+                            </div>
+
+                            <div class="form-actions" style="margin-top: 25px;">
+                                <button type="submit" class="cta-button" style="margin-top: 0; flex: 1;">Enviar</button>
+                                <a href="https://wa.me/5518998069727" target="_blank" class="cta-button whatsapp-btn" style="margin-top: 0; flex: 1;">
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.4); padding: 25px; border-left: 4px solid var(--neon-green); border-radius: 5px; height: fit-content;">
+                        <h3 style="margin-bottom: 20px; font-size: 1.2rem;">Credenciais</h3>
+                        <p style="margin-bottom: 10px;"><strong>Responsável:</strong><br>Mike Jonathan dos Santos Brito</p>
+                        <p style="margin-bottom: 10px;"><strong>Título:</strong><br>Engenheiro de Biotecnologia</p>
+                        <p style="margin-bottom: 10px;"><strong>Registro CREA-SP:</strong><br>5071801530</p>
+                        <p style="margin-bottom: 10px;"><strong>RNP:</strong><br>2623892040</p>
+                        <p style="margin-bottom: 0;"><strong>Base Operacional:</strong><br>Presidente Prudente - SP | Atendimento Remoto Nacional</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-4">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Adequação Regulatória</h1>
+                <h2>Segurança Jurídica para a Sua Indústria</h2>
+                <p>Mantenha sua empresa operando legalmente, evite embargos e construa uma reputação sólida no mercado. Selecione a área para entender como protegemos seu patrimônio de interdições e pesadas multas legais.</p>
+                <div class="services-grid">
+                    <div class="service-card" onclick="navigateTo(7)">
+                        <h3>Responsabilidade Técnica (ART)</h3>
+                        <p>Assunção legal de processos pelo engenheiro perante o CREA, garantindo liberação de alvarás.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(8)">
+                        <h3>Planos de Resíduos (PGRS)</h3>
+                        <p>Dimensionamento de fluxos de descarte ambientalmente corretos contra multas ambientais.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(9)">
+                        <h3>Boas Práticas de Fabricação (BPF)</h3>
+                        <p>Elaboração rigorosa de manuais para aprovação imediata em auditorias sanitárias.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(10)">
+                        <h3>Perícia Judicial</h3>
+                        <p>Assistência técnica imparcial para litígios complexos e auditoria profunda de laudos.</p>
+                    </div>
+                </div>
+                <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
+                    <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Otimização de Bioprocessos</h1>
+                <h2>Escale sua Produção com Rigor Científico e Aumente seus Lucros</h2>
+                <div class="services-grid">
+                    <div class="service-card" onclick="navigateTo(11)">
+                        <h3>Previsibilidade de Produção</h3>
+                        <p>Elimine gargalos operacionais, perdas de lote e padronize a qualidade de ponta a ponta.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(12)">
+                        <h3>Bebidas Fermentadas</h3>
+                        <p>Controle absoluto de Brix, leveduras e estabilização de off-flavors em cervejas e hidromel.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(13)">
+                        <h3>Panificação Industrial</h3>
+                        <p>Engenharia de matrizes de glúten e equilíbrio lático-acético em processos de longa fermentação.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(14)">
+                        <h3>Maturação de Laticínios</h3>
+                        <p>Gestão de microclima e cura de queijos finos com controle de rendimento e sanidade.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(15)">
+                        <h3>Controle Microbiológico</h3>
+                        <p>Aumente drasticamente a vida de prateleira (shelf-life) e blinde seus produtos contra contaminações.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(16)">
+                        <h3>Valorização de Resíduos</h3>
+                        <p>Transforme passivos ambientais em novos fluxos de receita com a extração de biopolímeros.</p>
+                    </div>
+                </div>
+                <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
+                    <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Soluções Digitais e Dados</h1>
+                <h2>Performance Computacional para Negócios</h2>
+                <p>Decisões guiadas por intuição perdem dinheiro. A ciência de dados aliada ao desenvolvimento web coloca seu laboratório ou empresa na vanguarda do mercado tecnológico.</p>
+                <div class="services-grid">
+                    <div class="service-card" onclick="navigateTo(17)">
+                        <h3>Modelagem Matemática de Dados</h3>
+                        <p>Tratamento estatístico experimental, otimização de algoritmos industriais e rotinas de cálculo.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(18)">
+                        <h3>Criação de Sites e Sistemas</h3>
+                        <p>Aplicações web de alta performance voltadas para conversão de vendas e interface imersiva UI/UX.</p>
+                    </div>
+                </div>
+                <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
+                    <a onclick="navigateTo(18)" class="cta-button" style="margin-top: 0; border-color: var(--neon-blue); color: var(--neon-blue);">Contratar Web Design</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-7">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Responsabilidade Técnica (ART)</h1>
+                <h2>Conformidade Direta com o CREA e Conselhos de Classe</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A Anotação de Responsabilidade Técnica (ART) é a sua principal blindagem jurídica. Operar sem o acompanhamento formal de um profissional qualificado expõe a sua organização ao risco imediato de interdições, multas e processos criminais.</p>
+                        <ul>
+                            <li><strong>Garantia Legal:</strong> Assunção da responsabilidade técnica sobre plantas industriais e processos biológicos de alimentos e bebidas.</li>
+                            <li><strong>Liberação Operacional:</strong> Acompanhamento direcionado à obtenção definitiva de alvarás de funcionamento e licenças sanitárias.</li>
+                            <li><strong>Tranquilidade Regulatória:</strong> Segurança jurídica incontestável atestando a integridade das operações perante os órgãos de fiscalização.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Solicitar Proposta</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="2.png" class="content-img" alt="Documentos técnicos e conformidade">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-8">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Planos de Gerenciamento (PGRS)</h1>
+                <h2>Adequação Imediata às Exigências Ambientais</h2>
+                <div class="content-split">
+                    <div>
+                        <p>O descarte incorreto de materiais é uma das principais causas de sanções financeiras pesadas. A formulação de um Plano de Gerenciamento de Resíduos Sólidos (PGRS) é compulsória para indústrias e essencial para a aprovação em auditorias ambientais.</p>
+                        <ul>
+                            <li><strong>Mapeamento Técnico:</strong> Organização e estruturação da segregação, acondicionamento e fluxo de coleta no ambiente fabril.</li>
+                            <li><strong>Sustentabilidade Validada:</strong> Direcionamento eficiente e legalizado para o tratamento ou destinação final ambientalmente correta.</li>
+                            <li><strong>Prevenção Ativa:</strong> Eliminação sistemática do risco de multas ambientais impostas por órgãos como IBAMA e CETESB.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="3.png" class="content-img" alt="Sustentabilidade e gestão ambiental">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-9">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Boas Práticas de Fabricação (BPF)</h1>
+                <h2>Preparação Estratégica para Auditorias Sanitárias</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A estrutura de qualidade e o valor da sua marca dependem da execução impecável da higiene. Desenvolvemos toda a matriz documental necessária para que sua indústria passe ilesa por qualquer inspeção e seja aprovada na obtenção de selos e certificações.</p>
+                        <ul>
+                            <li>Elaboração técnica e minuciosa do Manual de Boas Práticas de Fabricação (BPF).</li>
+                            <li>Desenvolvimento de Procedimentos Operacionais Padrão (POPs) estritamente adequados à realidade da sua linha de envase ou produção.</li>
+                            <li>Implementação de planilhas de rastreabilidade de insumos, garantindo total controle de qualidade ascendente e descendente.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="4.png" class="content-img" alt="Pranchetas, inspeção laboratorial">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-10">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Perícia e Assistência Técnica Judicial</h1>
+                <h2>Fundamentação Imparcial para Disputas Legais</h2>
+                <div class="content-split">
+                    <div>
+                        <p>Quando o seu patrimônio está em jogo devido a litígios que envolvem contaminações industriais, inconformidades operacionais ou questões ambientais, é vital contar com pareceres técnicos incisivos capazes de converter processos complexos em provas contundentes.</p>
+                        <ul>
+                            <li><strong>Assessoria Científica:</strong> Atuação pericial para avaliação técnica de processos, produzindo laudos de convergência ou refutação em processos judiciais.</li>
+                            <li><strong>Delineamento de Quesitos:</strong> Estruturação de questionamentos estratégicos de alta precisão para orientar e questionar o perito oficial do juízo.</li>
+                            <li><strong>Auditoria Profunda de Laudos:</strong> Validação de metodologias e detecção de falhas fáticas nos autos do processo elaborados por terceiros.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="11.png" class="content-img" alt="Balança pericial e análise tecnológica">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-11">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Previsibilidade de Produção</h1>
+                <h2>Fim do Desperdício e do Empirismo Industrial</h2>
+                <div class="content-split">
+                    <div>
+                        <p>Pare de perder dinheiro descartando lotes instáveis. A variação de qualidade entre bateladas afeta a confiança do consumidor e destrói as margens de lucro. Através da modelagem biotecnológica, transformamos processos incertos em rotas escaláveis e estritamente repetíveis.</p>
+                        <p>O foco é a racionalização da planta: acompanhamento matemático das cinéticas reacionais, balanceamento térmico de equipamentos, calibração físico-química e redução extrema de custos operacionais por falhas humanas.</p>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="5.png" class="content-img" alt="Gráficos de dados industriais">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-12">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Otimização de Bebidas Fermentadas</h1>
+                <h2>Controle Absoluto sobre Cervejas, Hidromel e Kombuchas</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A magia de uma bebida premium não é sorte, é ciência rigorosa. Atuamos diretamente no metabolismo celular durante o processo fermentativo para garantir a extração do rendimento alcoólico máximo e o perfeito engarrafamento do perfil aromático pretendido.</p>
+                        <ul>
+                            <li>Engenharia metabólica: cálculos precisos de correção de mosto, atenuação de graus Brix e taxas de inoculação celular.</li>
+                            <li>Manejo rigoroso de leveduras para acelerar fermentações e inibir a formação de compostos indesejados (off-flavors).</li>
+                            <li>Padronização termodinâmica das etapas cruciais de *cold crash*, clarificação e maturação.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="6.png" class="content-img" alt="Biorreatores e processos fermentativos">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-13">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Panificação e Fermentação Longa</h1>
+                <h2>Engenharia Aplicada às Massas e Levain</h2>
+                <div class="content-split">
+                    <div>
+                        <p>O alto valor comercial dos pães de fermentação natural exige que o comportamento imprevisível das massas seja domado. O empirismo gera descartes diários; a engenharia traz o controle térmico e biológico para a estabilidade de vendas.</p>
+                        <ul>
+                            <li>Desenvolvimento de curvas de acidez e equalização perfeita da relação lática/acética em culturas de *sourdough* e iscas industriais.</li>
+                            <li>Controle reológico direcionado à extensibilidade da malha de glúten, prevenindo o abatumamento e defeitos drásticos na casca e miolo.</li>
+                            <li>Dimensionamento higrotérmico e adequação técnica de câmaras de fermentação a frio.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="7.png" class="content-img" alt="Fornos industriais ou leveduras de panificação">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-14">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Maturação de Laticínios</h1>
+                <h2>Controle do Microclima e Microbiota de Queijos Finos</h2>
+                <div class="content-split">
+                    <div>
+                        <p>O desenvolvimento de queijos de alto padrão e laticínios vivos demanda a calibração microscópica das variáveis bioquímicas para garantir a sanidade da casca e o pleno desenvolvimento organoléptico (sabor, textura e aroma) valorizado pelos consumidores exigentes.</p>
+                        <ul>
+                            <li>Parametrização estrita de umidade relativa (UR) e temperatura no interior das câmaras de cura, controlando a perda de peso.</li>
+                            <li>Gestão da flora microbiana nativa e aplicação biotecnológica segura de culturas de superfície (fungos de afinamento).</li>
+                            <li>Auditoria de processos visando erradicar defeitos graves, como sinérese excessiva, amargor lático profundo ou trincas mecânicas.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="8.png" class="content-img" alt="Câmaras de maturação de queijos iluminadas">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-15">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Controle Microbiológico e Conservação</h1>
+                <h2>Biopreservação e Estabilidade de Prateleira (Shelf-Life)</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A deterioração biológica precoce não apenas gera perda de produtos e grandes prejuízos financeiros, mas também expõe sua marca a crises de imagem e riscos sanitários severos. A engenharia de barreiras tecnológicas é indispensável para proteger o consumidor final e alargar sua margem de distribuição.</p>
+                        <ul>
+                            <li>Mapeamento total da planta industrial com o objetivo de identificar e erradicar focos ocultos de contaminação cruzada.</li>
+                            <li>Projetos avançados de biopreservação e equalização precisa da Atividade de Água (Aw) em sinergia com o controle de pH intrínseco.</li>
+                            <li>Diagnóstico rápido e estratégias diretas para a interrupção do estufamento de embalagens e crescimento de bolores fúngicos.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="9.png" class="content-img" alt="Análises laboratoriais sob luz neon">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-16">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Valorização de Resíduos</h1>
+                <h2>Economia Circular Aplicada e Bionanotecnologia</h2>
+                <div class="content-split">
+                    <div>
+                        <p>O conceito tradicional de "lixo" industrial é um dreno no caixa da sua empresa. A bioeconomia e a engenharia molecular modernas permitem que passivos ambientais — que geram imensos custos de descarte — sejam convertidos e escalonados em biomateriais de vanguarda e insumos de alto valor agregado.</p>
+                        <ul>
+                            <li>Pesquisa e projeto de rotas tecnológicas exclusivas para extração e isolamento de biopolímeros (como Nanocristais e Nanofibrilas de Celulose) a partir de bagaços e podas.</li>
+                            <li>Design de pré-tratamentos químicos, térmicos e oxidativos visando a desestruturação limpa de matrizes lignocelulósicas resilientes.</li>
+                            <li>Alinhamento de processos industriais com potentes métricas corporativas de sustentabilidade e ESG para atração de investimentos governamentais ou privados.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="10.png" class="content-img" alt="Estruturas nanotecnológicas sustentáveis">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-17">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Modelagem Matemática e Dados</h1>
+                <h2>Decisões Validadas por Algoritmos e Estatística</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A intuição é inimiga da lucratividade em escala. A inteligência em ciência de dados converte variáveis brutas de laboratório em respostas exatas, apontando tendências vitais e cortando desperdícios em experimentos que antes se dariam apenas por tentativa e erro.</p>
+                        <ul>
+                            <li><strong>Análise Preditiva e Estatística:</strong> Tratamento paramétrico rigoroso de dados biológicos utilizando linguagens computacionais robustas e consagradas como R e MATLAB.</li>
+                            <li><strong>Otimização por Algoritmos:</strong> Desenvolvimento e calibração de modelos biofísicos para simulação e previsibilidade no ganho de escala de reatores e tanques.</li>
+                            <li><strong>Desenho Computacional Assistido:</strong> Vetorização técnica de diagramas de processo, P&ID e projetos assistidos (CAD) voltados a layouts de equipamentos.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="12.png" class="content-img" alt="Matemática e linguagens de programação">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-18">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1 style="color: var(--neon-blue); text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);">Programação e Criação de Sites</h1>
+                <h2>Soluções Digitais e Interfaces Modernas sob Medida</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A internet não tolera sistemas amadores. A exatidão da engenharia transposta diretamente para o desenvolvimento de soluções na web, proporcionando uma arquitetura limpa, visual impressionante e conversões diretas de leads para o seu negócio B2B ou B2C.</p>
+                        <ul>
+                            <li><strong>Websites Responsivos:</strong> Adaptação fluida garantida para todos os formatos de monitores corporativos, tablets e smartphones mobile-first.</li>
+                            <li><strong>Experiência Imersiva UI/UX:</strong> Engenharia visual aplicada para retenção de acessos, com design futurista e painéis tridimensionais (ZUI).</li>
+                            <li><strong>Alta Performance de Código:</strong> Estruturas sem inchaço (bloatware) ou plugins desnecessários, resultando em carregamentos ultrarrápidos, cruciais para ranqueamento superior no Google Orgânico.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="border-color: var(--neon-blue); color: var(--neon-blue);">Ver Catálogo</a>
+                            <a onclick="navigateTo(19)" class="cta-button" style="border-color: var(--neon-blue); color: var(--neon-blue);">Contratar Solução Web</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="13.png" class="content-img" alt="Layout responsivo web design">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-19">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1 style="color: var(--neon-blue); text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);">Orçamento de Web Design</h1>
+                <h2>Descreva as Necessidades Digitais do seu Negócio</h2>
+                
+                <div class="contact-grid">
+                    <div>
+                        <form id="contato-form-web" action="https://formspree.io/f/mgojpzen" method="POST">
+                            <input type="hidden" name="Origem_Formulario" value="Formulário Exclusivo de Criação de Sites">
+                            
+                            <div class="form-group">
+                                <label style="color: var(--neon-blue);">Seu Nome *</label>
+                                <input type="text" name="Nome" class="form-control" style="border-color: rgba(0, 243, 255, 0.3);" placeholder="Ex: João Silva" required>
+                            </div>
+                            <div class="form-group">
+                                <label style="color: var(--neon-blue);">Seu E-mail *</label>
+                                <input type="email" id="email-input-2" name="Email" class="form-control" style="border-color: rgba(0, 243, 255, 0.3);" placeholder="contato@empresa.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label style="color: var(--neon-blue);">Seu Telefone / WhatsApp *</label>
+                                <input type="tel" id="telefone-input-2" name="Telefone" class="form-control telefone-mask" style="border-color: rgba(0, 243, 255, 0.3);" placeholder="(DD) 99999-9999" maxlength="15" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="color: var(--neon-blue);">Descreva o Site ou Sistema Desejado *</label>
+                                <textarea name="Descricao_Web_Design" class="form-control" style="border-color: rgba(0, 243, 255, 0.3);" rows="4" placeholder="Ex: Preciso de um portal institucional interativo e rápido para a minha clínica, que transmita seriedade e permita o envio rápido de formulários..." required></textarea>
+                            </div>
+
+                            <div class="form-actions" style="margin-top: 25px;">
+                                <button type="submit" class="cta-button" style="margin-top: 0; flex: 1; border-color: var(--neon-blue); color: var(--neon-blue);">Enviar Solicitação e Avaliação</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.4); padding: 25px; border-left: 4px solid var(--neon-blue); border-radius: 5px; height: fit-content;">
+                        <h3 style="margin-bottom: 20px; font-size: 1.2rem; color: var(--neon-blue);">Metodologia de Desenvolvimento Web</h3>
+                        <p style="margin-bottom: 10px;">✔ Interfaces responsivas de adaptação universal (Mobile First).</p>
+                        <p style="margin-bottom: 10px;">✔ Arquitetura avançada de software para fluidez e conversão (UI/UX).</p>
+                        <p style="margin-bottom: 10px;">✔ Código estritamente nativo para indexação superior no Google (SEO Orgânico).</p>
+                        <p style="margin-bottom: 0;">✔ Planejamento total, desde o *deploy*, hospedagem ao lançamento final.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-20">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Credenciais e Atribuições Oficiais</h1>
+                <h2>Validação Técnica (CREA-SP e TJSP)</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A transparência é a base da segurança jurídica para o contratante industrial. Esta seção serve para atestar legalmente as habilitações oficiais e as áreas de cobertura do Engenheiro de Biotecnologia responsável pelas consultorias.</p>
+                        <ul>
+                            <li><strong>Registro Profissional Certificado:</strong> Status Ativo e regularizado no Conselho Regional de Engenharia e Agronomia de São Paulo (CREA-SP).</li>
+                            <li><strong>Habilitação Legal para Plantas Industriais:</strong> Autoridade técnica e regulamentada por lei para assumir a operação, pesquisa e adequação sanitária envolvendo sistemas biológicos, agricultura, produção de alimentos, elaboração de bebidas e destinação correta de matrizes residuais.</li>
+                            <li><strong>Acesso ao Tribunal de Justiça:</strong> Engenheiro homologado no Cadastro de Auxiliares da Justiça (CAJ) para assistência em disputas forenses.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Solicitar Envio de Documentação Integral</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="14.png" class="content-img" alt="Certidões e Comprovantes CREA e TJSP">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ==========================================
+        // LÓGICA DE SPLASH SCREEN
+        // ==========================================
+        function closeSplash() {
+            const splash = document.getElementById('splash-screen');
+            if(!splash || splash.classList.contains('splitting')) return;
+            splash.classList.add('splitting');
+            setTimeout(() => { splash.style.display = 'none'; }, 1000); // Aguarda o fim da animação CSS
+        }
+
+        // ==========================================
+        // HISTORY API - INTEGRAÇÃO BOTÃO VOLTAR (ANDROID / NAVEGADOR)
+        // ==========================================
+        window.addEventListener('popstate', function(e) {
+            // Quando o usuário usar as setas do navegador ou o botão voltar do Android
+            if (e.state !== null && typeof e.state.slide !== 'undefined') {
+                navigateTo(e.state.slide, false);
+            } else {
+                navigateTo(0, false);
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Garante que o estado inicial seja salvo no histórico
+            history.replaceState({ slide: 0 }, '', window.location.pathname);
+
+            // Splash desaparece automaticamente após 4 segundos se o usuário não clicar
+            setTimeout(closeSplash, 4000);
+
+            // Injeção do Rodapé
+            const footerHTML = `
+                <div class="slide-footer">
+                    <p>
+                        &copy; 2026 Mike Jonathan dos Santos Brito<br>
+                        Engenheiro de Biotecnologia | CREA-SP: 5071801530<br>
+                        <a onclick="navigateTo(18)" class="discreet-link">Gostou da interface imersiva? Solicite o desenvolvimento do seu site!</a>
+                    </p>
+                </div>
+            `;
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.insertAdjacentHTML('beforeend', footerHTML);
+            });
+        });
+
+        // ==========================================
+        // MÁSCARA E VALIDAÇÃO DOS FORMULÁRIOS
+        // ==========================================
+        const phoneInputs = document.querySelectorAll('.telefone-mask');
+        phoneInputs.forEach(input => {
+            input.addEventListener('input', function (e) {
+                let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+                e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+            });
+        });
+
+        function validateForm(e, emailId, phoneId, needsServiceCheck = false) {
+            const emailInput = document.getElementById(emailId);
+            const phoneInput = document.getElementById(phoneId);
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(emailInput.value)) {
+                e.preventDefault(); alert('Atenção: Por favor, insira um e-mail válido para podermos contatá-lo.'); emailInput.focus(); return false;
+            }
+            if (phoneInput.value.length < 14) {
+                e.preventDefault(); alert('Atenção: O número de telefone fornecido parece estar incompleto. Por favor, adicione o DDD (Ex: (11) 99999-9999).'); phoneInput.focus(); return false;
+            }
+            if (needsServiceCheck) {
+                const servicosSelecionados = document.querySelectorAll('input[name="Serviços_Interesse[]"]:checked');
+                if (servicosSelecionados.length === 0) {
+                    e.preventDefault(); alert('É fundamental selecionar pelo menos um serviço de interesse em nossa lista para que possamos direcionar o atendimento ao engenheiro responsável de forma mais ágil.'); 
+                    document.getElementById('service-dropdown').classList.add('visible'); return false;
+                }
+            }
+            return true;
+        }
+
+        document.getElementById('contato-form-geral').addEventListener('submit', function(e) { validateForm(e, 'email-input-1', 'telefone-input-1', true); });
+        document.getElementById('contato-form-web').addEventListener('submit', function(e) { validateForm(e, 'email-input-2', 'telefone-input-2', false); });
+
+        // DROPDOWN
+        function toggleServiceDropdown() { document.getElementById('service-dropdown').classList.toggle('visible'); }
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('service-dropdown');
+            if (dropdown && dropdown.classList.contains('visible') && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('visible');
+            }
+        });
+
+        // ==========================================
+        // HISTÓRICO E NAVEGAÇÃO ZUI INTEGRADA COM HISTORY API
+        // ==========================================
+        let currentSlide = 0; 
+
+        function toggleClassicMenu() {
+            document.getElementById('hamburger-btn').classList.toggle('open');
+            document.getElementById('classic-menu-overlay').classList.toggle('open');
+        }
+
+        function navigateFromClassic(index) {
+            toggleClassicMenu(); navigateTo(index); 
+            const carouselIndex = carouselData.findIndex(item => item.id === index);
+            if (carouselIndex !== -1) { targetAngle = -carouselIndex * theta; }
+        }
+
+        function goBack() {
+            // Em vez de manipular um array interno, usamos a funcionalidade de voltar do próprio navegador.
+            // Isso dispara o evento popstate, mantendo a consistência do botão de seta nativo.
+            history.back();
+        }
+
+        function navigateTo(index, recordHistory = true) {
+            // Evita salvar no histórico se estiver clicando para ir na mesma aba que já está aberta
+            if (recordHistory && currentSlide !== index) {
+                history.pushState({ slide: index }, '', '#s' + index);
+            }
+            
+            // Controle visual de quais slides ficam transparentes / para trás
+            let previousSlide = currentSlide;
+            currentSlide = index;
+
+            const biotechBtn = document.getElementById('biotech-btn');
+            if(index === 2) { biotechBtn.classList.add('active-dna'); } 
+            else { biotechBtn.classList.remove('active-dna'); }
+
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => {
+                slide.classList.remove('active', 'passed');
+                let slideId = slide.id.split('-')[1];
+                let numId = parseInt(slideId);
+                
+                if (numId === currentSlide) { 
+                    slide.classList.add('active'); 
+                } else if (numId === previousSlide || numId === 0 || (numId !== currentSlide && recordHistory === false)) { 
+                    // Regra simplificada de visual para que as telas anteriores recuem para o fundo (passed)
+                    slide.classList.add('passed'); 
+                } 
+            });
+        }
+
+        // ==========================================
+        // CARROSSEL 3D
+        // ==========================================
+        const menuItensConfig = [
+            { id: 0, text: "Início", icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' }, 
+            { id: 1, text: "Sobre", icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' }, 
+            { id: 2, text: "Serviços", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>' }, 
+            { id: 4, text: "Regulatória", icon: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>' }, 
+            { id: 5, text: "Bioprocessos", icon: '<svg viewBox="0 0 24 24"><path d="M10 2v7.31l-6 10.39A2 2 0 0 0 5.73 23h12.54a2 2 0 0 0 1.73-3.3l-6-10.39V2h-4z"></path><line x1="8.5" y1="14" x2="15.5" y2="14"></line></svg>' }, 
+            { id: 6, text: "Digitais", icon: '<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>' }, 
+            { id: 20, text: "Credenciais", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>' }, 
+            { id: 3, text: "Contato", icon: '<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>' }
+        ];
+
+        const carouselData = [...menuItensConfig]; 
+        const carouselEl = document.getElementById('carousel');
+        
+        const setRadius = () => {
+            if (window.innerWidth <= 480) return 240;
+            if (window.innerWidth <= 768) return 300;
+            return 350;
+        };
+        let radius = setRadius();
+        const theta = 360 / carouselData.length; 
+
+        function buildCarousel() {
+            carouselEl.innerHTML = '';
+            carouselData.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'menu-item'; 
+                div.innerHTML = `${item.icon}<span>${item.text}</span>`;
+                div.dataset.target = item.id; div.dataset.index = index;
+                div.style.transform = `rotateY(${index * theta}deg) translateZ(${radius}px)`;
+                div.addEventListener('pointerup', (e) => {
+                    if (Math.abs(dragTotalX) > 15) return; 
+                    navigateTo(item.id); targetAngle = -index * theta;
+                });
+                carouselEl.appendChild(div);
+            });
+            carouselEl.style.transform = `translateZ(-${radius}px)`;
+        }
+        buildCarousel();
+
+        window.addEventListener('resize', () => {
+            const newRadius = setRadius();
+            if(newRadius !== radius) {
+                radius = newRadius;
+                buildCarousel();
+            }
+        });
+
+        let currentAngle = 0; let targetAngle = 0; let isDragging = false; let startX = 0; let dragTotalX = 0;
+        const autoRotateSpeed = 0.08; const menuWrapper = document.getElementById('menu-wrapper');
+
+        menuWrapper.addEventListener('pointerdown', (e) => {
+            isDragging = true; startX = e.clientX; dragTotalX = 0; menuWrapper.style.cursor = 'grabbing';
+        });
+        window.addEventListener('pointerup', () => { isDragging = false; menuWrapper.style.cursor = 'grab'; });
+        window.addEventListener('pointermove', (e) => {
+            if (!isDragging) return;
+            const deltaX = e.clientX - startX; dragTotalX += deltaX; targetAngle += deltaX * 0.3; startX = e.clientX;
+        });
+
+        function updateCarouselCSS() {
+            currentAngle += (targetAngle - currentAngle) * 0.1;
+            if (!isDragging) targetAngle -= autoRotateSpeed; 
+            carouselEl.style.transform = `translateZ(-${radius}px) rotateY(${currentAngle}deg)`;
+            let normalizedAngle = ((currentAngle % 360) + 360) % 360; 
+            let frontIndex = Math.round((360 - normalizedAngle) / theta) % carouselData.length;
+            const items = document.querySelectorAll('.menu-item');
+            items.forEach((item, idx) => {
+                if (idx === frontIndex) item.classList.add('active'); else item.classList.remove('active');
+            });
+        }
+
+        // ==========================================
+        // BACKGROUND ANIMADO
+        // ==========================================
+        const canvas = document.getElementById('bgCanvas'); const ctx = canvas.getContext('2d');
+        function resizeCanvasBg() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvasBg); resizeCanvasBg();
+
+        const particles = []; const particleCount = 100; 
+        class Particle {
+            constructor() { this.reset(true); }
+            reset(initial = false) {
+                this.x = (Math.random() - 0.5) * window.innerWidth * 3; this.y = (Math.random() - 0.5) * window.innerHeight * 3;
+                this.z = initial ? Math.random() * 2000 : 2000; this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.02; this.speed = Math.random() * 4 + 2; 
+            }
+            update() { this.z -= this.speed; if (this.z <= 10) this.reset(false); this.rotation += this.rotationSpeed; }
+            draw() {
+                const cx = canvas.width / 2; const cy = canvas.height / 2;
+                const fov = 600; const scale = fov / this.z;
+                const x2d = cx + this.x * scale; const y2d = cy + this.y * scale;
+                ctx.save(); ctx.translate(x2d, y2d); ctx.rotate(this.rotation); ctx.scale(scale, scale);
+                ctx.globalAlpha = Math.max(0, Math.min(1, (2000 - this.z) / 500));
+                ctx.strokeStyle = 'rgba(0, 255, 204, 0.6)'; ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.arc(0, -20, 5, Math.PI, 0); ctx.lineTo(5, 20);              
+                ctx.arc(0, 20, 5, 0, Math.PI); ctx.closePath(); ctx.stroke();
+                ctx.fillStyle = 'rgba(0, 243, 255, 0.2)'; ctx.fill(); ctx.restore();
+            }
+        }
+        for(let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+        function animate() {
+            updateCarouselCSS();
+            ctx.fillStyle = 'rgba(3, 5, 10, 0.3)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
