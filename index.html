@@ -340,13 +340,12 @@
             #logo-wrapper { top: 70px; height: 100px; }
             #site-logo { font-size: 2.2rem; gap: 10px; margin-left: -1.3em;}
             
-            #presentation-container { top: 100px; height: calc(100vh - 150px); }
+            #presentation-container { top: 140px; height: calc(100vh - 150px); }
             .slide { width: 90%; max-width: 900px; padding: 35px 40px; }
             h1 { font-size: 2rem; } h2 { font-size: 1.4rem; }
             p, ul { font-size: 1.05rem; }
             .content-split { gap: 20px; }
 
-            #presentation-container { top: 150px; height: calc(100vh - 135px); }
 
             .splash-text-top h1 { font-size: 2rem; gap: 10px; margin-left: -1.25em;}
             .splash-text-bottom p { font-size: 1rem; letter-spacing: 1px; }
@@ -354,7 +353,13 @@
 
         /* 3. Tablets Verticais / Smartphones Grandes (Pro Max) */
         @media (max-width: 768px) {
-            #menu-wrapper { height: 50px; }
+            #menu-wrapper { 
+                height: 50px; 
+                /* Cria margens invisíveis maiores à esquerda e à direita apenas no celular */
+                -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 30%, black 70%, transparent 100%);
+                mask-image: linear-gradient(90deg, transparent 0%, black 30%, black 70%, transparent 100%);
+            }
+            .menu-item { width: 130px; left: -70px; font-size: 0.75rem; }
             #hamburger-btn { top: 15px; }
             
             #logo-wrapper { top: 65px; height: 85px; }
@@ -362,7 +367,7 @@
             .pulse-light { width: 300px; }
             .logo-animado-inline { width: 2.5em; height: 2.5em; }
             
-            #presentation-container { top: 120px; height: calc(100vh - 135px); }
+            #presentation-container { top: 110px; height: calc(100vh - 135px); }
             .slide { width: 92%; padding: 30px 25px; }
             h1 { font-size: 1.6rem; } h2 { font-size: 1.1rem; margin-bottom: 20px;} 
             p, ul { font-size: 0.95rem; }
@@ -513,7 +518,6 @@
         <a onclick="navigateFromClassic(4)">Adequação Regulatória</a>
         <a onclick="navigateFromClassic(5)">Otimização de Bioprocessos</a>
         <a onclick="navigateFromClassic(6)">Soluções Digitais</a>
-        <a onclick="navigateFromClassic(19)">Credenciais Oficiais</a>
         <a onclick="navigateFromClassic(3)">Contato</a>
     </div>
 
@@ -1099,29 +1103,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-20">
-            <div class="slide-inner-content">
-                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
-                <h1>Credenciais e Atribuições Oficiais</h1>
-                <h2>Validação Técnica (CREA-SP e TJSP)</h2>
-                <div class="content-split">
-                    <div>
-                        <p>A transparência é a base da segurança jurídica para o contratante industrial. Esta seção serve para atestar legalmente as habilitações oficiais e as áreas de cobertura do Engenheiro de Biotecnologia responsável pelas consultorias.</p>
-                        <ul>
-                            <li><strong>Registro Profissional Certificado:</strong> Status Ativo no Conselho Regional de Engenharia e Agronomia de São Paulo (CREA-SP).</li>
-                            <li><strong>Habilitação Legal para Plantas Industriais:</strong> Autoridade técnica e regulamentada por lei para assumir a operação, pesquisa e adequação sanitária.</li>
-                            <li><strong>Acesso ao Tribunal de Justiça:</strong> Engenheiro homologado no Cadastro de Auxiliares da Justiça (CAJ) para assistência em disputas forenses.</li>
-                        </ul>
-                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Solicitar Envio de Documentação Integral</a>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="14.png" class="content-img" alt="Certidões e Comprovantes CREA e TJSP">
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
     </div>
 
@@ -1260,7 +1242,6 @@
             { id: 4, text: "Regulatória", icon: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>' }, 
             { id: 5, text: "Bioprocessos", icon: '<svg viewBox="0 0 24 24"><path d="M10 2v7.31l-6 10.39A2 2 0 0 0 5.73 23h12.54a2 2 0 0 0 1.73-3.3l-6-10.39V2h-4z"></path><line x1="8.5" y1="14" x2="15.5" y2="14"></line></svg>' }, 
             { id: 6, text: "Digitais", icon: '<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>' }, 
-            { id: 20, text: "Credenciais", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>' }, 
             { id: 3, text: "Contato", icon: '<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>' }
         ];
 
@@ -1268,8 +1249,11 @@
         const carouselEl = document.getElementById('carousel');
         
         const setRadius = () => {
-            if (window.innerWidth <= 480) return 170;
-            if (window.innerWidth <= 768) return 300;
+            if (window.innerWidth <= 444) return 170;
+            if (window.innerWidth <= 500) return 180;
+            if (window.innerWidth <= 600) return 230;
+            if (window.innerWidth <= 700) return 300;
+            if (window.innerWidth <= 800) return 350;
             return 350;
         };
         let radius = setRadius();
