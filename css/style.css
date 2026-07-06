@@ -103,7 +103,7 @@ body.light-mode #classic-menu-overlay a:hover { color: var(--neon-blue); }
 .splash-text-top h1 { 
     font-size: 3.8rem; color: var(--neon-blue); text-shadow: 0 0 20px rgba(0, 243, 255, 0.6); 
     margin: 0; letter-spacing: 2px; line-height: 1;
-    display: flex; align-items: center; justify-content: center; gap: 15px; 
+    display: flex; align-items: center; justify-content: center; gap: 15px;
 }
 .splash-text-bottom p { font-size: 1.2rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 3px; margin: 0; text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);}
 .tap-text { display: block; font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 40px; animation: pulseAlpha 2s infinite; text-transform: uppercase; letter-spacing: 1px;}
@@ -163,7 +163,7 @@ body.light-mode #classic-menu-overlay a:hover { color: var(--neon-blue); }
 
 /* LOGOTIPO DO SITE */
 #logo-wrapper {
-    position: fixed; top: 120px; left: 0; width: 100%; height: 80px;
+    position: fixed; top: 95px; left: 0; width: 100%; height: 80px;
     display: flex; align-items: center; justify-content: center; z-index: 200;
 }
 
@@ -279,7 +279,7 @@ body.light-mode #hamburger-btn span { box-shadow: none; }
 
 /* CONTAINER DE TRANSIÇÃO ZUI */
 #presentation-container {
-    position: fixed; top: 250px; left: 0; width: 100vw; height: calc(100vh - 160px); 
+    position: fixed; top: 200px; left: 0; width: 100vw; height: calc(100vh - 160px); 
     perspective: 1500px; display: flex; align-items: center; justify-content: center; 
     z-index: 10; pointer-events: none; 
 }
