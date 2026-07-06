@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bioteka Soluções</title>
+    <meta name="description" content="Consultoria em Engenharia Biotecnológica: Adequação Regulatória, Otimização de Bioprocessos, Perícia Judicial, Análise de Dados e Soluções Digitais sob medida.">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="ptr-overlay">
+        <div id="ptr-panel-bg"></div>
+        <div id="ptr-content">
+            <svg viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg" class="logo-animado-inline" style="width: 3.5em; height: 3.5em;">
+                <defs>
+                    <linearGradient id="blueNeonPtr" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00ffff" />
+                        <stop offset="100%" stop-color="#0055ff" />
+                    </linearGradient>
+                    <linearGradient id="greenNeonPtr" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#39ff14" />
+                        <stop offset="100%" stop-color="#00b300" />
+                    </linearGradient>
+                    <path id="orbitPathPtr" d="M -130,0 A 130,45 0 1,0 130,0 A 130,45 0 1,0 -130,0" />
+                </defs>
+                <g transform="rotate(45)"><use href="#orbitPathPtr" fill="none" stroke="url(#blueNeonPtr)" stroke-width="12" opacity="0.8" /><circle r="18" fill="#00ffff"><animateMotion dur="2s" repeatCount="indefinite" begin="0s"><mpath href="#orbitPathPtr"/></animateMotion></circle><circle r="18" fill="#00ffff"><animateMotion dur="2s" repeatCount="indefinite" begin="-1s"><mpath href="#orbitPathPtr"/></animateMotion></circle></g>
+                <g transform="rotate(-45)"><use href="#orbitPathPtr" fill="none" stroke="url(#blueNeonPtr)" stroke-width="12" opacity="0.8" /><circle r="18" fill="#00ffff"><animateMotion dur="2s" repeatCount="indefinite" begin="-0.5s"><mpath href="#orbitPathPtr"/></animateMotion></circle><circle r="18" fill="#00ffff"><animateMotion dur="2s" repeatCount="indefinite" begin="-1.5s"><mpath href="#orbitPathPtr"/></animateMotion></circle></g>
+                <path d="M 0 55 C -45 10, -65 -45, 0 -100 C 65 -45, 45 10, 0 55 Z" fill="url(#greenNeonPtr)" opacity="0.9" />
+                <path d="M 0 -95 L 0 50 M 0 -20 Q 25 -45 30 -55 M 0 15 Q -25 -10 -30 -20 M 0 40 Q 20 20 25 10" fill="none" stroke="#03050a" stroke-width="7" stroke-linecap="round"/>
+            </svg>
+            <span>atualizando...</span>
+        </div>
+    </div>
+
+    <div id="splash-screen" onclick="closeSplash()">
+        <div class="splash-panel splash-top"></div>
+        <div class="splash-panel splash-bottom"></div>
+        <div class="splash-content-wrapper">
+            <div class="splash-text-top">
+                <h1>
+                    <svg viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg" class="logo-animado-inline">
+                        <defs>
+                            <linearGradient id="blueNeonSplash" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00ffff" />
+                                <stop offset="100%" stop-color="#0055ff" />
+                            </linearGradient>
+                            <linearGradient id="greenNeonSplash" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#39ff14" />
+                                <stop offset="100%" stop-color="#00b300" />
+                            </linearGradient>
+                            <path id="orbitPathSplash" d="M -130,0 A 130,45 0 1,0 130,0 A 130,45 0 1,0 -130,0" />
+                        </defs>
+                        <g transform="rotate(45)"><use href="#orbitPathSplash" fill="none" stroke="url(#blueNeonSplash)" stroke-width="12" opacity="0.8" /><circle r="18" fill="#00ffff"><animateMotion dur="4s" repeatCount="indefinite" begin="0s"><mpath href="#orbitPathSplash"/></animateMotion></circle><circle r="18" fill="#00ffff"><animateMotion dur="4s" repeatCount="indefinite" begin="-2s"><mpath href="#orbitPathSplash"/></animateMotion></circle></g>
+                        <g transform="rotate(-45)"><use href="#orbitPathSplash" fill="none" stroke="url(#blueNeonSplash)" stroke-width="12" opacity="0.8" /><circle r="18" fill="#00ffff"><animateMotion dur="4s" repeatCount="indefinite" begin="-1s"><mpath href="#orbitPathSplash"/></animateMotion></circle><circle r="18" fill="#00ffff"><animateMotion dur="4s" repeatCount="indefinite" begin="-3s"><mpath href="#orbitPathSplash"/></animateMotion></circle></g>
+                        <path d="M 0 55 C -45 10, -65 -45, 0 -100 C 65 -45, 45 10, 0 55 Z" fill="url(#greenNeonSplash)" opacity="0.9" />
+                        <path d="M 0 -95 L 0 50 M 0 -20 Q 25 -45 30 -55 M 0 15 Q -25 -10 -30 -20 M 0 40 Q 20 20 25 10" fill="none" stroke="#03050a" stroke-width="7" stroke-linecap="round"/>
+                    </svg>
+                    Bioteka Soluções
+                </h1>
+            </div>
+            <div class="splash-text-bottom">
+                <p>Engenharia • Inovação • Conformidade</p>
+                <span class="tap-text">Toque em qualquer lugar para acessar</span>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="bgCanvas"></canvas>
+
+    <div id="hamburger-btn" onclick="toggleClassicMenu()">
+        <span></span><span></span><span></span>
+    </div>
+
+    <div id="theme-toggle-wrapper" onclick="toggleTheme()">
+        <div class="toggle-track">
+            <div class="toggle-thumb"></div>
+        </div>
+    </div>
+
+    <a id="fixed-contact-btn" onclick="navigateTo(3)">💬 Solicitar Orçamento</a>
+
+    <div id="logo-wrapper">
+        <div class="pulse-light"></div>
+        <div id="site-logo" onclick="navigateTo(0)">
+            <svg viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg" class="logo-animado-inline">
+                <defs>
+                    <linearGradient id="blueNeonHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00ffff" />
+                        <stop offset="100%" stop-color="#0055ff" />
+                    </linearGradient>
+                    <linearGradient id="greenNeonHeader" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#39ff14" />
+                        <stop offset="100%" stop-color="#00b300" />
+                    </linearGradient>
+                    <path id="orbitPathHeader" d="M -130,0 A 130,45 0 1,0 130,0 A 130,45 0 1,0 -130,0" />
+                </defs>
+                <g transform="rotate(45)"><use href="#orbitPathHeader" fill="none" stroke="url(#blueNeonHeader)" stroke-width="12" opacity="0.8" /><circle r="18" fill="#00ffff"><animateMotion dur="4s" repeatCount="indefinite" begin="0s"><mpath href="#orbitPathHeader"/></animateMotion></circle><circle r="18" fill="#00ffff"><animateMotion dur="4s" repeatCount="indefinite" begin="-2s"><mpath href="#orbitPathHeader"/></animateMotion></circle></g>
+                <g transform="rotate(-45)"><use href="#orbitPathHeader" fill="none" stroke="url(#blueNeonHeader)" stroke-width="12" opacity="0.8" /><circle r="18" fill="#00ffff"><animateMotion dur="4s" repeatCount="indefinite" begin="-1s"><mpath href="#orbitPathHeader"/></animateMotion></circle><circle r="18" fill="#00ffff"><animateMotion dur="4s" repeatCount="indefinite" begin="-3s"><mpath href="#orbitPathHeader"/></animateMotion></circle></g>
+                <path d="M 0 55 C -45 10, -65 -45, 0 -100 C 65 -45, 45 10, 0 55 Z" fill="url(#greenNeonHeader)" opacity="0.9" />
+                <path d="M 0 -95 L 0 50 M 0 -20 Q 25 -45 30 -55 M 0 15 Q -25 -10 -30 -20 M 0 40 Q 20 20 25 10" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+            </svg>
+            <div style="display: flex; gap: 8px;">
+                <span class="logo-blue">Bioteka</span>
+                <span class="logo-green">Soluções</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="classic-menu-overlay">
+        <a onclick="navigateFromClassic(0)">Início</a>
+        <a onclick="navigateFromClassic(1)">Sobre o Engenheiro</a>
+        <a onclick="navigateFromClassic(2)">Serviços (Catálogo)</a>
+        <a onclick="navigateFromClassic(4)">Adequação Regulatória</a>
+        <a onclick="navigateFromClassic(5)">Otimização de Bioprocessos</a>
+        <a onclick="navigateFromClassic(6)">Soluções Digitais</a>
+        <a onclick="navigateFromClassic(3)">Contato</a>
+    </div>
+
+    <div id="menu-wrapper">
+        <div id="carousel"></div>
+    </div>
+
+    <div id="presentation-container">
+
+        <div class="slide active" id="slide-0">
+            <div class="slide-inner-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 55vh; padding-top: 10px;">
+                <h1>Bem-vindo à Bioteka Soluções</h1>
+                <h2 style="margin-bottom: 30px;">Inovação e Segurança para o seu Negócio</h2>
+                <p style="margin-bottom: 30px; max-width: 750px;">
+                    Entendemos que a sua indústria não tem margem para tentativa e erro ou riscos regulatórios. Oferecemos consultoria especializada em <strong>Engenharia Biotecnológica</strong> para blindar suas operações contra multas, padronizar seus lotes de produção e maximizar a lucratividade através de processos validados cientificamente.
+                </p>
+                <a onclick="navigateTo(2)" class="cta-button" style="padding: 15px 20px; margin-top: 25px; box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);">Conheça nossos serviços</a>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-1">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Sobre o Engenheiro</h1>
+                <h2>Conectando a Pesquisa de Ponta à Escala Industrial</h2>
+                <div class="content-split">
+                    <div>
+                        <p>O mercado atual exige precisão absoluta e não tolera processos baseados em achismos. Minha atuação é fundamentada na intersecção entre a pesquisa acadêmica de alto nível e as necessidades de produtividade e segurança financeira da indústria.</p>
+                        <p>Atuando em Biociências, aplico a teoria avançada diretamente na prática laboratorial e industrial. Desenvolvo desde a modelagem matemática para otimização de algoritmos de produção até o desenho de rotas sustentáveis complexas visando a economia circular e a extração de bioativos de alto valor comercial.</p>
+                        <p>O objetivo é traduzir a complexidade biotecnológica em análises precisas, conformidade legal contra autuações governamentais, rendimento financeiro e eficiência máxima para o seu negócio.</p>
+                        <a onclick="navigateTo(3)" class="cta-button">Contato Direto</a>
+                    </div>
+                    <div>
+                        <img src="img/1.png" class="content-img" alt="Foto profissional do Engenheiro de Biotecnologia">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-2">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Catálogo de Serviços</h1>
+                <h2>Visão Geral das Soluções Técnicas</h2>
+                <p style="margin-top: 25px">Selecione qualquer categoria abaixo para visualizar os detalhes e compreender como a engenharia biotecnológica pode escalar e proteger sua produção e pesquisa da forma mais lucrativa e segura.</p>
+
+                <div class="compact-grid">
+                    <div class="compact-card">
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px;" onclick="navigateTo(4)">Adequação Regulatória</div>
+                            <a class="cta-button chat-quick-btn" onclick="navigateTo(3)" title="Contato Rápido">💬</a>
+                        </div>
+                        <a onclick="navigateTo(7)">↳ Responsabilidade Técnica (ART)</a>
+                        <a onclick="navigateTo(8)">↳ Planos de Resíduos (PGRS)</a>
+                        <a onclick="navigateTo(9)">↳ Boas Práticas de Fabricação</a>
+                        <a onclick="navigateTo(10)">↳ Perícia Judicial e Assistência</a>
+                    </div>
+                    <div class="compact-card">
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px;" onclick="navigateTo(5)">Otimização de Bioprocessos</div>
+                            <a class="cta-button chat-quick-btn" onclick="navigateTo(3)" title="Contato Rápido">💬</a>
+                        </div>
+                        <a onclick="navigateTo(11)">↳ Previsibilidade de Produção</a>
+                        <a onclick="navigateTo(12)">↳ Bebidas Fermentadas</a>
+                        <a onclick="navigateTo(13)">↳ Fermentação de Panificados</a>
+                        <a onclick="navigateTo(14)">↳ Maturação de Laticínios</a>
+                        <a onclick="navigateTo(15)">↳ Controle Microbiológico</a>
+                        <a onclick="navigateTo(16)">↳ Valorização de Resíduos</a>
+                    </div>
+                    <div class="compact-card">
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px;" onclick="navigateTo(6)">Soluções Digitais e Dados</div>
+                            <a class="cta-button chat-quick-btn" onclick="navigateTo(18)" title="Contato Rápido Web">💬</a>
+                        </div>
+                        <a onclick="navigateTo(17)">↳ Modelagem Estatística em R</a>
+                        <a onclick="navigateTo(18)">↳ Programação e Criação Web</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-3">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Contato Profissional</h1>
+                <h2>Solicite uma Análise de Viabilidade</h2>
+                
+                <div class="contact-grid">
+                    <div>
+                        <form id="contato-form-geral" action="https://formspree.io/f/mgojpzen" method="POST">
+                            <div class="form-group">
+                                <label>Seu Nome *</label>
+                                <input type="text" name="Nome" class="form-control" placeholder="Ex: João Silva" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Seu E-mail *</label>
+                                <input type="email" id="email-input-1" name="Email" class="form-control" placeholder="contato@empresa.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Seu Telefone / WhatsApp *</label>
+                                <input type="tel" id="telefone-input-1" name="Telefone" class="form-control telefone-mask" placeholder="(DD) 99999-9999" maxlength="15" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Serviços de Interesse *</label>
+                                <div id="service-dropdown" class="dropdown-check-list" tabindex="100">
+                                    <span class="anchor" onclick="toggleServiceDropdown()">Selecione opções...</span>
+                                    <ul class="items">
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Responsabilidade Técnica (ART)" /> Responsabilidade Técnica (ART)</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Planos de Resíduos (PGRS)" /> Planos de Resíduos (PGRS)</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Boas Práticas de Fabricação (BPF)" /> Boas Práticas de Fabricação (BPF)</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Perícia Judicial / Assistência Técnica" /> Perícia Judicial / Assistência Técnica</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Previsibilidade de Produção" /> Previsibilidade de Produção</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Otimização de Bebidas Fermentadas" /> Otimização de Bebidas Fermentadas</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Otimização em Panificação" /> Otimização em Panificação</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Otimização em Laticínios" /> Otimização em Laticínios</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Controle Microbiológico e Conservação" /> Controle Microbiológico e Conservação</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Valorização de Resíduos" /> Valorização de Resíduos</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Modelagem Matemática de Dados" /> Modelagem Matemática de Dados</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Programação e Criação de Sites" /> Programação e Criação de Sites</li>
+                                        <li><input type="checkbox" name="Serviços_Interesse[]" value="Outros serviços / Dúvidas" /> Outros serviços / Dúvidas</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sua Mensagem *</label>
+                                <textarea name="Mensagem" class="form-control" rows="3" placeholder="Descreva brevemente a sua necessidade ou processo atual para avaliarmos a melhor solução..." required></textarea>
+                            </div>
+
+                            <div class="form-actions" style="margin-top: 25px;">
+                                <button type="submit" class="cta-button" style="margin-top: 0; flex: 1;">Enviar</button>
+                                <a href="https://wa.me/5518998069727" target="_blank" class="cta-button whatsapp-btn" style="margin-top: 0; flex: 1;">
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.4); padding: 25px; border-left: 4px solid var(--neon-green); border-radius: 5px; height: fit-content;">
+                        <h3 style="margin-bottom: 20px;">Credenciais</h3>
+                        <p style="margin-bottom: 10px;"><strong>Responsável:</strong><br>Mike Jonathan dos Santos Brito</p>
+                        <p style="margin-bottom: 10px;"><strong>Título:</strong><br>Engenheiro de Biotecnologia</p>
+                        <p style="margin-bottom: 10px;"><strong>Registro CREA-SP:</strong><br>5071801530</p>
+                        <p style="margin-bottom: 10px;"><strong>RNP:</strong><br>2623892040</p>
+                        <p style="margin-bottom: 0;"><strong>Base Operacional:</strong><br>Presidente Prudente - SP | Atendimento Remoto Nacional</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-4">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Adequação Regulatória</h1>
+                <h2>Segurança Jurídica para a Sua Indústria</h2>
+                <p>Mantenha sua empresa operando legalmente, evite embargos e construa uma reputação sólida no mercado. Selecione a área para entender como protegemos seu patrimônio de interdições e pesadas multas legais.</p>
+                <div class="services-grid">
+                    <div class="service-card" onclick="navigateTo(7)">
+                        <h3>Responsabilidade Técnica (ART)</h3>
+                        <p>Validação legal de processos pelo engenheiro perante o CREA, garantindo liberação de alvarás.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(8)">
+                        <h3>Planos de Resíduos (PGRS)</h3>
+                        <p>Dimensionamento de fluxos de descarte ambientalmente corretos contra multas ambientais.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(9)">
+                        <h3>Boas Práticas de Fabricação (BPF)</h3>
+                        <p>Elaboração rigorosa de manuais para aprovação imediata em auditorias sanitárias.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(10)">
+                        <h3>Perícia Judicial</h3>
+                        <p>Assistência técnica imparcial para litígios complexos e auditoria profunda de laudos.</p>
+                    </div>
+                </div>
+                <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
+                    <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Otimização de Bioprocessos</h1>
+                <h2>Escale sua Produção e Aumente Lucros</h2>
+                <div class="services-grid">
+                    <div class="service-card" onclick="navigateTo(11)">
+                        <h3>Previsibilidade de Produção</h3>
+                        <p>Elimine gargalos operacionais, perdas de lote e padronize a qualidade de ponta a ponta.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(12)">
+                        <h3>Bebidas Fermentadas</h3>
+                        <p>Controle absoluto de Brix, leveduras e estabilização de off-flavors em cervejas e hidromel.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(13)">
+                        <h3>Panificação Industrial</h3>
+                        <p>Engenharia de matrizes de glúten e equilíbrio lático-acético em processos de longa fermentação.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(14)">
+                        <h3>Maturação de Laticínios</h3>
+                        <p>Gestão de microclima e cura de queijos finos com controle de rendimento e sanidade.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(15)">
+                        <h3>Controle Microbiológico</h3>
+                        <p>Aumente drasticamente a vida de prateleira (shelf-life) e blinde seus produtos contra contaminações.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(16)">
+                        <h3>Valorização de Resíduos</h3>
+                        <p>Transforme passivos ambientais em novos fluxos de receita com a extração de biopolímeros.</p>
+                    </div>
+                </div>
+                <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
+                    <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Soluções Digitais e Dados</h1>
+                <h2>Performance Computacional para Negócios</h2>
+                <p>Decisões guiadas por intuição perdem dinheiro. A ciência de dados aliada ao desenvolvimento web coloca seu laboratório ou empresa na vanguarda do mercado tecnológico.</p>
+                <div class="services-grid">
+                    <div class="service-card" onclick="navigateTo(17)">
+                        <h3>Modelagem Matemática de Dados</h3>
+                        <p>Tratamento estatístico experimental, otimização de algoritmos industriais e rotinas de cálculo.</p>
+                    </div>
+                    <div class="service-card" onclick="navigateTo(18)">
+                        <h3>Criação de Sites e Sistemas</h3>
+                        <p>Aplicações web de alta performance voltadas para conversão de vendas e interface imersiva UI/UX.</p>
+                    </div>
+                </div>
+                <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
+                    <a onclick="navigateTo(18)" class="cta-button" style="margin-top: 0; border-color: var(--neon-blue); color: var(--neon-blue);">Contratar Web Design</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-7">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Responsabilidade Técnica (ART)</h1>
+                <h2>Conformidade Direta com o CREA</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A Anotação de Responsabilidade Técnica (ART) é a sua principal proteção legal. Operar sem o acompanhamento formal de um profissional qualificado expõe a sua organização ao risco imediato de interdições, multas e processos criminais.</p>
+                        <ul>
+                            <li><strong>Garantia Legal:</strong> Responsabilidade técnica oficial sobre processos industriais perante o CREA.</li>
+                            <li><strong>Liberação Operacional:</strong> Acompanhamento para obtenção de alvarás de funcionamento.</li>
+                            <li><strong>Tranquilidade Regulatória:</strong> Aprovação e validação técnica atestando a integridade das operações.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Solicitar Proposta</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/2.png" class="content-img" alt="Documentos técnicos e conformidade">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-8">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Planos de Gerenciamento (PGRS)</h1>
+                <h2>Adequação Imediata às Exigências</h2>
+                <div class="content-split">
+                    <div>
+                        <p>O descarte incorreto de materiais é uma das principais causas de sanções financeiras pesadas. A formulação de um Plano de Gerenciamento de Resíduos Sólidos (PGRS) é obrigatória para indústrias e essencial para a aprovação em auditorias ambientais.</p>
+                        <ul>
+                            <li><strong>Mapeamento Técnico:</strong> Organização e estruturação da segregação.</li>
+                            <li><strong>Sustentabilidade Validada:</strong> Direcionamento para o tratamento correto.</li>
+                            <li><strong>Prevenção Ativa:</strong> Eliminação do risco de multas do IBAMA e CETESB.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/3.png" class="content-img" alt="Sustentabilidade e gestão ambiental">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-9">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Boas Práticas de Fabricação (BPF)</h1>
+                <h2>Preparação para Auditorias Sanitárias</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A estrutura de qualidade e o valor da sua marca dependem da execução impecável da higiene. Desenvolvemos toda a matriz documental necessária para que sua indústria passe ilesa por qualquer inspeção e seja aprovada na obtenção de selos e certificações.</p>
+                        <ul>
+                            <li>Elaboração do Manual de Boas Práticas de Fabricação (BPF).</li>
+                            <li>Desenvolvimento de Procedimentos Operacionais Padrão (POPs).</li>
+                            <li>Implementação de planilhas de rastreabilidade de insumos.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/4.png" class="content-img" alt="Pranchetas, inspeção laboratorial">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-10">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Perícia e Assistência Técnica</h1>
+                <h2>Fundamentação Imparcial para Disputas</h2>
+                <div class="content-split">
+                    <div>
+                        <p>Quando o seu patrimônio está em jogo devido a litígios que envolvem contaminações industriais, inconformidades operacionais ou questões ambientais, é vital contar com pareceres técnicos sólidos capazes de converter processos complexos em provas contundentes.</p>
+                        <ul>
+                            <li><strong>Assessoria Científica:</strong> Produção de laudos de convergência ou refutação.</li>
+                            <li><strong>Delineamento de Quesitos:</strong> Estruturação de questionamentos estratégicos.</li>
+                            <li><strong>Auditoria Profunda de Laudos:</strong> Validação de metodologias fáticas nos autos.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/11.png" class="content-img" alt="Balança pericial e análise tecnológica">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-11">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Previsibilidade de Produção</h1>
+                <h2>Fim do Desperdício e do Achismo</h2>
+                <div class="content-split">
+                    <div>
+                        <p>Pare de perder dinheiro descartando lotes instáveis. A variação de qualidade entre bateladas afeta a confiança do consumidor e destrói as margens de lucro. Através da modelagem biotecnológica, transformamos processos incertos em rotas escaláveis e estritamente repetíveis.</p>
+                        <p>O foco é a racionalização da planta: acompanhamento matemático das cinéticas reacionais, balanceamento térmico de equipamentos, calibração físico-química e redução extrema de custos operacionais por falhas humanas.</p>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/5.png" class="content-img" alt="Gráficos de dados industriais">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-12">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Otimização de Bebidas Fermentadas</h1>
+                <h2>Controle sobre Cervejas e Hidromel</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A magia de uma bebida premium não é sorte, é ciência rigorosa. Atuamos diretamente no metabolismo celular durante o processo fermentativo para garantir a extração do rendimento alcoólico máximo e o perfeito engarrafamento do perfil aromático pretendido.</p>
+                        <ul>
+                            <li>Engenharia metabólica: cálculos precisos de correção de mosto e taxas de inoculação celular.</li>
+                            <li>Manejo rigoroso de leveduras para inibir a formação de compostos indesejados (off-flavors).</li>
+                            <li>Padronização termodinâmica das etapas cruciais de clarificação e maturação.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/6.png" class="content-img" alt="Biorreatores e processos fermentativos">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-13">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Panificação e Fermentação Longa</h1>
+                <h2>Engenharia Aplicada às Massas e Levain</h2>
+                <div class="content-split">
+                    <div>
+                        <p>O alto valor comercial dos pães de fermentação natural exige que o comportamento imprevisível das massas seja domado. Operar por intuição gera descartes diários; a engenharia traz o controle térmico e biológico para a estabilidade de vendas.</p>
+                        <ul>
+                            <li>Desenvolvimento de curvas de acidez e equalização perfeita da relação lática/acética em culturas de *sourdough* e iscas industriais.</li>
+                            <li>Controle reológico direcionado à extensibilidade da malha de glúten, prevenindo o abatumamento e defeitos drásticos na casca e miolo.</li>
+                            <li>Dimensionamento higrotérmico e adequação técnica de câmaras de fermentação a frio.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/7.png" class="content-img" alt="Fornos industriais ou leveduras de panificação">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-14">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Maturação de Laticínios</h1>
+                <h2>Controle do Microclima e Microbiota</h2>
+                <div class="content-split">
+                    <div>
+                        <p>O desenvolvimento de queijos de alto padrão e laticínios vivos demanda a calibração microscópica das variáveis bioquímicas para garantir a sanidade da casca e o pleno desenvolvimento organoléptico valorizado pelos consumidores exigentes.</p>
+                        <ul>
+                            <li>Parametrização estrita de umidade relativa (UR) e temperatura no interior das câmaras de cura.</li>
+                            <li>Gestão da flora microbiana nativa e aplicação biotecnológica segura de culturas de superfície.</li>
+                            <li>Auditoria de processos visando erradicar defeitos graves, como sinérese excessiva ou trincas mecânicas.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/8.png" class="content-img" alt="Câmaras de maturação de queijos iluminadas">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-15">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Controle Microbiológico e Conservação</h1>
+                <h2>Biopreservação e Estabilidade (Shelf-Life)</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A deterioração biológica precoce não apenas gera perda de produtos e grandes prejuízos financeiros, mas também expõe sua marca a crises de imagem e riscos sanitários severos. A engenharia de barreiras tecnológicas é indispensável para proteger o consumidor final.</p>
+                        <ul>
+                            <li>Mapeamento total da planta com o objetivo de identificar focos ocultos de contaminação cruzada.</li>
+                            <li>Projetos avançados de biopreservação e equalização precisa da Atividade de Água (Aw).</li>
+                            <li>Diagnóstico e estratégias diretas para a interrupção do estufamento de embalagens e crescimento fúngico.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/9.png" class="content-img" alt="Análises laboratoriais sob luz neon">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-16">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Valorização de Resíduos</h1>
+                <h2>Economia Circular Aplicada</h2>
+                <div class="content-split">
+                    <div>
+                        <p>O conceito tradicional de "lixo" industrial é um dreno no caixa da sua empresa. A bioeconomia e a engenharia molecular modernas permitem que passivos ambientais sejam convertidos e escalonados em biomateriais de vanguarda e insumos de alto valor agregado.</p>
+                        <ul>
+                            <li>Pesquisa e projeto de rotas tecnológicas exclusivas para extração e isolamento de biopolímeros (como Nanocristais).</li>
+                            <li>Design de pré-tratamentos químicos e térmicos visando a desestruturação limpa de matrizes.</li>
+                            <li>Alinhamento de processos industriais com potentes métricas corporativas de sustentabilidade e ESG.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/10.png" class="content-img" alt="Estruturas nanotecnológicas sustentáveis">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-17">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1>Modelagem Matemática e Dados</h1>
+                <h2>Decisões Validadas por Algoritmos</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A intuição é inimiga da lucratividade em escala. A inteligência em ciência de dados converte variáveis brutas de laboratório em respostas exatas, apontando tendências vitais e cortando desperdícios em experimentos que antes se dariam apenas por tentativa e erro.</p>
+                        <ul>
+                            <li><strong>Análise Preditiva e Estatística:</strong> Tratamento paramétrico rigoroso utilizando linguagens como R e MATLAB.</li>
+                            <li><strong>Otimização por Algoritmos:</strong> Desenvolvimento de modelos biofísicos para simulação no ganho de escala de reatores.</li>
+                            <li><strong>Desenho Computacional Assistido:</strong> Vetorização técnica de diagramas de processo e layouts de equipamentos.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/12.png" class="content-img" alt="Matemática e linguagens de programação">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-18">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1 style="color: var(--neon-blue); text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);">Programação e Criação de Sites</h1>
+                <h2>Soluções Digitais e Interfaces Modernas</h2>
+                <div class="content-split">
+                    <div>
+                        <p>A internet não tolera sistemas amadores. A exatidão da engenharia transposta diretamente para o desenvolvimento de soluções na web, proporcionando uma arquitetura limpa, visual impressionante e conversões diretas de leads para o seu negócio B2B ou B2C.</p>
+                        <ul>
+                            <li><strong>Websites Responsivos:</strong> Adaptação fluida garantida para todos os formatos de monitores, tablets e smartphones.</li>
+                            <li><strong>Experiência Imersiva UI/UX:</strong> Engenharia visual aplicada para retenção de acessos e design futurista.</li>
+                            <li><strong>Alta Performance de Código:</strong> Estruturas sem inchaço, resultando em carregamentos ultrarrápidos para SEO.</li>
+                        </ul>
+                        <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                            <a onclick="navigateTo(2)" class="cta-secondary" style="border-color: var(--neon-blue); color: var(--neon-blue);">Ver Catálogo</a>
+                            <a onclick="navigateTo(19)" class="cta-button" style="border-color: var(--neon-blue); color: var(--neon-blue);">Contratar Solução Web</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/13.png" class="content-img" alt="Layout responsivo web design">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-19">
+            <div class="slide-inner-content">
+                <a onclick="goBack()" class="btn-voltar">← Voltar</a>
+                <h1 style="color: var(--neon-blue); text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);">Orçamento de Web Design</h1>
+                <h2>Descreva as Necessidades Digitais</h2>
+                
+                <div class="contact-grid">
+                    <div>
+                        <form id="contato-form-web" action="https://formspree.io/f/mgojpzen" method="POST">
+                            <input type="hidden" name="Origem_Formulario" value="Formulário Exclusivo de Criação de Sites">
+                            
+                            <div class="form-group">
+                                <label style="color: var(--neon-blue);">Seu Nome *</label>
+                                <input type="text" name="Nome" class="form-control" style="border-color: rgba(0, 243, 255, 0.3);" placeholder="Ex: João Silva" required>
+                            </div>
+                            <div class="form-group">
+                                <label style="color: var(--neon-blue);">Seu E-mail *</label>
+                                <input type="email" id="email-input-2" name="Email" class="form-control" style="border-color: rgba(0, 243, 255, 0.3);" placeholder="contato@empresa.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label style="color: var(--neon-blue);">Seu Telefone / WhatsApp *</label>
+                                <input type="tel" id="telefone-input-2" name="Telefone" class="form-control telefone-mask" style="border-color: rgba(0, 243, 255, 0.3);" placeholder="(DD) 99999-9999" maxlength="15" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="color: var(--neon-blue);">Descreva o Site ou Sistema Desejado *</label>
+                                <textarea name="Descricao_Web_Design" class="form-control" style="border-color: rgba(0, 243, 255, 0.3);" rows="4" placeholder="Ex: Preciso de um portal institucional interativo e rápido para a minha clínica..." required></textarea>
+                            </div>
+
+                            <div class="form-actions" style="margin-top: 25px;">
+                                <button type="submit" class="cta-button" style="margin-top: 0; flex: 1; border-color: var(--neon-blue); color: var(--neon-blue);">Enviar Solicitação e Avaliação</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div style="background: rgba(0,0,0,0.4); padding: 25px; border-left: 4px solid var(--neon-blue); border-radius: 5px; height: fit-content;">
+                        <h3 style="margin-bottom: 20px; color: var(--neon-blue);">Metodologia Web</h3>
+                        <p style="margin-bottom: 10px;">✔ Interfaces responsivas de adaptação universal (Mobile First).</p>
+                        <p style="margin-bottom: 10px;">✔ Arquitetura avançada de software para fluidez e conversão (UI/UX).</p>
+                        <p style="margin-bottom: 10px;">✔ Código estritamente nativo para indexação superior no Google.</p>
+                        <p style="margin-bottom: 0;">✔ Planejamento total, desde o *deploy*, hospedagem ao lançamento final.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
