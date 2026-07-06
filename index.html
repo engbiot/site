@@ -20,6 +20,7 @@
             --menu-bg: rgba(3, 5, 10, 0.85);
             --logo-blue-txt: var(--neon-blue);
             --logo-green-txt: var(--neon-green);
+            --info-box-bg: rgba(0, 0, 0, 0.4);
         }
 
         /* TEMA CLARO (LIGHT MODE) */
@@ -36,6 +37,7 @@
             --menu-bg: rgba(255, 255, 255, 0.85);
             --logo-blue-txt: #0055cc;
             --logo-green-txt: #008000;
+            --info-box-bg: rgba(0, 0, 0, 0.05);
         }
 
         body, html {
@@ -53,7 +55,7 @@
         body.light-mode #menu-wrapper { border-color: rgba(0, 102, 255, 0.2); box-shadow: 0 10px 25px -10px rgba(0,0,0,0.1); }
         body.light-mode .menu-item { color: #555; }
         body.light-mode .menu-item:hover, body.light-mode .menu-item.active { color: var(--neon-blue); text-shadow: none; }
-        body.light-mode .slide { border: 1px solid #e2e8f0; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+        body.light-mode .slide { border: 1px solid #94a3b8; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
         body.light-mode h1, body.light-mode h2, body.light-mode h3 { text-shadow: none; }
         body.light-mode p, body.light-mode ul { color: var(--text-muted); }
         body.light-mode .service-card { border-color: #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
@@ -445,6 +447,12 @@
             .form-control { font-size: 0.85rem; padding: 8px 12px; }
             .menu-item { width: 160px; left: -80px; font-size: 0.75rem; }
             #classic-menu-overlay a { font-size: 1.1rem; letter-spacing: 1px; }
+
+            .splash-text-top h1 { font-size: 1.7rem; gap: 8px; }
+            .splash-text-bottom p { font-size: 0.8rem; letter-spacing: 1px; }
+            
+            #menu-wrapper { height: 45px; }
+            #logo-wrapper { top: 70px; height: 70px; }
         }
     </style>
 </head>
@@ -695,7 +703,7 @@
                         </form>
                     </div>
 
-                    <div style="background: rgba(0,0,0,0.4); padding: 25px; border-left: 4px solid var(--neon-green); border-radius: 5px; height: fit-content;">
+                    <div style="background: var(--info-box-bg); padding: 25px; border-left: 4px solid var(--neon-green); border-radius: 5px; height: fit-content;">
                         <h3 style="margin-bottom: 20px;">Credenciais</h3>
                         <p style="margin-bottom: 10px;"><strong>Responsável:</strong><br>Mike Jonathan dos Santos Brito</p>
                         <p style="margin-bottom: 10px;"><strong>Título:</strong><br>Engenheiro de Biotecnologia</p>
@@ -1130,7 +1138,7 @@
                         </form>
                     </div>
 
-                    <div style="background: rgba(0,0,0,0.4); padding: 25px; border-left: 4px solid var(--neon-blue); border-radius: 5px; height: fit-content;">
+                    <div style="background: var(--info-box-bg); padding: 25px; border-left: 4px solid var(--neon-blue); border-radius: 5px; height: fit-content;">
                         <h3 style="margin-bottom: 20px; color: var(--neon-blue);">Metodologia Web</h3>
                         <p style="margin-bottom: 10px;">✔ Interfaces responsivas de adaptação universal (Mobile First).</p>
                         <p style="margin-bottom: 10px;">✔ Arquitetura avançada de software para fluidez e conversão (UI/UX).</p>
