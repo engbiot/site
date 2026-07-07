@@ -496,7 +496,7 @@ body.light-mode .selected-item-web {
 
 @media (max-width: 480px) {
     #menu-wrapper { height: 55px; }
-    #logo-wrapper { top: 60px; height: 70px; }
+    #logo-wrapper { top: 75px; height: 70px; }
     #presentation-container { top: 130px; height: calc(100vh - 115px); }
     
     #site-logo { font-size: 1.5rem; letter-spacing: 1px; }
