@@ -1,12 +1,24 @@
 // ==========================================
-// MODO DIA/NOITE (LIGHT MODE TOGGLE)
+// MODO DIA/NOITE (LIGHT MODE TOGGLE) COM LOCALSTORAGE
 // ==========================================
 /**
  * Alterna a classe 'light-mode' no elemento body.
- * Modifica as variáveis nativas do CSS para alterar toda a paleta da página.
+ * Salva a preferência no localStorage para manter após o refresh.
  */
+// Checagem inicial ao carregar o JS principal
+const savedTheme = localStorage.getItem('theme') || 'light';
+if (savedTheme === 'dark') {
+    document.body.classList.remove('light-mode');
+} else {
+    document.body.classList.add('light-mode');
+}
+
 function toggleTheme() {
     document.body.classList.toggle('light-mode');
+    
+    // Verifica qual tema ficou ativo após o clique e salva no navegador
+    const currentTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+    localStorage.setItem('theme', currentTheme);
 }
 
 // ==========================================
@@ -95,7 +107,25 @@ window.addEventListener('popstate', function(e) {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    history.replaceState({ slide: 0 }, '', window.location.pathname);
+    // 1. Lógica para recuperar a tela (slide) atual lendo a URL (ex: meudominio.com/#s5)
+    let startSlide = 0;
+    const hash = window.location.hash;
+    
+    if (hash && hash.startsWith('#s')) {
+        const slideIndex = parseInt(hash.replace('#s', ''), 10);
+        if (!isNaN(slideIndex)) {
+            startSlide = slideIndex;
+        }
+    }
+
+    // 2. Substitui o estado atual informando o slide correto (mantendo a hash na URL)
+    history.replaceState({ slide: startSlide }, '', hash || window.location.pathname);
+    
+    // 3. Se não for o slide 0, navega silenciosamente (sem gravar novo histórico) para o slide salvo
+    if (startSlide !== 0) {
+        navigateTo(startSlide, false);
+    }
+
     setTimeout(closeSplash, 4000);
 
     // Injeta automaticamente o rodapé no final de cada slide iterado
