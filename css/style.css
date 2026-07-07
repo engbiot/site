@@ -70,6 +70,26 @@ body.light-mode #classic-menu-overlay { background: rgba(255, 255, 255, 0.9); bo
 body.light-mode #classic-menu-overlay a { color: #333; text-shadow: none; }
 body.light-mode #classic-menu-overlay a:hover { color: var(--neon-blue); }
 
+/* Refinamento dos botões no modo claro: cor mais leve e contraste adequado */
+body.light-mode .cta-button {
+    color: #005ce6; /* Texto em tom adequado para contraste */
+    border-color: #66a3ff; /* Borda em tom mais claro */
+}
+body.light-mode .cta-button:hover {
+    background: #66a3ff !important; /* Fundo mais leve no hover */
+    color: #ffffff !important; /* Texto branco para excelente contraste visual */
+    box-shadow: 0 0 15px rgba(102, 163, 255, 0.4);
+}
+body.light-mode .cta-secondary {
+    color: #005ce6;
+    border-color: #66a3ff;
+}
+body.light-mode .cta-secondary:hover {
+    background: #66a3ff !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(102, 163, 255, 0.4);
+}
+
 /* ==========================================
    TELA DE ABERTURA (SPLASH SCREEN VIDRO)
    ========================================== */
@@ -285,7 +305,7 @@ body.light-mode #hamburger-btn span { box-shadow: none; }
 
 /* CONTAINER DE TRANSIÇÃO ZUI */
 #presentation-container {
-    position: fixed; top: 190px; left: 0; width: 100vw; height: calc(100vh - 160px); 
+    position: fixed; top: 180px; left: 0; width: 100vw; height: calc(100vh - 160px); 
     perspective: 1500px; display: flex; align-items: center; justify-content: center; 
     z-index: 10; pointer-events: none; 
 }
@@ -386,7 +406,10 @@ ul { line-height: 1.8; color: var(--text-muted); }
 .dropdown-check-list.visible ul.items { display: block; }
 .dropdown-check-list ul.items::-webkit-scrollbar { width: 6px; }
 .dropdown-check-list ul.items::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 3px; }
+
+/* Nova regra para aplicar clique no texto inteiro através do encapsulamento label */
 .items li { list-style: none; margin-bottom: 10px; font-size: 0.95rem; color: var(--text-muted); display: flex; align-items: center;}
+.items li label { display: flex; align-items: center; width: 100%; cursor: pointer; }
 .items li input[type="checkbox"] { margin-right: 10px; cursor: pointer; accent-color: var(--neon-green); transform: scale(1.2);}
 
 .form-actions { display: flex; gap: 15px; margin-top: 15px; }
@@ -462,7 +485,7 @@ body.light-mode .selected-item-web {
 
     #menu-wrapper { height: 55px; }
     #logo-wrapper { top: 68px; height: 80px; }
-    #presentation-container { top: 155px; height: calc(100vh - 130px); }
+    #presentation-container { top: 150px; height: calc(100vh - 130px); }
     
     #site-logo { font-size: 1.8rem; }
     .pulse-light { width: 300px; height: 100px; }
@@ -497,7 +520,7 @@ body.light-mode .selected-item-web {
 @media (max-width: 480px) {
     #menu-wrapper { height: 55px; }
     #logo-wrapper { top: 60px; height: 70px; }
-    #presentation-container { top: 130px; height: calc(100vh - 115px); }
+    #presentation-container { top: 110px; height: calc(100vh - 115px); }
     
     #site-logo { font-size: 1.5rem; letter-spacing: 1px; }
     .pulse-light { width: 240px; height: 80px; }
