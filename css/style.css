@@ -12,6 +12,7 @@
     --menu-bg: rgba(3, 5, 10, 0.85);
     --logo-blue-txt: var(--neon-blue);
     --logo-green-txt: var(--neon-green);
+    --info-box-bg: rgba(0, 0, 0, 0.4);
 }
 
 /* TEMA CLARO (LIGHT MODE) */
@@ -28,6 +29,7 @@ body.light-mode {
     --menu-bg: rgba(255, 255, 255, 0.85);
     --logo-blue-txt: #0055cc;
     --logo-green-txt: #008000;
+    --info-box-bg: rgba(0, 0, 0, 0.05);
 }
 
 body, html {
@@ -45,7 +47,7 @@ body, html {
 body.light-mode #menu-wrapper { border-color: rgba(0, 102, 255, 0.2); box-shadow: 0 10px 25px -10px rgba(0,0,0,0.1); }
 body.light-mode .menu-item { color: #555; }
 body.light-mode .menu-item:hover, body.light-mode .menu-item.active { color: var(--neon-blue); text-shadow: none; }
-body.light-mode .slide { border: 1px solid #e2e8f0; box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+body.light-mode .slide { border: 1px solid #0169fa; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
 body.light-mode h1, body.light-mode h2, body.light-mode h3 { text-shadow: none; }
 body.light-mode p, body.light-mode ul { color: var(--text-muted); }
 body.light-mode .service-card { border-color: #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
