@@ -80,6 +80,13 @@ body.light-mode .cta-button:hover {
     color: #ffffff !important; /* Texto branco para excelente contraste visual */
     box-shadow: 0 0 15px rgba(102, 163, 255, 0.4);
 }
+
+body.light-mode .whatsapp-btn:hover {
+    background: #00ff15 !important; /* Fundo mais leve no hover */
+    color: #003e12 !important; /* Texto branco para excelente contraste visual */
+    box-shadow: 0 0 15px rgba(0, 154, 57, 0.4);
+    border-color: #00b900;
+}
 body.light-mode .cta-secondary {
     color: #005ce6;
     border-color: #66a3ff;
@@ -133,7 +140,7 @@ body.light-mode .cta-secondary:hover {
     display: flex; align-items: center; justify-content: center; gap: 15px;
 }
 .splash-text-bottom p { font-size: 1rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 3px; margin: 0; text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);}
-.tap-text { display: block; font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 40px; animation: pulseAlpha 2s infinite; text-transform: uppercase; letter-spacing: 1px;}
+.tap-text { display: block; font-size: 0.85rem; color: rgba(37, 0, 245, 0.6); margin-top: 40px; animation: pulseAlpha 2s infinite; text-transform: uppercase; letter-spacing: 1px;}
 
 @keyframes pulseAlpha { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 

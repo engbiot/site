@@ -11,8 +11,16 @@
     
     <!-- [MANUTENÇÃO] Link para o arquivo CSS. Altere o caminho se mudar de pasta -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Script inline para aplicar o tema antes do HTML renderizar, evitando FOUC -->
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'light'; // Light é o padrão agora
+        if (savedTheme === 'light') {
+            document.documentElement.classList.add('light-mode-forced'); // Ajuda preventiva
+        }
+    </script>
 </head>
-<body>
+</head>
+<body class="light-mode">
 
     <!-- [MANUTENÇÃO] Overlay do Pull-to-Refresh (atualização de página mobile) -->
     <div id="ptr-overlay">
