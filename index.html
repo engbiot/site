@@ -11,15 +11,8 @@
     
     <!-- [MANUTENÇÃO] Link para o arquivo CSS. Altere o caminho se mudar de pasta -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- Script inline para aplicar o tema antes do HTML renderizar, evitando FOUC -->
-    <script>
-        const savedTheme = localStorage.getItem('theme') || 'light'; // Light é o padrão agora
-        if (savedTheme === 'light') {
-            document.documentElement.classList.add('light-mode-forced'); // Ajuda preventiva
-        }
-    </script>
 </head>
-<body class="light-mode">
+<body>
 
     <!-- [MANUTENÇÃO] Overlay do Pull-to-Refresh (atualização de página mobile) -->
     <div id="ptr-overlay">
@@ -118,7 +111,7 @@
             </svg>
             <div style="display: flex; gap: 8px;">
                 <span class="logo-blue">Lactus</span>
-                <span class="logo-green">Engenharia</span>
+                <span class="logo-green">Soluções</span>
             </div>
         </div>
     </div>
@@ -377,7 +370,7 @@
                 </div>
                 <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
                     <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
-                    <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0; border-color: var(--neon-blue); color: var(--neon-blue);">Contato</a>
+                    <a onclick="navigateTo(18)" class="cta-button" style="margin-top: 0; border-color: var(--neon-blue); color: var(--neon-blue);">Contato </a>
                 </div>
             </div>
         </div>
