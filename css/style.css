@@ -430,7 +430,7 @@ ul { line-height: 1.8; color: var(--text-muted); }
     #logo-wrapper { top: 70px; height: 70px; }
     #presentation-container { top: 130px; height: calc(100vh - 115px); }
     
-    #site-logo { font-size: 1rem; letter-spacing: 1px; }
+    #site-logo { font-size: 3rem; letter-spacing: 1px; }
     .pulse-light { width: 240px; height: 80px; }
     
     h1 { font-size: 1.4rem; } h2 { font-size: 1rem; }
