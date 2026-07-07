@@ -1,4 +1,7 @@
-/* RESET E VARIÁVEIS MODERNAS */
+/* ==========================================
+   RESET E VARIÁVEIS MODERNAS
+   [MANUTENÇÃO]: Altere aqui as cores principais
+   ========================================== */
 :root {
     --neon-blue: #00f3ff;
     --neon-green: #00ffcc;
@@ -15,7 +18,9 @@
     --info-box-bg: rgba(0, 0, 0, 0.4);
 }
 
-/* TEMA CLARO (LIGHT MODE) */
+/* ==========================================
+   TEMA CLARO (LIGHT MODE)
+   ========================================== */
 body.light-mode {
     --neon-blue: #0066ff;
     --neon-green: #00b300;
@@ -104,7 +109,7 @@ body.light-mode #classic-menu-overlay a:hover { color: var(--neon-blue); }
 
 .splash-text-top h1 { 
     font-size: 2.5rem; color: var(--neon-blue); text-shadow: 0 0 20px rgba(0, 243, 255, 0.6); 
-    margin: 0; letter-spacing: 2px; line-height: 1;
+    margin: 0; letter-spacing: 2px; line-height: 1.2;
     display: flex; align-items: center; justify-content: center; gap: 15px;
 }
 .splash-text-bottom p { font-size: 1rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 3px; margin: 0; text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);}
@@ -182,7 +187,7 @@ body.light-mode #classic-menu-overlay a:hover { color: var(--neon-blue); }
 }
 
 #site-logo {
-    position: relative; z-index: 200; font-size: 2.3rem; font-weight: 900; 
+    position: relative; z-index: 200; font-size: 2rem; font-weight: 900; 
     text-transform: uppercase; letter-spacing: 2px; cursor: pointer; 
     white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 12px; transition: transform 0.3s;
 }
@@ -220,7 +225,6 @@ body.light-mode .toggle-thumb {
     transform: translateX(24px);
     background: #fff;
 }
-/* Icones Lua e Sol */
 .toggle-thumb::before {
     content: '⚫'; font-size: 14px; transition: opacity 0.3s;
 }
@@ -281,7 +285,7 @@ body.light-mode #hamburger-btn span { box-shadow: none; }
 
 /* CONTAINER DE TRANSIÇÃO ZUI */
 #presentation-container {
-    position: fixed; top: 170px; left: 0; width: 100vw; height: calc(100vh - 160px); 
+    position: fixed; top: 180px; left: 0; width: 100vw; height: calc(100vh - 160px); 
     perspective: 1500px; display: flex; align-items: center; justify-content: center; 
     z-index: 10; pointer-events: none; 
 }
@@ -389,20 +393,30 @@ ul { line-height: 1.8; color: var(--text-muted); }
 .whatsapp-btn { border-color: #25D366; color: #25D366; display: flex; justify-content: center; align-items: center; }
 .whatsapp-btn:hover { background: #25D366 !important; color: #fff !important; box-shadow: 0 0 20px rgba(37,211,102,0.6); border-color: #25D366;}
 
-/* RESPONSIVIDADE */
+/* ==========================================
+   CLASSES DE QUEBRA DE TEXTO E RESPONSIVIDADE
+   [MANUTENÇÃO]: IDs e classes para ajustes diretos em telas menores
+   ========================================== */
+.nowrap { white-space: nowrap; }
+.mobile-break { display: none; }
+
+/* REGRAS MEDIA QUERIES (MOBILE) */
 @media (max-width: 768px) {
+    /* Ativação das quebras de linha propostas no design */
+    .mobile-break { display: block; }
+
     #menu-wrapper { height: 55px; }
     #logo-wrapper { top: 68px; height: 80px; }
-    #presentation-container { top: 140px; height: calc(100vh - 130px); }
+    #presentation-container { top: 150px; height: calc(100vh - 130px); }
     
-    #site-logo { font-size: 2.5rem; }
+    #site-logo { font-size: 1.8rem; }
     .pulse-light { width: 300px; height: 100px; }
     
-    #hamburger-btn { top: 1px; padding: 15px; } /* Mantém área de clique grande no mobile */
+    #hamburger-btn { top: 8px; padding: 10px; } /* Mantém área de clique grande no mobile */
     #theme-toggle-wrapper { top: 10px; right: 15px; } /* Ajuste chave no mobile */
     
-    .slide { width: 92%; padding: 30px 25px; max-height: 85%; margin-top: 0; }
-    h1 { font-size: 2rem; } h2 { font-size: 1.5rem; margin-bottom: 20px;} 
+    .slide { width: 90%; padding: 30px 25px; max-height: 85%; margin-top: 0; }
+    h1 { font-size: 1.7rem; } h2 { font-size: 1.2rem; margin-bottom: 20px;} 
     p, ul { font-size: 1rem; }
     
     .services-grid, .hub-grid, .contact-grid, .compact-grid { grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
@@ -426,14 +440,14 @@ ul { line-height: 1.8; color: var(--text-muted); }
 }
 
 @media (max-width: 480px) {
-    #menu-wrapper { height: 50px; }
+    #menu-wrapper { height: 55px; }
     #logo-wrapper { top: 70px; height: 70px; }
-    #presentation-container { top: 130px; height: calc(100vh - 115px); }
+    #presentation-container { top: 135px; height: calc(100vh - 115px); }
     
-    #site-logo { font-size: 1.5rem; letter-spacing: 1px; }11
+    #site-logo { font-size: 1.5rem; letter-spacing: 1px; }
     .pulse-light { width: 240px; height: 80px; }
     
-    h1 { font-size: 1.8rem; } h2 { font-size: 1.4rem; }
+    h1 { font-size: 1.5em; } h2 { font-size: 1.2rem; }
     .slide { padding: 25px 20px; max-height: 85%; margin-top: 0;}
     .slide-footer { padding-bottom: 90px; }
     
@@ -444,3 +458,4 @@ ul { line-height: 1.8; color: var(--text-muted); }
     .splash-text-top h1 { font-size: 1.5rem; }
     .splash-text-bottom p { font-size: 0.7rem; letter-spacing: 1px; }
     .tap-text { font-size: 0.5rem; margin-top: 40px; }
+}

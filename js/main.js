@@ -1,24 +1,23 @@
 // ==========================================
-// DAY/NIGHT TOGGLE (MODO CLARO)
+// MODO DIA/NOITE (LIGHT MODE TOGGLE)
 // ==========================================
 function toggleTheme() {
     document.body.classList.toggle('light-mode');
 }
 
 // ==========================================
-// PULL TO REFRESH NATIVO
+// PULL TO REFRESH (ATUALIZAÇÃO NATIVA MOBILE)
 // ==========================================
 let pStartY = 0;
 let isPulling = false;
 const ptrOverlay = document.getElementById('ptr-overlay');
 const ptrPanelBg = document.getElementById('ptr-panel-bg');
 const ptrContent = document.getElementById('ptr-content');
-const MAX_PULL = 180; // pixels máximos para puxar
-const THRESHOLD = 120; // pixels para ativar o refresh
+const MAX_PULL = 180; 
+const THRESHOLD = 120; 
 
 document.addEventListener('touchstart', (e) => {
     const activeSlide = document.querySelector('.slide.active');
-    // Só ativa se o slide estiver no topo (ou se o toque for no body/header)
     if (!activeSlide || activeSlide.scrollTop <= 0) {
         pStartY = e.touches[0].clientY;
         isPulling = true;
@@ -33,13 +32,9 @@ document.addEventListener('touchmove', (e) => {
     const distance = currentY - pStartY;
 
     if (distance > 0) {
-        // Atrasar um pouco o movimento (fricção)
         let pullDistance = Math.min(distance * 0.5, MAX_PULL);
-        
         ptrOverlay.style.opacity = '1';
         ptrOverlay.style.pointerEvents = 'all';
-        
-        // Mover o painel e o logo
         ptrPanelBg.style.transform = `translateY(${100 + (pullDistance / window.innerHeight * 100)}vh)`;
         ptrContent.style.transform = `translateY(${-50 + pullDistance}px)`;
         ptrContent.style.opacity = Math.min(pullDistance / THRESHOLD, 1);
@@ -53,14 +48,11 @@ document.addEventListener('touchend', () => {
     ptrPanelBg.style.transition = 'transform 0.4s ease-out';
     ptrContent.style.transition = 'transform 0.4s ease-out, opacity 0.4s';
     
-    // Checa se puxou o suficiente
     const currentY = parseFloat(ptrContent.style.transform.replace(/[^\d.-]/g, '')) || 0;
     if (currentY > (THRESHOLD - 50)) {
-        // Atualiza a página
         ptrContent.innerHTML = '<span>Atualizando...</span>';
         setTimeout(() => { location.reload(); }, 500);
     } else {
-        // Cancela o pull-to-refresh
         ptrOverlay.style.opacity = '0';
         ptrOverlay.style.pointerEvents = 'none';
         ptrPanelBg.style.transform = 'translateY(0)';
@@ -69,9 +61,8 @@ document.addEventListener('touchend', () => {
     }
 });
 
-
 // ==========================================
-// LÓGICA DE SPLASH SCREEN
+// TELA DE ABERTURA (SPLASH SCREEN)
 // ==========================================
 function closeSplash() {
     const splash = document.getElementById('splash-screen');
@@ -81,7 +72,7 @@ function closeSplash() {
 }
 
 // ==========================================
-// HISTORY API E FOOTER
+// NAVEGAÇÃO HISTORY API & RODAPÉS AUTOMÁTICOS
 // ==========================================
 window.addEventListener('popstate', function(e) {
     if (e.state !== null && typeof e.state.slide !== 'undefined') {
@@ -95,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     history.replaceState({ slide: 0 }, '', window.location.pathname);
     setTimeout(closeSplash, 4000);
 
+    // [MANUTENÇÃO] HTML do rodapé gerado via JS
     const footerHTML = `
         <div class="slide-footer">
             <p>
@@ -110,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================
-// MÁSCARAS E VALIDAÇÃO DOS FORMULÁRIOS
+// VALIDAÇÕES, MÁSCARAS E CÓDIGOS DE PROTEÇÃO
 // ==========================================
 const phoneInputs = document.querySelectorAll('.telefone-mask');
 phoneInputs.forEach(input => {
@@ -128,8 +120,14 @@ document.addEventListener('click', function(event) {
     }
 });
 
+// [MANUTENÇÃO] Proteção: Desabilitar menu de contexto e clique-arraste nas imagens do site
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('contextmenu', e => e.preventDefault());
+    img.addEventListener('dragstart', e => e.preventDefault());
+});
+
 // ==========================================
-// NAVEGAÇÃO ZUI
+// TRANSIÇÃO DE TELAS (ZUI NAVIGATION)
 // ==========================================
 let currentSlide = 0; 
 
@@ -169,8 +167,9 @@ function navigateTo(index, recordHistory = true) {
 }
 
 // ==========================================
-// CARROSSEL 3D
+// MOTOR DO CARROSSEL 3D
 // ==========================================
+// [MANUTENÇÃO] Configuração dos itens do menu e SVG Icons
 const menuItensConfig = [
     { id: 0, text: "Início", icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' }, 
     { id: 1, text: "Sobre", icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' }, 
@@ -185,11 +184,12 @@ const carouselData = [...menuItensConfig];
 const carouselEl = document.getElementById('carousel');
 
 const setRadius = () => {
-    if (window.innerWidth <= 444) return 150;
-    if (window.innerWidth <= 500) return 180;
-    if (window.innerWidth <= 600) return 200;
-    if (window.innerWidth <= 700) return 300;
-    if (window.innerWidth <= 800) return 350;
+    if (window.innerWidth <= 375) return 140;
+    if (window.innerWidth <= 474) return 150;
+    if (window.innerWidth <= 500) return 160;
+    if (window.innerWidth <= 650) return 190;
+    if (window.innerWidth <= 768) return 250;
+    if (window.innerWidth <= 800) return 300;
     return 350;
 };
 let radius = setRadius();
@@ -246,7 +246,7 @@ function updateCarouselCSS() {
 }
 
 // ==========================================
-// BACKGROUND ANIMADO
+// ANIMAÇÃO DE BACKGROUND (CANVAS)
 // ==========================================
 const canvas = document.getElementById('bgCanvas'); const ctx = canvas.getContext('2d');
 function resizeCanvasBg() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -277,14 +277,10 @@ for(let i = 0; i < particleCount; i++) particles.push(new Particle());
 
 function animate() {
     updateCarouselCSS();
-    
-    // Verifica se o modo claro está ativo e define a cor de fundo do canvas
     const isLightMode = document.body.classList.contains('light-mode');
     ctx.fillStyle = isLightMode ? 'rgba(244, 247, 246, 0.5)' : 'rgba(3, 5, 10, 0.3)';
-    
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Opcional: altera a cor das partículas no modo claro para maior contraste
     ctx.strokeStyle = isLightMode ? 'rgba(0, 102, 255, 0.4)' : 'rgba(0, 255, 204, 0.6)';
     ctx.fillStyle = isLightMode ? 'rgba(0, 102, 255, 0.1)' : 'rgba(0, 243, 255, 0.2)';
     
