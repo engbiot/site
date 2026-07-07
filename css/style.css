@@ -101,11 +101,11 @@ body.light-mode #classic-menu-overlay a:hover { color: var(--neon-blue); }
 }
 
 .splash-text-top h1 { 
-    font-size: 3.8rem; color: var(--neon-blue); text-shadow: 0 0 20px rgba(0, 243, 255, 0.6); 
+    font-size: 2.5rem; color: var(--neon-blue); text-shadow: 0 0 20px rgba(0, 243, 255, 0.6); 
     margin: 0; letter-spacing: 2px; line-height: 1;
     display: flex; align-items: center; justify-content: center; gap: 15px;
 }
-.splash-text-bottom p { font-size: 1.2rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 3px; margin: 0; text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);}
+.splash-text-bottom p { font-size: 1rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 3px; margin: 0; text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);}
 .tap-text { display: block; font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 40px; animation: pulseAlpha 2s infinite; text-transform: uppercase; letter-spacing: 1px;}
 
 @keyframes pulseAlpha { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
@@ -418,8 +418,9 @@ ul { line-height: 1.8; color: var(--text-muted); }
     .form-actions { flex-direction: column; }
     #fixed-contact-btn { bottom: 20px; right: 20px; padding: 10px 15px; font-size: 0.8rem; border-width: 1px;}
     
-    .splash-text-top h1 { font-size: 2.5rem; }
-    .splash-text-bottom p { font-size: 0.9rem; letter-spacing: 1px; }
+    .splash-text-top h1 { font-size: 2rem; }
+    .splash-text-bottom p { font-size: 1rem; letter-spacing: 1px; }
+    .tap-text { font-size: 0.7rem; margin-top: 40px; }
 }
 
 @media (max-width: 480px) {
@@ -427,7 +428,7 @@ ul { line-height: 1.8; color: var(--text-muted); }
     #logo-wrapper { top: 70px; height: 70px; }
     #presentation-container { top: 130px; height: calc(100vh - 115px); }
     
-    #site-logo { font-size: 1.5rem; letter-spacing: 1px; }
+    #site-logo { font-size: 1rem; letter-spacing: 1px; }
     .pulse-light { width: 240px; height: 80px; }
     
     h1 { font-size: 1.4rem; } h2 { font-size: 1rem; }
@@ -437,4 +438,7 @@ ul { line-height: 1.8; color: var(--text-muted); }
     .form-control { font-size: 0.85rem; padding: 8px 12px; }
     .menu-item { width: 160px; left: -80px; font-size: 0.75rem; }
     #classic-menu-overlay a { font-size: 1.1rem; letter-spacing: 1px; }
-}
+
+    .splash-text-top h1 { font-size: 1.5rem; }
+    .splash-text-bottom p { font-size: 0.7rem; letter-spacing: 1px; }
+    .tap-text { font-size: 0.5rem; margin-top: 40px; }
