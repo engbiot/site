@@ -391,11 +391,11 @@ ul { line-height: 1.8; color: var(--text-muted); }
 
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
-    #menu-wrapper { height: 50px; }
+    #menu-wrapper { height: 55px; }
     #logo-wrapper { top: 68px; height: 80px; }
     #presentation-container { top: 140px; height: calc(100vh - 130px); }
     
-    #site-logo { font-size: 4.8rem; }
+    #site-logo { font-size: 2.5rem; }
     .pulse-light { width: 300px; height: 100px; }
     
     #hamburger-btn { top: 2px; padding: 15px; } /* Mantém área de clique grande no mobile */
