@@ -191,7 +191,7 @@ body.light-mode #classic-menu-overlay a:hover { color: var(--neon-blue); }
     text-transform: uppercase; letter-spacing: 2px; cursor: pointer; 
     white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 12px; transition: transform 0.3s;
 }
-#site-logo:hover { transform: scale(1.05); }
+#site-logo:hover { transform: scale(1.1); }
 .logo-blue { color: var(--logo-blue-txt); text-shadow: 0 0 12px rgba(0, 243, 255, 0.6); transition: 0.5s; }
 .logo-green { color: var(--logo-green-txt); text-shadow: 0 0 12px rgba(0, 255, 204, 0.6); transition: 0.5s; }
 
@@ -285,7 +285,7 @@ body.light-mode #hamburger-btn span { box-shadow: none; }
 
 /* CONTAINER DE TRANSIÇÃO ZUI */
 #presentation-container {
-    position: fixed; top: 180px; left: 0; width: 100vw; height: calc(100vh - 160px); 
+    position: fixed; top: 190px; left: 0; width: 100vw; height: calc(100vh - 160px); 
     perspective: 1500px; display: flex; align-items: center; justify-content: center; 
     z-index: 10; pointer-events: none; 
 }
@@ -320,20 +320,20 @@ p { line-height: 1.6; font-size: 1.1rem; color: var(--text-muted); }
 ul { line-height: 1.8; color: var(--text-muted); }
 
 .cta-button {
-    display: inline-block; margin-top: 20px; padding: 12px 25px; background: transparent;
-    color: var(--neon-green); border: 2px solid var(--neon-green); border-radius: 8px;
+    display: inline-block; margin-top: 10px; padding: 12px 25px; background: transparent;
+    color: var(--neon-blue); border: 2px solid var(--neon-blue); border-radius: 8px;
     font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
     transition: 0.4s; text-decoration: none; text-align: center;
 }
-.cta-button:hover { background: var(--neon-green) !important; color: #fff !important; box-shadow: 0 0 20px var(--neon-green); }
+.cta-button:hover { background: var(--neon-blue) !important; color: #010a60 !important; box-shadow: 0 0 20px var(--neon-blue); }
 
 .cta-secondary {
-    display: inline-block; margin-top: 20px; padding: 12px 25px; background: rgba(0,255,204,0.1);
-    color: var(--neon-green); border: 2px solid var(--neon-green); border-radius: 8px;
+    display: inline-block; margin-top: 20px; padding: 12px 25px; background: transparent;
+    color: var(--neon-blue); border: 2px solid var(--neon-blue); border-radius: 8px;
     font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
     transition: 0.4s; text-decoration: none; text-align: center;
 }
-.cta-secondary:hover { background: var(--neon-green) !important; color: #fff !important; box-shadow: 0 0 20px var(--neon-green); }
+.cta-secondary:hover { background: var(--neon-blue) !important; color: #010a60 !important; box-shadow: 0 0 20px var(--neon-blue); }
 
 .btn-voltar { border: 1px solid rgba(255,255,255,0.4); color: var(--text-color); margin-bottom: 20px; padding: 8px 20px; font-size: 0.8rem; display: inline-block; cursor: pointer; border-radius: 4px; transition: 0.3s;}
 
@@ -394,6 +394,61 @@ ul { line-height: 1.8; color: var(--text-muted); }
 .whatsapp-btn:hover { background: #25D366 !important; color: #fff !important; box-shadow: 0 0 20px rgba(37,211,102,0.6); border-color: #25D366;}
 
 /* ==========================================
+   FEEDBACK VISUAL DE SERVIÇOS SELECIONADOS
+   ========================================== */
+.selected-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.selected-item {
+    background: rgba(0, 255, 204, 0.1);
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: fadeInTag 0.3s ease forwards;
+}
+
+/* Checkmark de confirmação via pseudo-elemento */
+.selected-item::before {
+    content: '✓';
+    font-weight: 900;
+}
+
+/* Ajuste de cor automático para o Light Mode */
+body.light-mode .selected-item {
+    background: rgba(0, 179, 0, 0.05);
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+}
+
+@keyframes fadeInTag {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Variação visual para a aba de Web Design (Azul Neon) */
+.selected-item-web {
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+}
+
+/* Ajuste de cor automático para o Light Mode (Web) */
+body.light-mode .selected-item-web {
+    background: rgba(0, 102, 255, 0.05);
+    border-color: var(--neon-blue);
+    color: var(--neon-blue);
+}
+
+/* ==========================================
    CLASSES DE QUEBRA DE TEXTO E RESPONSIVIDADE
    [MANUTENÇÃO]: IDs e classes para ajustes diretos em telas menores
    ========================================== */
@@ -407,7 +462,7 @@ ul { line-height: 1.8; color: var(--text-muted); }
 
     #menu-wrapper { height: 55px; }
     #logo-wrapper { top: 68px; height: 80px; }
-    #presentation-container { top: 150px; height: calc(100vh - 130px); }
+    #presentation-container { top: 155px; height: calc(100vh - 130px); }
     
     #site-logo { font-size: 1.8rem; }
     .pulse-light { width: 300px; height: 100px; }
@@ -441,8 +496,8 @@ ul { line-height: 1.8; color: var(--text-muted); }
 
 @media (max-width: 480px) {
     #menu-wrapper { height: 55px; }
-    #logo-wrapper { top: 70px; height: 70px; }
-    #presentation-container { top: 135px; height: calc(100vh - 115px); }
+    #logo-wrapper { top: 60px; height: 70px; }
+    #presentation-container { top: 130px; height: calc(100vh - 115px); }
     
     #site-logo { font-size: 1.5rem; letter-spacing: 1px; }
     .pulse-light { width: 240px; height: 80px; }

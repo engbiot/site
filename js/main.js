@@ -86,13 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
     history.replaceState({ slide: 0 }, '', window.location.pathname);
     setTimeout(closeSplash, 4000);
 
-    // [MANUTENÇÃO] HTML do rodapé gerado via JS
     const footerHTML = `
         <div class="slide-footer">
             <p>
-                &copy; 2026 Mike Jonathan dos Santos Brito<br>
-                Engenheiro de Biotecnologia | CREA-SP: 5071801530<br>
-                <a onclick="navigateTo(18)" class="discreet-link">Gostou da interface imersiva? Solicite o desenvolvimento do seu site!</a>
+                &copy; 2026 • Mike Jonathan dos Santos Brito<br>
+                • Engenheiro de Biotecnologia <span class="nowrap">• CREA-SP: 5071801530<br></span>
+                <a onclick="navigateTo(18)" class="discreet-link">Gostou da interface imersiva? <span class="nowrap">Solicite o desenvolvimento do seu site!</span></a>
             </p>
         </div>
     `;
@@ -112,19 +111,108 @@ phoneInputs.forEach(input => {
     });
 });
 
-function toggleServiceDropdown() { document.getElementById('service-dropdown').classList.toggle('visible'); }
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('contextmenu', e => e.preventDefault());
+    img.addEventListener('dragstart', e => e.preventDefault());
+});
+
+// ==========================================
+// MÁSCARAS E DROPDOWNS DOS FORMULÁRIOS
+// ==========================================
+function toggleServiceDropdown() { 
+    document.getElementById('service-dropdown').classList.toggle('visible'); 
+}
+function toggleServiceDropdownWeb() { 
+    document.getElementById('service-dropdown-web').classList.toggle('visible'); 
+}
+
 document.addEventListener('click', function(event) {
     const dropdown = document.getElementById('service-dropdown');
     if (dropdown && dropdown.classList.contains('visible') && !dropdown.contains(event.target)) {
         dropdown.classList.remove('visible');
     }
+    
+    const dropdownWeb = document.getElementById('service-dropdown-web');
+    if (dropdownWeb && dropdownWeb.classList.contains('visible') && !dropdownWeb.contains(event.target)) {
+        dropdownWeb.classList.remove('visible');
+    }
 });
 
-// [MANUTENÇÃO] Proteção: Desabilitar menu de contexto e clique-arraste nas imagens do site
-document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('contextmenu', e => e.preventDefault());
-    img.addEventListener('dragstart', e => e.preventDefault());
-});
+// ==========================================
+// RENDERIZAÇÃO DAS TAGS DE SERVIÇOS (FORM GERAL)
+// ==========================================
+const serviceCheckboxes = document.querySelectorAll('#service-dropdown input[type="checkbox"]');
+const selectedContainer = document.getElementById('selected-services-container');
+const dropdownAnchor = document.querySelector('#service-dropdown .anchor');
+
+if(serviceCheckboxes && selectedContainer && dropdownAnchor) {
+    serviceCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateSelectedServices);
+    });
+}
+
+function updateSelectedServices() {
+    selectedContainer.innerHTML = '';
+    let selectedCount = 0;
+
+    serviceCheckboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            selectedCount++;
+            const span = document.createElement('span');
+            span.className = 'selected-item';
+            span.textContent = checkbox.value;
+            selectedContainer.appendChild(span);
+        }
+    });
+
+    if (selectedCount > 0) {
+        dropdownAnchor.textContent = `${selectedCount} serviço(s) selecionado(s)`;
+        dropdownAnchor.style.color = 'var(--neon-green)';
+        dropdownAnchor.style.borderColor = 'var(--neon-green)';
+    } else {
+        dropdownAnchor.textContent = 'Selecione opções...';
+        dropdownAnchor.style.color = 'var(--text-color)';
+        dropdownAnchor.style.borderColor = 'var(--border-color)';
+    }
+}
+
+// ==========================================
+// RENDERIZAÇÃO DAS TAGS DE SERVIÇOS (FORM WEB DESIGN)
+// ==========================================
+const webCheckboxes = document.querySelectorAll('#service-dropdown-web input[type="checkbox"]');
+const selectedContainerWeb = document.getElementById('selected-services-container-web');
+const dropdownAnchorWeb = document.querySelector('#service-dropdown-web .anchor');
+
+if(webCheckboxes && selectedContainerWeb && dropdownAnchorWeb) {
+    webCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateSelectedServicesWeb);
+    });
+}
+
+function updateSelectedServicesWeb() {
+    selectedContainerWeb.innerHTML = '';
+    let selectedCount = 0;
+
+    webCheckboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            selectedCount++;
+            const span = document.createElement('span');
+            span.className = 'selected-item selected-item-web'; 
+            span.textContent = checkbox.value;
+            selectedContainerWeb.appendChild(span);
+        }
+    });
+
+    if (selectedCount > 0) {
+        dropdownAnchorWeb.textContent = `${selectedCount} funcionalidade(s) selecionada(s)`;
+        dropdownAnchorWeb.style.color = 'var(--neon-blue)';
+        dropdownAnchorWeb.style.borderColor = 'var(--neon-blue)';
+    } else {
+        dropdownAnchorWeb.textContent = 'Selecione opções...';
+        dropdownAnchorWeb.style.color = 'var(--text-color)';
+        dropdownAnchorWeb.style.borderColor = 'rgba(0, 243, 255, 0.3)';
+    }
+}
 
 // ==========================================
 // TRANSIÇÃO DE TELAS (ZUI NAVIGATION)
@@ -169,7 +257,6 @@ function navigateTo(index, recordHistory = true) {
 // ==========================================
 // MOTOR DO CARROSSEL 3D
 // ==========================================
-// [MANUTENÇÃO] Configuração dos itens do menu e SVG Icons
 const menuItensConfig = [
     { id: 0, text: "Início", icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' }, 
     { id: 1, text: "Sobre", icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' }, 
