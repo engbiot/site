@@ -187,7 +187,7 @@ const carouselEl = document.getElementById('carousel');
 const setRadius = () => {
     if (window.innerWidth <= 444) return 170;
     if (window.innerWidth <= 500) return 180;
-    if (window.innerWidth <= 600) return 230;
+    if (window.innerWidth <= 600) return 200;
     if (window.innerWidth <= 700) return 300;
     if (window.innerWidth <= 800) return 350;
     return 350;
