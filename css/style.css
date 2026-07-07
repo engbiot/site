@@ -222,10 +222,10 @@ body.light-mode .toggle-thumb {
 }
 /* Icones Lua e Sol */
 .toggle-thumb::before {
-    content: '🌙'; font-size: 14px; transition: opacity 0.3s;
+    content: '⚫'; font-size: 14px; transition: opacity 0.3s;
 }
 body.light-mode .toggle-thumb::before {
-    content: '☀️';
+    content: '⚪';
 }
 
 /* BOTÃO SANDUÍCHE APRIMORADO */
@@ -430,7 +430,7 @@ ul { line-height: 1.8; color: var(--text-muted); }
     #logo-wrapper { top: 70px; height: 70px; }
     #presentation-container { top: 130px; height: calc(100vh - 115px); }
     
-    #site-logo { font-size: 1rem; letter-spacing: 1px; }
+    #site-logo { font-size: 3rem; letter-spacing: 1px; }
     .pulse-light { width: 240px; height: 80px; }
     
     h1 { font-size: 1.4rem; } h2 { font-size: 1rem; }
