@@ -135,7 +135,7 @@ body.light-mode .cta-secondary:hover {
 }
 
 .splash-text-top h1 { 
-    font-size: 2.5rem; color: var(--neon-purple); text-shadow: 0 0 20px rgba(157, 0, 255, 0.6); 
+    font-size: 2.5rem; color: var(--neon-purple); text-shadow: 0 0 20px rgba(255, 255, 255, 0.6); 
     margin: 0; letter-spacing: 2px; line-height: 1.2;
     display: flex; align-items: center; justify-content: center; 
     gap: 0px; /* Reduzido a zero para eliminar o espaço forçado */
@@ -229,8 +229,9 @@ body.light-mode .cta-secondary:hover {
 
 .logo-animado-inline {
     width: 2.2em; height: 2.2em; flex-shrink: 0;
-    filter: drop-shadow(0 0 10px rgba(157, 0, 255, 0.5));
-    margin-right: -7px; /* "Engole" o vazio da viewBox e puxa o texto para a esquerda */
+    filter: drop-shadow(2px 2px 0px rgb(255, 255, 255));
+    margin-left: -40px; 
+    margin-right: -4px; /* remove o vazio da viewBox e puxa o texto para a esquerda */
 }
 
 /* CHAVE DAY/NIGHT (THEME TOGGLE) */
