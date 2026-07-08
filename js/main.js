@@ -1,9 +1,8 @@
 // ==========================================
-// MODO DIA/NOITE (LIGHT MODE TOGGLE) COM LOCALSTORAGE
+// [SEÇÃO 1] MODO DIA/NOITE (LIGHT MODE TOGGLE) COM LOCALSTORAGE
+// Gerencia a troca de tema (claro/escuro) e armazena a preferência na máquina do usuário.
 // ==========================================
 
-// Envolvemos a checagem no evento DOMContentLoaded para garantir que o <body> 
-// já esteja totalmente carregado antes do JavaScript tentar alterá-lo.
 document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
@@ -22,7 +21,8 @@ function toggleTheme() {
 }
 
 // ==========================================
-// PULL TO REFRESH (ATUALIZAÇÃO NATIVA MOBILE)
+// [SEÇÃO 2] PULL TO REFRESH (ATUALIZAÇÃO NATIVA MOBILE)
+// Simula a interação de aplicativos nativos de celular ao puxar a tela para baixo.
 // ==========================================
 let pStartY = 0;
 let isPulling = false;
@@ -32,10 +32,8 @@ const ptrContent = document.getElementById('ptr-content');
 const MAX_PULL = 180; 
 const THRESHOLD = 120; 
 
-// Gerencia o início do arrastar
 document.addEventListener('touchstart', (e) => {
     const activeSlide = document.querySelector('.slide.active');
-    // Só ativa se o usuário estiver no topo do slide e arrastar para baixo
     if (!activeSlide || activeSlide.scrollTop <= 0) {
         pStartY = e.touches[0].clientY;
         isPulling = true;
@@ -44,7 +42,6 @@ document.addEventListener('touchstart', (e) => {
     }
 }, { passive: true });
 
-// Processa o movimento vertical
 document.addEventListener('touchmove', (e) => {
     if (!isPulling) return;
     const currentY = e.touches[0].clientY;
@@ -60,7 +57,6 @@ document.addEventListener('touchmove', (e) => {
     }
 }, { passive: false });
 
-// Executa o refresh caso tenha atingido o limite, ou restaura a posição inicial
 document.addEventListener('touchend', () => {
     if (!isPulling) return;
     isPulling = false;
@@ -82,11 +78,9 @@ document.addEventListener('touchend', () => {
 });
 
 // ==========================================
-// TELA DE ABERTURA (SPLASH SCREEN)
+// [SEÇÃO 3] TELA DE ABERTURA (SPLASH SCREEN)
+// Animação inicial ao entrar no site para carregamento da interface pesada (3D e CSS).
 // ==========================================
-/**
- * Adiciona a classe 'splitting' para iniciar a animação de saída da tela de loading.
- */
 function closeSplash() {
     const splash = document.getElementById('splash-screen');
     if(!splash || splash.classList.contains('splitting')) return;
@@ -95,9 +89,9 @@ function closeSplash() {
 }
 
 // ==========================================
-// NAVEGAÇÃO HISTORY API & RODAPÉS AUTOMÁTICOS
+// [SEÇÃO 4] NAVEGAÇÃO HISTORY API E INJEÇÃO DE RODAPÉS
+// Permite o uso do botão de voltar do celular/navegador sem quebrar o site e insere footer dinâmico.
 // ==========================================
-// Gerencia a navegação pelos botões nativos do navegador (avançar/voltar)
 window.addEventListener('popstate', function(e) {
     if (e.state !== null && typeof e.state.slide !== 'undefined') {
         navigateTo(e.state.slide, false);
@@ -107,7 +101,6 @@ window.addEventListener('popstate', function(e) {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Lógica para recuperar a tela (slide) atual lendo a URL (ex: meudominio.com/#s5)
     let startSlide = 0;
     const hash = window.location.hash;
     
@@ -118,17 +111,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 2. Substitui o estado atual informando o slide correto (mantendo a hash na URL)
     history.replaceState({ slide: startSlide }, '', hash || window.location.pathname);
     
-    // 3. Se não for o slide 0, navega silenciosamente (sem gravar novo histórico) para o slide salvo
     if (startSlide !== 0) {
         navigateTo(startSlide, false);
     }
 
     setTimeout(closeSplash, 4000);
 
-    // Injeta automaticamente o rodapé no final de cada slide iterado
     const footerHTML = `
         <div class="slide-footer">
             <p>
@@ -144,9 +134,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================
-// VALIDAÇÕES E MÁSCARAS DE DADOS
+// [SEÇÃO 5] VALIDAÇÕES, MÁSCARAS E PREVENÇÕES
+// Máscaras de telefone e bloqueio contra download de imagens.
 // ==========================================
-// Aplica a formatação de telefone (DD) 99999-9999 automaticamente
 const phoneInputs = document.querySelectorAll('.telefone-mask');
 phoneInputs.forEach(input => {
     input.addEventListener('input', function (e) {
@@ -155,18 +145,15 @@ phoneInputs.forEach(input => {
     });
 });
 
-// Proteção básica para evitar arrastar ou salvar imagens via clique com direito
 document.querySelectorAll('img').forEach(img => {
     img.addEventListener('contextmenu', e => e.preventDefault());
     img.addEventListener('dragstart', e => e.preventDefault());
 });
 
 // ==========================================
-// MÁSCARAS E DROPDOWNS DOS FORMULÁRIOS
+// [SEÇÃO 6] LÓGICA DE FORMULÁRIO E DROPDOWNS CUSTOMIZADOS
+// Cria as seleções em caixas multiescolhas nos formulários de contato.
 // ==========================================
-/** 
- * Funções para abrir/fechar as caixas de seleção estilo Dropdown. 
- */
 function toggleServiceDropdown() { 
     document.getElementById('service-dropdown').classList.toggle('visible'); 
 }
@@ -174,7 +161,6 @@ function toggleServiceDropdownWeb() {
     document.getElementById('service-dropdown-web').classList.toggle('visible'); 
 }
 
-// Fecha os dropdowns ao clicar fora da área deles
 document.addEventListener('click', function(event) {
     const dropdown = document.getElementById('service-dropdown');
     if (dropdown && dropdown.classList.contains('visible') && !dropdown.contains(event.target)) {
@@ -187,20 +173,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// ==========================================
-// RENDERIZAÇÃO DAS TAGS DE SERVIÇOS (REFATORADO PARA EVITAR REDUNDÂNCIA)
-// ==========================================
-/**
- * Lê os inputs selecionados e gera tags visuais no formulário correspondente.
- * Centraliza a lógica que antes estava dividida em duas funções idênticas.
- * 
- * @param {NodeList} checkboxes - Lista de elementos input type checkbox.
- * @param {HTMLElement} container - Onde as tags geradas serão renderizadas.
- * @param {HTMLElement} anchor - Elemento que mostra o texto ("x itens selecionados").
- * @param {string} customClass - Classe opcional de cor para a tag.
- * @param {string} mainColor - Cor principal que a label (anchor) receberá.
- * @param {string} typeLabel - O texto de descrição para os selecionados (ex: serviço ou funcionalidade)
- */
 function updateServicesTags(checkboxes, container, anchor, customClass = '', mainColor = 'var(--neon-green)', typeLabel = 'serviço(s)') {
     container.innerHTML = '';
     let selectedCount = 0;
@@ -226,7 +198,6 @@ function updateServicesTags(checkboxes, container, anchor, customClass = '', mai
     }
 }
 
-// Inicializa EventListeners do Formulário de Contato Geral
 const serviceCheckboxes = document.querySelectorAll('#service-dropdown input[type="checkbox"]');
 const selectedContainer = document.getElementById('selected-services-container');
 const dropdownAnchor = document.querySelector('#service-dropdown .anchor');
@@ -239,7 +210,6 @@ if(serviceCheckboxes && selectedContainer && dropdownAnchor) {
     });
 }
 
-// Inicializa EventListeners do Formulário de Web Design (Azul)
 const webCheckboxes = document.querySelectorAll('#service-dropdown-web input[type="checkbox"]');
 const selectedContainerWeb = document.getElementById('selected-services-container-web');
 const dropdownAnchorWeb = document.querySelector('#service-dropdown-web .anchor');
@@ -253,33 +223,24 @@ if(webCheckboxes && selectedContainerWeb && dropdownAnchorWeb) {
 }
 
 // ==========================================
-// TRANSIÇÃO DE TELAS (ZUI NAVIGATION)
+// [SEÇÃO 7] TRANSIÇÃO DE TELAS (ZUI NAVIGATION - ZOOM USER INTERFACE)
+// Navegação baseada em transformações 3D ativando os "slides".
 // ==========================================
 let currentSlide = 0; 
 
-/** Abre e fecha o menu overlay clássico mobile */
 function toggleClassicMenu() {
     document.getElementById('hamburger-btn').classList.toggle('open');
     document.getElementById('classic-menu-overlay').classList.toggle('open');
 }
 
-/** Redireciona a partir do menu clássico */
 function navigateFromClassic(index) {
     toggleClassicMenu(); navigateTo(index); 
     const carouselIndex = carouselData.findIndex(item => item.id === index);
     if (carouselIndex !== -1) { targetAngle = -carouselIndex * theta; }
 }
 
-/** Executa o retorno pelo histórico do navegador */
 function goBack() { history.back(); }
 
-/**
- * Função principal que injeta ou remove as classes 'active' e 'passed' 
- * nos slides para gerar a animação 3D estilo ZUI.
- * 
- * @param {number} index - ID numérico do slide a ser ativado
- * @param {boolean} recordHistory - Controla a gravação no router do HTML5
- */
 function navigateTo(index, recordHistory = true) {
     if (recordHistory && currentSlide !== index) {
         history.pushState({ slide: index }, '', '#s' + index);
@@ -303,7 +264,8 @@ function navigateTo(index, recordHistory = true) {
 }
 
 // ==========================================
-// MOTOR DO CARROSSEL 3D (MENU SUPERIOR)
+// [SEÇÃO 8] MOTOR DO CARROSSEL 3D (MENU SUPERIOR)
+// Posiciona matematicamente e rotaciona os itens do menu cilíndrico.
 // ==========================================
 const menuItensConfig = [
     { id: 0, text: "Início", icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' }, 
@@ -318,7 +280,6 @@ const menuItensConfig = [
 const carouselData = [...menuItensConfig]; 
 const carouselEl = document.getElementById('carousel');
 
-// Define dinamicamente o raio do cilindro 3D baseado no Viewport (Responsive)
 const setRadius = () => {
     if (window.innerWidth <= 375) return 140;
     if (window.innerWidth <= 474) return 150;
@@ -331,7 +292,6 @@ const setRadius = () => {
 let radius = setRadius();
 const theta = 360 / carouselData.length; 
 
-/** Constrói os elementos em anel giratório 3D */
 function buildCarousel() {
     carouselEl.innerHTML = '';
     carouselData.forEach((item, index) => {
@@ -341,7 +301,7 @@ function buildCarousel() {
         div.dataset.target = item.id; div.dataset.index = index;
         div.style.transform = `rotateY(${index * theta}deg) translateZ(${radius}px)`;
         div.addEventListener('pointerup', (e) => {
-            if (Math.abs(dragTotalX) > 15) return; // Cancela clique se foi um arraste no mouse/touch
+            if (Math.abs(dragTotalX) > 15) return; 
             navigateTo(item.id); targetAngle = -index * theta;
         });
         carouselEl.appendChild(div);
@@ -350,7 +310,6 @@ function buildCarousel() {
 }
 buildCarousel();
 
-// Ajusta o carrossel em caso de redimensionamento da janela
 window.addEventListener('resize', () => {
     const newRadius = setRadius();
     if(newRadius !== radius) {
@@ -371,13 +330,11 @@ window.addEventListener('pointermove', (e) => {
     const deltaX = e.clientX - startX; dragTotalX += deltaX; targetAngle += deltaX * 0.3; startX = e.clientX;
 });
 
-/** Calcula o CSS do eixo de rotação iterativamente no loop de renderização */
 function updateCarouselCSS() {
-    currentAngle += (targetAngle - currentAngle) * 0.1; // Smooth easing para o arraste
-    if (!isDragging) targetAngle -= autoRotateSpeed; // Rotação infinita autônoma
+    currentAngle += (targetAngle - currentAngle) * 0.1; 
+    if (!isDragging) targetAngle -= autoRotateSpeed; 
     carouselEl.style.transform = `translateZ(-${radius}px) rotateY(${currentAngle}deg)`;
     
-    // Atualiza a classe active para iluminar o item que está de frente
     let normalizedAngle = ((currentAngle % 360) + 360) % 360; 
     let frontIndex = Math.round((360 - normalizedAngle) / theta) % carouselData.length;
     const items = document.querySelectorAll('.menu-item');
@@ -387,17 +344,16 @@ function updateCarouselCSS() {
 }
 
 // ==========================================
-// ANIMAÇÃO DE BACKGROUND VIA CANVAS 3D (PARTÍCULAS)
+// [SEÇÃO 9] ANIMAÇÃO DE BACKGROUND VIA CANVAS 3D (PARTÍCULAS)
+// Desenha os hexágonos e reage ao tema claro/escuro.
 // ==========================================
 const canvas = document.getElementById('bgCanvas'); const ctx = canvas.getContext('2d');
 
-/** Ajusta a resolução visual do quadro */
 function resizeCanvasBg() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 window.addEventListener('resize', resizeCanvasBg); resizeCanvasBg();
 
 const particles = []; const particleCount = 100; 
 
-/** Objeto base para cada molécula ou ponto flutuante de fundo */
 class Particle {
     constructor() { this.reset(true); }
     reset(initial = false) {
@@ -414,21 +370,17 @@ class Particle {
         ctx.globalAlpha = Math.max(0, Math.min(1, (2000 - this.z) / 500));
         ctx.strokeStyle = 'rgba(0, 255, 204, 0.6)'; ctx.lineWidth = 3;
         
-        // Desenho hexagonal
         ctx.beginPath(); ctx.arc(0, -20, 5, Math.PI, 0); ctx.lineTo(5, 20);              
         ctx.arc(0, 20, 5, 0, Math.PI); ctx.closePath(); ctx.stroke();
         ctx.fillStyle = 'rgba(0, 243, 255, 0.2)'; ctx.fill(); ctx.restore();
     }
 }
 
-// Popula o array com as partículas instanciadas
 for(let i = 0; i < particleCount; i++) particles.push(new Particle());
 
-/** Loop contínuo (Engine de Renderização do Canvas e Carrossel) */
 function animate() {
     updateCarouselCSS();
     
-    // Sincroniza cor do fundo com o State (Dark/Light mode)
     const isLightMode = document.body.classList.contains('light-mode');
     ctx.fillStyle = isLightMode ? 'rgba(244, 247, 246, 0.5)' : 'rgba(3, 5, 10, 0.3)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);

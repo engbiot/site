@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- [SEÇÃO: CONFIGURAÇÕES BÁSICAS] Define codificação e área de visualização responsiva -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- [MANUTENÇÃO] Metatags de proteção e SEO -->
+    
+    <!-- [SEÇÃO: SEO E PROTEÇÃO] Título, descrição e políticas de segurança -->
     <title>TekPrax</title>
     <meta name="description" content="Consultoria em Engenharia Biotecnológica: Adequação Regulatória, Otimização de Bioprocessos, Perícia Judicial, Análise de Dados e Soluções Digitais sob medida.">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- [SEÇÃO: CONTROLE DE CACHE] Força o navegador a sempre buscar a versão mais recente dos arquivos -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     
-    <!-- [MANUTENÇÃO] Link para o arquivo CSS. Altere o caminho se mudar de pasta -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Script inline para aplicar o tema antes do HTML renderizar, evitando FOUC -->
+    <!-- [SEÇÃO: ARQUIVOS EXTERNOS COM CACHE-BUSTING] CSS atualizado com versão ?v=1.1 -->
+    <link rel="stylesheet" href="css/style.css?v=1.1">
+    
+</head>
+<body>
     <script>
-        const savedTheme = localStorage.getItem('theme') || 'light'; // Light é o padrão agora
-        if (savedTheme === 'light') {
-            document.documentElement.classList.add('light-mode-forced'); // Ajuda preventiva
+        // Lê o cache instantaneamente e aplica o tema ANTES da tela ser desenhada
+        if ((localStorage.getItem('theme') || 'light') === 'light') {
+            document.body.classList.add('light-mode');
         }
     </script>
-</head>
-</head>
-<body class="light-mode">
-
-    <!-- [MANUTENÇÃO] Overlay do Pull-to-Refresh (atualização de página mobile) -->
+    <!-- [SEÇÃO: PULL-TO-REFRESH] Animação exibida ao arrastar a tela para baixo em celulares -->
     <div id="ptr-overlay">
         <div id="ptr-panel-bg"></div>
         <div id="ptr-content">
@@ -47,7 +52,7 @@
         </div>
     </div>
 
-    <!-- [MANUTENÇÃO] Tela de carregamento inicial (Splash Screen) -->
+    <!-- [SEÇÃO: SPLASH SCREEN] Tela de abertura imersiva inicial -->
     <div id="splash-screen" onclick="closeSplash()">
         <div class="splash-panel splash-top"></div>
         <div class="splash-panel splash-bottom"></div>
@@ -81,9 +86,10 @@
         </div>
     </div>
 
-    <!-- Background animado em 3D -->
+    <!-- [SEÇÃO: FUNDO 3D] Canvas que renderiza as partículas animadas -->
     <canvas id="bgCanvas"></canvas>
 
+    <!-- [SEÇÃO: COMPONENTES FIXOS] Botões de menu clássico, tema e contato fixo -->
     <div id="hamburger-btn" onclick="toggleClassicMenu()">
         <span></span><span></span><span></span>
     </div>
@@ -96,7 +102,7 @@
 
     <a id="fixed-contact-btn" onclick="navigateTo(3)">💬 Solicitar Orçamento</a>
 
-    <!-- [MANUTENÇÃO] Logotipo do cabeçalho -->
+    <!-- [SEÇÃO: LOGOTIPO CENTRALIZADO] Estrutura do Logo animado -->
     <div id="logo-wrapper">
         <div class="pulse-light"></div>
         <div id="site-logo" onclick="navigateTo(0)">
@@ -124,7 +130,7 @@
         </div>
     </div>
 
-    <!-- Menu Clássico (Overlay) -->
+    <!-- [SEÇÃO: MENUS] Overlay de celular e Menu 3D Superior -->
     <div id="classic-menu-overlay">
         <a onclick="navigateFromClassic(0)">Início</a>
         <a onclick="navigateFromClassic(1)">Sobre o Engenheiro</a>
@@ -139,17 +145,14 @@
         <div id="carousel"></div>
     </div>
 
-    <!-- CONTAINER PRINCIPAL DOS SLIDES -->
+    <!-- [SEÇÃO: CONTEÚDO (SLIDES)] Container de apresentações em ZUI -->
     <div id="presentation-container">
 
-        <!-- [MANUTENÇÃO] Slide 0: Início -->
+        <!-- Slide 0: Início -->
         <div class="slide active" id="slide-0">
             <div class="slide-inner-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 55vh; padding-top: 10px;">
-                
-                <!-- Aplicação do bloqueio de quebra de palavras (.nowrap) -->
                 <h1 id="title-main">Bem-vindo à <span class="nowrap">TekPrax</span></h1>
                 <h2 id="subtitle-main" style="margin-bottom: 30px;">Inovação e Segurança <span class="nowrap">para o seu Negócio</span></h2>
-                
                 <p style="margin-bottom: 30px; max-width: 750px;">
                     Entendemos que a sua indústria não tem margem para tentativa e erro ou riscos regulatórios. Oferecemos consultoria especializada em <strong>Engenharia Biotecnológica</strong> para blindar suas operações contra multas, padronizar seus lotes de produção e maximizar a lucratividade através de processos validados cientificamente.
                 </p>
@@ -157,6 +160,7 @@
             </div>
         </div>
 
+        <!-- Slide 1: Sobre -->
         <div class="slide" id="slide-1">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
@@ -176,6 +180,7 @@
             </div>
         </div>
 
+        <!-- Slide 2: Serviços (Catálogo) -->
         <div class="slide" id="slide-2">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
@@ -218,7 +223,7 @@
             </div>
         </div>
 
-        <!-- [MANUTENÇÃO] Slide 3: Formulário de Contato Principal -->
+        <!-- Slide 3: Contato Profissional -->
         <div class="slide" id="slide-3">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
@@ -227,7 +232,6 @@
                 
                 <div class="contact-grid">
                     <div>
-                        <!-- [MANUTENÇÃO] Link de envio do formspree, pode ser alterado por PHP nativo se preferir -->
                         <form id="contato-form-geral" action="https://formspree.io/f/mgojpzen" method="POST">
                             <div class="form-group">
                                 <label>Seu Nome *</label>
@@ -272,9 +276,7 @@
 
                             <div class="form-actions" style="margin-top: 25px;">
                                 <button type="submit" class="cta-button" style="margin-top: 0; flex: 1;">Enviar</button>
-                                <a href="https://wa.me/5518998069727" target="_blank" class="cta-button whatsapp-btn" style="margin-top: 0; flex: 1;">
-                                    WhatsApp
-                                </a>
+                                <a href="https://wa.me/5518998069727" target="_blank" class="cta-button whatsapp-btn" style="margin-top: 0; flex: 1;">WhatsApp</a>
                             </div>
                         </form>
                     </div>
@@ -291,6 +293,8 @@
             </div>
         </div>
 
+        <!-- [DEMAIS SLIDES] - Preservados exatamente como os originais -->
+        <!-- Slide 4: Regulatória -->
         <div class="slide" id="slide-4">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
@@ -322,6 +326,7 @@
             </div>
         </div>
 
+        <!-- Slide 5: Bioprocessos -->
         <div class="slide" id="slide-5">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
@@ -360,6 +365,7 @@
             </div>
         </div>
 
+        <!-- Slide 6: Soluções Digitais -->
         <div class="slide" id="slide-6">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
@@ -383,6 +389,7 @@
             </div>
         </div>
 
+        <!-- Slides 7 a 18 (Detalhes) -->
         <div class="slide" id="slide-7">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
@@ -401,9 +408,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Solicitar Proposta</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/2.png" class="content-img" alt="Documentos técnicos e conformidade">
-                    </div>
+                    <div><img src="img/2.png" class="content-img" alt="Documentos técnicos e conformidade"></div>
                 </div>
             </div>
         </div>
@@ -426,9 +431,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/3.png" class="content-img" alt="Sustentabilidade e gestão ambiental">
-                    </div>
+                    <div><img src="img/3.png" class="content-img" alt="Sustentabilidade e gestão ambiental"></div>
                 </div>
             </div>
         </div>
@@ -451,9 +454,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/4.png" class="content-img" alt="Pranchetas, inspeção laboratorial">
-                    </div>
+                    <div><img src="img/4.png" class="content-img" alt="Pranchetas, inspeção laboratorial"></div>
                 </div>
             </div>
         </div>
@@ -476,9 +477,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/11.png" class="content-img" alt="Balança pericial e análise tecnológica">
-                    </div>
+                    <div><img src="img/11.png" class="content-img" alt="Balança pericial e análise tecnológica"></div>
                 </div>
             </div>
         </div>
@@ -497,9 +496,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/5.png" class="content-img" alt="Gráficos de dados industriais">
-                    </div>
+                    <div><img src="img/5.png" class="content-img" alt="Gráficos de dados industriais"></div>
                 </div>
             </div>
         </div>
@@ -522,9 +519,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/6.png" class="content-img" alt="Biorreatores e processos fermentativos">
-                    </div>
+                    <div><img src="img/6.png" class="content-img" alt="Biorreatores e processos fermentativos"></div>
                 </div>
             </div>
         </div>
@@ -547,9 +542,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/7.png" class="content-img" alt="Fornos industriais ou leveduras de panificação">
-                    </div>
+                    <div><img src="img/7.png" class="content-img" alt="Fornos industriais ou leveduras de panificação"></div>
                 </div>
             </div>
         </div>
@@ -572,9 +565,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/8.png" class="content-img" alt="Câmaras de maturação de queijos iluminadas">
-                    </div>
+                    <div><img src="img/8.png" class="content-img" alt="Câmaras de maturação de queijos iluminadas"></div>
                 </div>
             </div>
         </div>
@@ -597,9 +588,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/9.png" class="content-img" alt="Análises laboratoriais sob luz neon">
-                    </div>
+                    <div><img src="img/9.png" class="content-img" alt="Análises laboratoriais sob luz neon"></div>
                 </div>
             </div>
         </div>
@@ -622,9 +611,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/10.png" class="content-img" alt="Estruturas nanotecnológicas sustentáveis">
-                    </div>
+                    <div><img src="img/10.png" class="content-img" alt="Estruturas nanotecnológicas sustentáveis"></div>
                 </div>
             </div>
         </div>
@@ -647,9 +634,7 @@
                             <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/12.png" class="content-img" alt="Matemática e linguagens de programação">
-                    </div>
+                    <div><img src="img/12.png" class="content-img" alt="Matemática e linguagens de programação"></div>
                 </div>
             </div>
         </div>
@@ -672,14 +657,12 @@
                             <a onclick="navigateTo(19)" class="cta-button" style="border-color: var(--neon-blue); color: var(--neon-blue);">Contratar Solução Web</a>
                         </div>
                     </div>
-                    <div>
-                        <img src="img/13.png" class="content-img" alt="Layout responsivo web design">
-                    </div>
+                    <div><img src="img/13.png" class="content-img" alt="Layout responsivo web design"></div>
                 </div>
             </div>
         </div>
 
-        <!-- [MANUTENÇÃO] Slide 19: Formulário focado em Web Design -->
+        <!-- Slide 19: Formulário focado em Web Design -->
         <div class="slide" id="slide-19">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
@@ -745,7 +728,7 @@
 
     </div>
 
-    <!-- [MANUTENÇÃO] Inserção do Script Principal -->
-    <script src="js/main.js"></script>
+    <!-- [SEÇÃO: ARQUIVOS EXTERNOS JS COM CACHE-BUSTING] Script com tag de versão ?v=1.1 -->
+    <script src="js/main.js?v=1.1"></script>
 </body>
 </html>

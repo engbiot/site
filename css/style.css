@@ -1,6 +1,6 @@
 /* ==========================================
-   RESET E VARIÁVEIS MODERNAS
-   [MANUTENÇÃO]: Altere aqui as cores principais
+   [SEÇÃO 1] RESET E VARIÁVEIS MODERNAS (DARK MODE)
+   Cores baseadas em Cyberpunk e Dark UI
    ========================================== */
 :root {
     --neon-blue: #00f3ff;
@@ -19,7 +19,8 @@
 }
 
 /* ==========================================
-   TEMA CLARO (LIGHT MODE)
+   [SEÇÃO 2] TEMA CLARO (LIGHT MODE OVERRIDES)
+   Força paletas clean quando o botão de modo é acionado
    ========================================== */
 body.light-mode {
     --neon-blue: #0066ff;
@@ -45,10 +46,9 @@ body, html {
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* BACKGROUND CANVAS */
 #bgCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;}
 
-/* ESTILOS LIGHT MODE ESPECÍFICOS */
+/* [SEÇÃO 2.1] Ajustes Finos do Modo Claro */
 body.light-mode #menu-wrapper { border-color: rgba(0, 102, 255, 0.2); box-shadow: 0 10px 25px -10px rgba(0,0,0,0.1); }
 body.light-mode .menu-item { color: #555; }
 body.light-mode .menu-item:hover, body.light-mode .menu-item.active { color: var(--neon-blue); text-shadow: none; }
@@ -70,107 +70,68 @@ body.light-mode #classic-menu-overlay { background: rgba(255, 255, 255, 0.9); bo
 body.light-mode #classic-menu-overlay a { color: #333; text-shadow: none; }
 body.light-mode #classic-menu-overlay a:hover { color: var(--neon-blue); }
 
-/* Refinamento dos botões no modo claro: cor mais leve e contraste adequado */
-body.light-mode .cta-button {
-    color: #005ce6; /* Texto em tom adequado para contraste */
-    border-color: #66a3ff; /* Borda em tom mais claro */
-}
+body.light-mode .cta-button { color: #005ce6; border-color: #66a3ff; }
 body.light-mode .cta-button:hover {
-    background: #66a3ff !important; /* Fundo mais leve no hover */
-    color: #ffffff !important; /* Texto branco para excelente contraste visual */
-    box-shadow: 0 0 15px rgba(102, 163, 255, 0.4);
+    background: #66a3ff !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(102, 163, 255, 0.4);
 }
 
 body.light-mode .whatsapp-btn:hover {
-    background: #00ff15 !important; /* Fundo mais leve no hover */
-    color: #003e12 !important; /* Texto branco para excelente contraste visual */
-    box-shadow: 0 0 15px rgba(0, 154, 57, 0.4);
-    border-color: #00b900;
+    background: #00ff15 !important; color: #003e12 !important; box-shadow: 0 0 15px rgba(0, 154, 57, 0.4); border-color: #00b900;
 }
-body.light-mode .cta-secondary {
-    color: #005ce6;
-    border-color: #66a3ff;
-}
+body.light-mode .cta-secondary { color: #005ce6; border-color: #66a3ff; }
 body.light-mode .cta-secondary:hover {
-    background: #66a3ff !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 15px rgba(102, 163, 255, 0.4);
+    background: #66a3ff !important; color: #ffffff !important; box-shadow: 0 0 15px rgba(102, 163, 255, 0.4);
 }
 
 /* ==========================================
-   TELA DE ABERTURA (SPLASH SCREEN VIDRO)
+   [SEÇÃO 3] ANIMAÇÕES E TELAS FLUTUANTES (SPLASH E PTR)
    ========================================== */
 #splash-screen {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: 9999; display: flex; flex-direction: column;
-    cursor: pointer; overflow: hidden;
+    z-index: 9999; display: flex; flex-direction: column; cursor: pointer; overflow: hidden;
 }
 .splash-panel {
-    position: absolute; left: 0; width: 100%; height: 50vh;
-    background: rgba(0, 255, 204, 0.05);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+    position: absolute; left: 0; width: 100%; height: 50vh; background: rgba(0, 255, 204, 0.05);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
 }
-.splash-top {
-    top: 0; border-bottom: 2px solid var(--neon-green);
-    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15);
-}
-.splash-bottom {
-    bottom: 0; border-top: 2px solid var(--neon-green);
-    box-shadow: 0 -10px 30px rgba(0, 255, 204, 0.15);
-}
+.splash-top { top: 0; border-bottom: 2px solid var(--neon-green); box-shadow: 0 10px 30px rgba(0, 255, 204, 0.15); }
+.splash-bottom { bottom: 0; border-top: 2px solid var(--neon-green); box-shadow: 0 -10px 30px rgba(0, 255, 204, 0.15); }
 
 .splash-content-wrapper {
     position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
-    display: flex; flex-direction: column; z-index: 10000; pointer-events: none;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    display: flex; flex-direction: column; z-index: 10000; pointer-events: none; transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.splash-text-top {
-    height: 50vh; display: flex; align-items: flex-end; justify-content: center;
-    padding-bottom: 10px; box-sizing: border-box; text-align: center;
-}
-.splash-text-bottom {
-    height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-    padding-top: 20px; box-sizing: border-box; text-align: center;
-}
+.splash-text-top { height: 50vh; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; box-sizing: border-box; text-align: center; }
+.splash-text-bottom { height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 20px; box-sizing: border-box; text-align: center; }
 
 .splash-text-top h1 { 
     font-size: 2.5rem; color: var(--neon-purple); text-shadow: 0 0 20px rgba(255, 255, 255, 0.6); 
-    margin: 0; letter-spacing: 2px; line-height: 1.2;
-    display: flex; align-items: center; justify-content: center; 
-    gap: 0px; /* Reduzido a zero para eliminar o espaço forçado */
+    margin: 0; letter-spacing: 2px; line-height: 1.2; display: flex; align-items: center; justify-content: center; gap: 0px; 
 }
 .splash-text-bottom p { font-size: 1rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 3px; margin: 0; text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);}
-.tap-text { display: block; font-size: 0.85rem; color: rgba(37, 0, 245, 0.6); margin-top: 40px; animation: pulseAlpha 2s infinite; text-transform: uppercase; letter-spacing: 1px;}
 
-@keyframes pulseAlpha { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+.tap-text { display: block; font-size: 0.85rem; margin-top: 40px; animation: pulseAlpha 2s infinite; text-transform: uppercase; letter-spacing: 1px; font-weight: 300; color: var(--text-muted); }
+@keyframes pulseAlpha { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
 #splash-screen.splitting .splash-content-wrapper { opacity: 0; transform: scale(0.9); }
 #splash-screen.splitting .splash-top { transform: translateY(-100%); }
 #splash-screen.splitting .splash-bottom { transform: translateY(100%); }
 
-/* PULL TO REFRESH OVERLAY */
 #ptr-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: 10001; pointer-events: none; display: flex; 
-    flex-direction: column; align-items: center; justify-content: center;
-    opacity: 0; transition: opacity 0.2s;
+    z-index: 10001; pointer-events: none; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s;
 }
 #ptr-panel-bg {
-    position: absolute; top: -100vh; left: 0; width: 100%; height: 100vh;
-    background: rgba(0, 255, 204, 0.15); backdrop-filter: blur(10px);
-    border-bottom: 2px solid var(--neon-green);
-    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
-    will-change: transform;
+    position: absolute; top: -100vh; left: 0; width: 100%; height: 100vh; background: rgba(0, 255, 204, 0.15); backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--neon-green); box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2); will-change: transform;
 }
-#ptr-content {
-    position: relative; z-index: 10002; display: flex; flex-direction: column;
-    align-items: center; gap: 15px; transform: translateY(-50px);
-    opacity: 0; will-change: transform, opacity;
-}
+#ptr-content { position: relative; z-index: 10002; display: flex; flex-direction: column; align-items: center; gap: 15px; transform: translateY(-50px); opacity: 0; will-change: transform, opacity; }
 #ptr-content span { color: var(--neon-green); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
 
-/* MENU 3D */
+/* ==========================================
+   [SEÇÃO 4] ESTRUTURA PRINCIPAL E ALINHAMENTO MATEMÁTICO DO LAYOUT
+   Aqui controlamos os 15px padronizados de respiro para o logo em relação ao menu e slide
+   ========================================== */
 #menu-wrapper {
     position: fixed; top: 0; width: 100%; height: 60px;
     background: var(--menu-bg); backdrop-filter: blur(5px);
@@ -182,6 +143,19 @@ body.light-mode .cta-secondary:hover {
     overflow: hidden; touch-action: none; cursor: grab;
 }
 #menu-wrapper:active { cursor: grabbing; }
+
+/* Logo Posicionado 15px abaixo dos 60px do Menu (60 + 15 = 75px) */
+#logo-wrapper {
+    position: fixed; top: 75px; left: 0; width: 100%; height: 80px;
+    display: flex; align-items: center; justify-content: center; z-index: 200;
+}
+
+/* Slides posicionados 15px abaixo da altura total do logo (75 + 80 = 155; 155 + 15 = 170px) */
+#presentation-container {
+    position: fixed; top: 170px; left: 0; width: 100vw; height: calc(100vh - 170px); 
+    perspective: 1500px; display: flex; align-items: center; justify-content: center; 
+    z-index: 10; pointer-events: none; 
+}
 
 #carousel { position: relative; width: 0; height: 0; transform-style: preserve-3d; transform: translateZ(-500px); }
 .menu-item {
@@ -196,154 +170,72 @@ body.light-mode .cta-secondary:hover {
 .menu-item:hover { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); }
 .menu-item.active { color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue); }
 
-/* LOGOTIPO DO SITE */
-#logo-wrapper {
-    position: fixed; top: 80px; left: 0; width: 100%; height: 80px;
-    display: flex; align-items: center; justify-content: center; z-index: 200;
-}
-
 .pulse-light {
     position: absolute; width: 380px; height: 120px;
     background: radial-gradient(ellipse, rgba(0, 243, 255, 0.2) 0%, rgba(0, 255, 204, 0.08) 40%, transparent 70%);
-    border-radius: 50%; z-index: 199; pointer-events: none;
-    animation: pulseGlowEffect 4s ease-in-out infinite alternate;
+    border-radius: 50%; z-index: 199; pointer-events: none; animation: pulseGlowEffect 4s ease-in-out infinite alternate;
 }
-
-@keyframes pulseGlowEffect {
-    0% { transform: scale(0.85); opacity: 0.5; filter: blur(15px); }
-    100% { transform: scale(1.15); opacity: 1; filter: blur(20px); }
-}
+@keyframes pulseGlowEffect { 0% { transform: scale(0.85); opacity: 0.5; filter: blur(15px); } 100% { transform: scale(1.15); opacity: 1; filter: blur(20px); } }
 
 #site-logo {
-    position: relative; z-index: 200; font-size: 2rem; font-weight: 900; 
-    text-transform: uppercase; letter-spacing: 2px; cursor: pointer; 
-    white-space: nowrap; display: flex; align-items: center; justify-content: center; 
-    gap: 0px; /* Reduzido a zero para eliminar o espaço forçado */
-    transition: transform 0.3s;
-    margin: 0 auto; 
+    position: relative; z-index: 200; font-size: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 0px; transition: transform 0.3s; margin: 0 auto; 
 }
 #site-logo:hover { transform: scale(1.1); }
-
 .logo-blue { color: var(--logo-blue-txt); text-shadow: 0 0 12px rgba(0, 243, 255, 0.6); transition: 0.5s; }
 .logo-green { color: var(--logo-green-txt); text-shadow: 0 0 12px rgba(0, 255, 204, 0.6); transition: 0.5s; }
+.logo-animado-inline { width: 2.2em; height: 2.2em; flex-shrink: 0; filter: drop-shadow(2px 2px 0px rgb(255, 255, 255)); margin-left: -40px; margin-right: -4px; }
 
-.logo-animado-inline {
-    width: 2.2em; height: 2.2em; flex-shrink: 0;
-    filter: drop-shadow(2px 2px 0px rgb(255, 255, 255));
-    margin-left: -40px; 
-    margin-right: -4px; /* remove o vazio da viewBox e puxa o texto para a esquerda */
-}
+/* ==========================================
+   [SEÇÃO 5] CONTROLES FIXOS (BOTÕES E TOGGLES)
+   ========================================== */
+#theme-toggle-wrapper { position: fixed; top: 15px; right: 25px; z-index: 300; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.toggle-track { width: 56px; height: 30px; background: #222; border-radius: 30px; position: relative; transition: background 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5), 0 0 10px rgba(255,255,255,0.1); }
+body.light-mode .toggle-track { background: #e0e5ec; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1), 0 0 10px rgba(0,0,0,0.05); }
+.toggle-thumb { width: 24px; height: 24px; border-radius: 50%; position: absolute; top: 3px; left: 4px; background: #333; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+body.light-mode .toggle-thumb { transform: translateX(24px); background: #fff; }
+.toggle-thumb::before { content: '⚫'; font-size: 14px; transition: opacity 0.3s; }
+body.light-mode .toggle-thumb::before { content: '⚪'; }
 
-/* CHAVE DAY/NIGHT (THEME TOGGLE) */
-#theme-toggle-wrapper {
-    position: fixed; top: 15px; right: 25px; z-index: 300;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
-.toggle-track {
-    width: 56px; height: 30px; background: #222; border-radius: 30px;
-    position: relative; transition: background 0.3s;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5), 0 0 10px rgba(255,255,255,0.1);
-}
-body.light-mode .toggle-track {
-    background: #e0e5ec;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1), 0 0 10px rgba(0,0,0,0.05);
-}
-.toggle-thumb {
-    width: 24px; height: 24px; border-radius: 50%;
-    position: absolute; top: 3px; left: 4px;
-    background: #333; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-body.light-mode .toggle-thumb {
-    transform: translateX(24px);
-    background: #fff;
-}
-.toggle-thumb::before {
-    content: '⚫'; font-size: 14px; transition: opacity 0.3s;
-}
-body.light-mode .toggle-thumb::before {
-    content: '⚪';
-}
-
-/* BOTÃO SANDUÍCHE APRIMORADO */
 #hamburger-btn {
-    position: fixed; top: 5px; left: 10px; 
-    width: 30px; height: 22px;
-    padding: 15px; /* Aumenta drasticamente a área de clique invisível */
-    z-index: 300; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
-    box-sizing: content-box;
+    position: fixed; top: 5px; left: 10px; width: 30px; height: 22px; padding: 15px;
+    z-index: 300; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; box-sizing: content-box;
 }
-#hamburger-btn span {
-    display: block; height: 3px; width: 100%; background: var(--neon-green);
-    border-radius: 3px; transition: all 0.3s ease-in-out; box-shadow: 0 0 5px var(--neon-green);
-    pointer-events: none; /* Garante que o clique seja na div pai */
-}
+#hamburger-btn span { display: block; height: 3px; width: 100%; background: var(--neon-green); border-radius: 3px; transition: all 0.3s ease-in-out; box-shadow: 0 0 5px var(--neon-green); pointer-events: none; }
 body.light-mode #hamburger-btn span { box-shadow: none; }
 #hamburger-btn.open span:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
 #hamburger-btn.open span:nth-child(2) { opacity: 0; }
 #hamburger-btn.open span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
 
 #fixed-contact-btn {
-    position: fixed; bottom: 30px; right: 30px; background: rgba(0, 255, 204, 0.1);
-    color: var(--neon-green); border: 2px solid var(--neon-green); padding: 12px 25px;
-    border-radius: 30px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase;
-    letter-spacing: 1px; cursor: pointer; z-index: 150; transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(0, 255, 204, 0.2); backdrop-filter: blur(5px);
-    display: flex; align-items: center; gap: 8px; text-decoration: none;
+    position: fixed; bottom: 30px; right: 30px; background: rgba(0, 255, 204, 0.1); color: var(--neon-green); border: 2px solid var(--neon-green); padding: 12px 25px;
+    border-radius: 30px; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; z-index: 150; transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.2); backdrop-filter: blur(5px); display: flex; align-items: center; gap: 8px; text-decoration: none;
 }
 #fixed-contact-btn:hover { background: var(--neon-green); color: var(--dark-bg); box-shadow: 0 0 25px var(--neon-green); transform: scale(1.05); }
 
-/* MENU CLÁSSICO */
 #classic-menu-overlay {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(0, 255, 204, 0.05); 
-    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-    z-index: 250; display: flex; flex-direction: column; justify-content: center;
-    align-items: center; gap: 25px; pointer-events: none; 
-    transform: translateX(-100%); 
-    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    border-right: 2px solid var(--border-color);
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 255, 204, 0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    z-index: 250; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 25px; pointer-events: none; transform: translateX(-100%); transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1); border-right: 2px solid var(--border-color);
 }
-#classic-menu-overlay.open { 
-    transform: translateX(0); pointer-events: all; 
-    box-shadow: 10px 0 30px rgba(0, 255, 204, 0.15); 
-}
-#classic-menu-overlay a {
-    color: var(--text-color); font-size: 1.5rem; text-decoration: none;
-    text-transform: uppercase; letter-spacing: 3px; cursor: pointer; display: inline-block; 
-    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s linear, text-shadow 0.15s linear;
-    font-weight: 600;
-}
+#classic-menu-overlay.open { transform: translateX(0); pointer-events: all; box-shadow: 10px 0 30px rgba(0, 255, 204, 0.15); }
+#classic-menu-overlay a { color: var(--text-color); font-size: 1.5rem; text-decoration: none; text-transform: uppercase; letter-spacing: 3px; cursor: pointer; display: inline-block; transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s linear, text-shadow 0.15s linear; font-weight: 600; }
 #classic-menu-overlay a:hover { color: var(--neon-green); text-shadow: 0 0 15px var(--neon-green); transform: scale(1.08); }
 
-/* CONTAINER DE TRANSIÇÃO ZUI */
-#presentation-container {
-    position: fixed; top: 180px; left: 0; width: 100vw; height: calc(100vh - 160px); 
-    perspective: 1500px; display: flex; align-items: center; justify-content: center; 
-    z-index: 10; pointer-events: none; 
-}
-
+/* ==========================================
+   [SEÇÃO 6] ESTILOS E COMPONENTES INTERNOS DOS SLIDES
+   ========================================== */
 .slide {
     position: absolute; width: 85%; max-width: 1000px; max-height: 85%; overflow-y: auto;
     background: var(--slide-bg); border: 1px solid var(--border-color); border-radius: 20px;
-    padding: 40px 50px; box-shadow: 0 0 40px rgba(0, 243, 255, 0.1);
-    opacity: 0; transform: translateZ(-2000px) scale(0.5); pointer-events: none;
-    transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease-in-out, background-color 0.5s;
-    display: flex; flex-direction: column;
+    padding: 40px 50px; box-shadow: 0 0 40px rgba(0, 243, 255, 0.1); opacity: 0; transform: translateZ(-2000px) scale(0.5); pointer-events: none;
+    transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease-in-out, background-color 0.5s; display: flex; flex-direction: column;
 }
-.slide.active {
-    opacity: 1; transform: translateZ(0) scale(1); pointer-events: all;
-    transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-in-out 0.3s;
-}
+.slide.active { opacity: 1; transform: translateZ(0) scale(1); pointer-events: all; transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-in-out 0.3s; }
 .slide.passed { opacity: 0; transform: translateZ(1500px) scale(2); pointer-events: none; }
-
 .slide-inner-content { flex: 1 0 auto; } 
-
 .slide-footer { margin-top: 40px; flex-shrink: 0; padding-top: 20px; padding-bottom: 70px; border-top: 1px solid var(--border-color); text-align: center; }
 .slide-footer p { font-size: 0.75rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
 .discreet-link { color: var(--neon-blue); font-size: 0.7rem; text-decoration: none; cursor: pointer; transition: color 0.3s; display: inline-block; margin-top: 6px; font-style: italic;}
-
 .slide::-webkit-scrollbar { width: 8px; }
 .slide::-webkit-scrollbar-thumb { background: var(--neon-green); border-radius: 4px; }
 
@@ -353,59 +245,30 @@ h2 { font-size: 1.6rem; color: var(--neon-blue); }
 p { line-height: 1.6; font-size: 1.1rem; color: var(--text-muted); }
 ul { line-height: 1.8; color: var(--text-muted); }
 
-.cta-button {
-    display: inline-block; margin-top: 10px; padding: 12px 25px; background: transparent;
-    color: var(--neon-blue); border: 2px solid var(--neon-blue); border-radius: 8px;
-    font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-    transition: 0.4s; text-decoration: none; text-align: center;
-}
+.cta-button { display: inline-block; margin-top: 10px; padding: 12px 25px; background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue); border-radius: 8px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.4s; text-decoration: none; text-align: center; }
 .cta-button:hover { background: var(--neon-blue) !important; color: #010a60 !important; box-shadow: 0 0 20px var(--neon-blue); }
-
-.cta-secondary {
-    display: inline-block; margin-top: 20px; padding: 12px 25px; background: transparent;
-    color: var(--neon-blue); border: 2px solid var(--neon-blue); border-radius: 8px;
-    font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
-    transition: 0.4s; text-decoration: none; text-align: center;
-}
+.cta-secondary { display: inline-block; margin-top: 20px; padding: 12px 25px; background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue); border-radius: 8px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.4s; text-decoration: none; text-align: center; }
 .cta-secondary:hover { background: var(--neon-blue) !important; color: #010a60 !important; box-shadow: 0 0 20px var(--neon-blue); }
-
 .btn-voltar { border: 1px solid rgba(255,255,255,0.4); color: var(--text-color); margin-bottom: 20px; padding: 8px 20px; font-size: 0.8rem; display: inline-block; cursor: pointer; border-radius: 4px; transition: 0.3s;}
 
 .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-.service-card {
-    background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px;
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background-color 0.5s; cursor: pointer; position: relative;
-}
+.service-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background-color 0.5s; cursor: pointer; position: relative; }
 .service-card:hover { transform: translateY(-5px); border-color: var(--neon-green); box-shadow: 0 5px 20px rgba(0, 255, 204, 0.1); }
-
 .content-split { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; margin-top: 20px; }
-
-.content-img { 
-    width: 100%; max-height: 350px; object-fit: cover; 
-    border: 2px solid var(--border-color); 
-    box-shadow: 0 0 25px rgba(0, 243, 255, 0.1); 
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-    animation: morphBlob 8s ease-in-out infinite alternate;
-}
-@keyframes morphBlob {
-    0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-}
+.content-img { width: 100%; max-height: 350px; object-fit: cover; border: 2px solid var(--border-color); box-shadow: 0 0 25px rgba(0, 243, 255, 0.1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; animation: morphBlob 8s ease-in-out infinite alternate; }
+@keyframes morphBlob { 0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; } 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } }
 
 .compact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 30px; }
 .compact-card { background: rgba(0,0,0,0.03); padding: 20px; border-radius: 8px; border-left: 3px solid var(--neon-blue); display: flex; flex-direction: column;}
-
-.main-catalog-btn {
-    display: block; border: 2px solid var(--neon-green); background: rgba(0, 255, 204, 0.05); padding: 12px; border-radius: 8px; text-align: center; font-size: 1.05rem;
-    color: var(--neon-green); cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
-}
+.main-catalog-btn { display: block; border: 2px solid var(--neon-green); background: rgba(0, 255, 204, 0.05); padding: 12px; border-radius: 8px; text-align: center; font-size: 1.05rem; color: var(--neon-green); cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
 .main-catalog-btn:hover { background: var(--neon-green); color: #fff; box-shadow: 0 0 20px var(--neon-green); text-shadow: none; }
 .compact-card a { display: block; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; cursor: pointer; transition: 0.3s; padding-left: 10px;}
 .compact-card a:hover { color: var(--neon-blue); transform: translateX(5px); }
-
 .chat-quick-btn { flex: 0 0 45px !important; height: 45px; margin: 0 !important; padding: 0 !important; display: flex !important; align-items: center; justify-content: center; font-size: 1.2rem; border-radius: 8px; }
 
-/* FORMULÁRIO */
+/* ==========================================
+   [SEÇÃO 7] ELEMENTOS DO FORMULÁRIO (GERAL E DROPDOWN)
+   ========================================== */
 .contact-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; margin-top: 20px; }
 .form-group { display: flex; flex-direction: column; margin-bottom: 15px; text-align: left; }
 .form-group label { margin-bottom: 5px; color: var(--neon-blue); font-size: 0.9rem; font-weight: 600; }
@@ -420,8 +283,6 @@ ul { line-height: 1.8; color: var(--text-muted); }
 .dropdown-check-list.visible ul.items { display: block; }
 .dropdown-check-list ul.items::-webkit-scrollbar { width: 6px; }
 .dropdown-check-list ul.items::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 3px; }
-
-/* Nova regra para aplicar clique no texto inteiro através do encapsulamento label */
 .items li { list-style: none; margin-bottom: 10px; font-size: 0.95rem; color: var(--text-muted); display: flex; align-items: center;}
 .items li label { display: flex; align-items: center; width: 100%; cursor: pointer; }
 .items li input[type="checkbox"] { margin-right: 10px; cursor: pointer; accent-color: var(--neon-green); transform: scale(1.2);}
@@ -430,97 +291,43 @@ ul { line-height: 1.8; color: var(--text-muted); }
 .whatsapp-btn { border-color: #25D366; color: #25D366; display: flex; justify-content: center; align-items: center; }
 .whatsapp-btn:hover { background: #25D366 !important; color: #fff !important; box-shadow: 0 0 20px rgba(37,211,102,0.6); border-color: #25D366;}
 
-/* ==========================================
-   FEEDBACK VISUAL DE SERVIÇOS SELECIONADOS
-   ========================================== */
-.selected-services {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 12px;
-}
+.selected-services { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.selected-item { background: rgba(0, 255, 204, 0.1); border: 1px solid var(--neon-green); color: var(--neon-green); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; animation: fadeInTag 0.3s ease forwards; }
+.selected-item::before { content: '✓'; font-weight: 900; }
+body.light-mode .selected-item { background: rgba(0, 179, 0, 0.05); border-color: var(--neon-green); color: var(--neon-green); }
+@keyframes fadeInTag { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-.selected-item {
-    background: rgba(0, 255, 204, 0.1);
-    border: 1px solid var(--neon-green);
-    color: var(--neon-green);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    animation: fadeInTag 0.3s ease forwards;
-}
+.selected-item-web { background: rgba(0, 243, 255, 0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); }
+body.light-mode .selected-item-web { background: rgba(0, 102, 255, 0.05); border-color: var(--neon-blue); color: var(--neon-blue); }
 
-/* Checkmark de confirmação via pseudo-elemento */
-.selected-item::before {
-    content: '✓';
-    font-weight: 900;
-}
-
-/* Ajuste de cor automático para o Light Mode */
-body.light-mode .selected-item {
-    background: rgba(0, 179, 0, 0.05);
-    border-color: var(--neon-green);
-    color: var(--neon-green);
-}
-
-@keyframes fadeInTag {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Variação visual para a aba de Web Design (Azul Neon) */
-.selected-item-web {
-    background: rgba(0, 243, 255, 0.1);
-    border: 1px solid var(--neon-blue);
-    color: var(--neon-blue);
-}
-
-/* Ajuste de cor automático para o Light Mode (Web) */
-body.light-mode .selected-item-web {
-    background: rgba(0, 102, 255, 0.05);
-    border-color: var(--neon-blue);
-    color: var(--neon-blue);
-}
-
-/* ==========================================
-   CLASSES DE QUEBRA DE TEXTO E RESPONSIVIDADE
-   [MANUTENÇÃO]: IDs e classes para ajustes diretos em telas menores
-   ========================================== */
 .nowrap { white-space: nowrap; }
 .mobile-break { display: none; }
 
-/* REGRAS MEDIA QUERIES (MOBILE) */
+/* ==========================================
+   [SEÇÃO 8] RESPONSIVIDADE E MATEMÁTICA DE TELAS MÉDIAS
+   ========================================== */
 @media (max-width: 768px) {
-    /* Ativação das quebras de linha propostas no design */
     .mobile-break { display: block; }
-
+    
+    /* Repassando a lógica de centralização: Menu (55), Respiro(15), Logo(80), Respiro(15) */
     #menu-wrapper { height: 55px; }
-    #logo-wrapper { top: 68px; height: 80px; }
-    #presentation-container { top: 150px; height: calc(100vh - 130px); }
+    #logo-wrapper { top: 70px; height: 80px; } 
+    #presentation-container { top: 165px; height: calc(100vh - 165px); } 
     
     #site-logo { font-size: 1.8rem; }
     .pulse-light { width: 300px; height: 100px; }
-    
-    #hamburger-btn { top: 8px; padding: 10px; } /* Mantém área de clique grande no mobile */
-    #theme-toggle-wrapper { top: 10px; right: 15px; } /* Ajuste chave no mobile */
+    #hamburger-btn { top: 8px; padding: 10px; } 
+    #theme-toggle-wrapper { top: 10px; right: 15px; } 
     
     .slide { width: 90%; padding: 30px 25px; max-height: 85%; margin-top: 0; }
     h1 { font-size: 1.7rem; } h2 { font-size: 1.2rem; margin-bottom: 20px;} 
     p, ul { font-size: 1rem; }
-    
     .services-grid, .hub-grid, .contact-grid, .compact-grid { grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
-    
     .content-split { display: flex; flex-direction: column-reverse; gap: 20px; margin-top: 15px; }
     .content-img { width: 85%; max-height: 280px; margin: 0 auto; display: block; }
-
     .service-card { padding: 15px; }
     .service-card h3 { font-size: 1rem; margin-bottom: 8px;}
-    
     .cta-button, .cta-secondary { display: block; text-align: center; box-sizing: border-box; font-size: 0.85rem;}
-
     #classic-menu-overlay { height: 100vh;}
     #classic-menu-overlay a { font-size: 1.2rem; }
     .form-actions { flex-direction: column; }
@@ -528,44 +335,27 @@ body.light-mode .selected-item-web {
     
     .splash-text-top h1 { font-size: 2rem; }
     .splash-text-bottom p { font-size: 1rem; letter-spacing: 1px; }
-    .tap-text { font-size: 0.7rem; margin-top: 40px; }
+    .tap-text { display: block; font-size: 0.7rem; margin-top: 40px; animation: pulseAlpha 2s infinite; text-transform: uppercase; letter-spacing: 1px; font-weight: 300; color: var(--text-muted); }
 }
 
+/* ==========================================
+   [SEÇÃO 9] RESPONSIVIDADE E MATEMÁTICA DE TELAS PEQUENAS (CELULAR)
+   ========================================== */
 @media (max-width: 480px) {
-    #menu-wrapper { height: 55px; }
-    #logo-wrapper { top: 60px; height: 70px; }
-    #presentation-container { top: 110px; height: calc(100vh - 115px); }
+    /* Mantendo a constante: Menu (55), Respiro(15), Logo(70), Respiro(15) */
+    #menu-wrapper { height: 55px; } 
+    #logo-wrapper { top: 70px; height: 70px; } 
+    #presentation-container { top: 155px; height: calc(100vh - 155px); } 
     
     #site-logo { font-size: 1.8rem; letter-spacing: 1px; }
     .pulse-light { width: 240px; height: 80px; }
-    
     h1 { font-size: 1.5rem; } h2 { font-size: 1.2rem; }
     .slide { padding: 25px 20px; max-height: 85%; margin-top: 0;}
     .slide-footer { padding-bottom: 90px; }
-    
     .form-control { font-size: 0.85rem; padding: 8px 12px; }
     .menu-item { width: 160px; left: -80px; font-size: 0.75rem; }
     #classic-menu-overlay a { font-size: 1.1rem; letter-spacing: 1px; }
-
     .splash-text-top h1 { font-size: 2.5rem; }
     .splash-text-bottom p { font-size: 0.8rem; letter-spacing: 1px; }
-
-.tap-text { 
-    display: block; 
-    font-size: 0.5rem; 
-    margin-top: 40px; 
-    animation: pulseAlpha 2s infinite; 
-    text-transform: uppercase; 
-    letter-spacing: 1px;
-    font-weight: 300;
-    /* A mágica acontece aqui: usamos a variável que muda automaticamente com o tema */
-    color: var(--text-muted); 
-}
-
-/* Substitua a animação anterior por esta para garantir que o 
-   efeito de piscar fique visível em ambos os fundos */
-@keyframes pulseAlpha { 
-    0%, 100% { opacity: 0.4; } 
-    50% { opacity: 1; } 
-}
+    .tap-text { display: block; font-size: 0.6rem; margin-top: 40px; animation: pulseAlpha 2s infinite; text-transform: uppercase; letter-spacing: 1px; font-weight: 300; color: var(--text-muted); }
 }
