@@ -183,7 +183,7 @@ body.light-mode .cta-secondary:hover {
 #site-logo:hover { transform: scale(1.1); }
 .logo-blue { color: var(--logo-blue-txt); text-shadow: 0 0 12px rgba(0, 243, 255, 0.6); transition: 0.5s; }
 .logo-green { color: var(--logo-green-txt); text-shadow: 0 0 12px rgba(0, 255, 204, 0.6); transition: 0.5s; }
-.logo-animado-inline { width: 2.2em; height: 2.2em; flex-shrink: 0; filter: drop-shadow(2px 2px 0px rgb(255, 255, 255)); margin-left: -40px; margin-right: -4px; }
+.logo-animado-inline { width: 2.2em; height: 2.2em; flex-shrink: 0; filter: drop-shadow(1px 1px 0px rgb(255, 255, 255)); margin-left: -40px; margin-right: -4px; }
 
 /* ==========================================
    [SEÇÃO 5] CONTROLES FIXOS (BOTÕES E TOGGLES)
