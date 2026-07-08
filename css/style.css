@@ -230,7 +230,7 @@ body.light-mode .cta-secondary:hover {
 .logo-animado-inline {
     width: 2.2em; height: 2.2em; flex-shrink: 0;
     filter: drop-shadow(0 0 10px rgba(157, 0, 255, 0.5));
-    margin-right: -10px; /* "Engole" o vazio da viewBox e puxa o texto para a esquerda */
+    margin-right: -7px; /* "Engole" o vazio da viewBox e puxa o texto para a esquerda */
 }
 
 /* CHAVE DAY/NIGHT (THEME TOGGLE) */
@@ -551,12 +551,12 @@ body.light-mode .selected-item-web {
 
 .tap-text { 
     display: block; 
-    font-size: 0.85rem; 
+    font-size: 0.5rem; 
     margin-top: 40px; 
     animation: pulseAlpha 2s infinite; 
     text-transform: uppercase; 
     letter-spacing: 1px;
-    font-weight: 600;
+    font-weight: 300;
     /* A mágica acontece aqui: usamos a variável que muda automaticamente com o tema */
     color: var(--text-muted); 
 }
