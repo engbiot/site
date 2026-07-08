@@ -135,9 +135,10 @@ body.light-mode .cta-secondary:hover {
 }
 
 .splash-text-top h1 { 
-    font-size: 2.5rem; color: var(--neon-blue); text-shadow: 0 0 20px rgba(0, 243, 255, 0.6); 
+    font-size: 2.5rem; color: var(--neon-purple); text-shadow: 0 0 20px rgba(157, 0, 255, 0.6); 
     margin: 0; letter-spacing: 2px; line-height: 1.2;
-    display: flex; align-items: center; justify-content: center; gap: 15px;
+    display: flex; align-items: center; justify-content: center; 
+    gap: 0px; /* Reduzido a zero para eliminar o espaço forçado */
 }
 .splash-text-bottom p { font-size: 1rem; color: var(--neon-green); text-transform: uppercase; letter-spacing: 3px; margin: 0; text-shadow: 0 0 10px rgba(0, 255, 204, 0.4);}
 .tap-text { display: block; font-size: 0.85rem; color: rgba(37, 0, 245, 0.6); margin-top: 40px; animation: pulseAlpha 2s infinite; text-transform: uppercase; letter-spacing: 1px;}
@@ -216,15 +217,20 @@ body.light-mode .cta-secondary:hover {
 #site-logo {
     position: relative; z-index: 200; font-size: 2rem; font-weight: 900; 
     text-transform: uppercase; letter-spacing: 2px; cursor: pointer; 
-    white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 12px; transition: transform 0.3s;
+    white-space: nowrap; display: flex; align-items: center; justify-content: center; 
+    gap: 0px; /* Reduzido a zero para eliminar o espaço forçado */
+    transition: transform 0.3s;
+    margin: 0 auto; 
 }
 #site-logo:hover { transform: scale(1.1); }
+
 .logo-blue { color: var(--logo-blue-txt); text-shadow: 0 0 12px rgba(0, 243, 255, 0.6); transition: 0.5s; }
 .logo-green { color: var(--logo-green-txt); text-shadow: 0 0 12px rgba(0, 255, 204, 0.6); transition: 0.5s; }
 
 .logo-animado-inline {
     width: 2.2em; height: 2.2em; flex-shrink: 0;
-    filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.5));
+    filter: drop-shadow(0 0 10px rgba(157, 0, 255, 0.5));
+    margin-right: -15px; /* "Engole" o vazio da viewBox e puxa o texto para a esquerda */
 }
 
 /* CHAVE DAY/NIGHT (THEME TOGGLE) */
@@ -529,10 +535,10 @@ body.light-mode .selected-item-web {
     #logo-wrapper { top: 60px; height: 70px; }
     #presentation-container { top: 110px; height: calc(100vh - 115px); }
     
-    #site-logo { font-size: 1.5rem; letter-spacing: 1px; }
+    #site-logo { font-size: 1.8rem; letter-spacing: 1px; }
     .pulse-light { width: 240px; height: 80px; }
     
-    h1 { font-size: 1.7em; } h2 { font-size: 1.2rem; }
+    h1 { font-size: 1.5em; } h2 { font-size: 1.2rem; }
     .slide { padding: 25px 20px; max-height: 85%; margin-top: 0;}
     .slide-footer { padding-bottom: 90px; }
     
@@ -540,8 +546,8 @@ body.light-mode .selected-item-web {
     .menu-item { width: 160px; left: -80px; font-size: 0.75rem; }
     #classic-menu-overlay a { font-size: 1.1rem; letter-spacing: 1px; }
 
-    .splash-text-top h1 { font-size: 1.5rem; }
-    .splash-text-bottom p { font-size: 0.7rem; letter-spacing: 1px; }
+    .splash-text-top h1 { font-size: 1.8rem; }
+    .splash-text-bottom p { font-size: 0.5rem; letter-spacing: 1px; }
 
     .tap-text { 
     display: block;
