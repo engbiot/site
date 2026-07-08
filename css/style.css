@@ -542,5 +542,22 @@ body.light-mode .selected-item-web {
 
     .splash-text-top h1 { font-size: 1.5rem; }
     .splash-text-bottom p { font-size: 0.7rem; letter-spacing: 1px; }
-    .tap-text { font-size: 0.5rem; margin-top: 40px; }
+    .tap-text { 
+    display: block; 
+    font-size: 0.85rem; 
+    margin-top: 40px; 
+    animation: pulseAlpha 2s infinite; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    font-weight: 600;
+    /* A mágica acontece aqui: usamos a variável que muda automaticamente com o tema */
+    color: var(--text-muted); 
+}
+
+/* Substitua a animação anterior por esta para garantir que o 
+   efeito de piscar fique visível em ambos os fundos */
+@keyframes pulseAlpha { 
+    0%, 100% { opacity: 0.4; } 
+    50% { opacity: 1; } 
+}
 }
