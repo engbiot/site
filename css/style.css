@@ -312,14 +312,14 @@ body.light-mode .selected-item-web { background: rgba(0, 102, 255, 0.05); border
     /* Repassando a lógica de centralização: Menu (55), Respiro(15), Logo(80), Respiro(15) */
     #menu-wrapper { height: 55px; }
     #logo-wrapper { top: 70px; height: 80px; } 
-    #presentation-container { top: 165px; height: calc(100vh - 165px); } 
+    #presentation-container { top: 165px; height: calc(100vh - 165px); align-items: flex-start; } 
     
     #site-logo { font-size: 1.8rem; }
     .pulse-light { width: 300px; height: 100px; }
     #hamburger-btn { top: 8px; padding: 10px; } 
-    #theme-toggle-wrapper { top: 10px; right: 15px; } 
+    #theme-toggle-wrapper { top: 14px; right: 15px; } 
     
-    .slide { width: 90%; padding: 30px 25px; max-height: 85%; margin-top: 0; }
+    .slide { width: 90%; padding: 30px 25px; max-height: 95%; margin-top: 0; }
     h1 { font-size: 1.7rem; } h2 { font-size: 1.2rem; margin-bottom: 20px;} 
     p, ul { font-size: 1rem; }
     .services-grid, .hub-grid, .contact-grid, .compact-grid { grid-template-columns: 1fr; gap: 15px; margin-top: 15px; }
@@ -345,12 +345,12 @@ body.light-mode .selected-item-web { background: rgba(0, 102, 255, 0.05); border
     /* Mantendo a constante: Menu (55), Respiro(15), Logo(70), Respiro(15) */
     #menu-wrapper { height: 55px; } 
     #logo-wrapper { top: 70px; height: 70px; } 
-    #presentation-container { top: 155px; height: calc(100vh - 155px); } 
+    #presentation-container { top: 155px; height: calc(100vh - 155px); align-items: flex-start; } 
     
     #site-logo { font-size: 1.8rem; letter-spacing: 1px; }
     .pulse-light { width: 240px; height: 80px; }
     h1 { font-size: 1.5rem; } h2 { font-size: 1.2rem; }
-    .slide { padding: 25px 20px; max-height: 85%; margin-top: 0;}
+    .slide { padding: 25px 20px; max-height: 95%; margin-top: 0;}
     .slide-footer { padding-bottom: 90px; }
     .form-control { font-size: 0.85rem; padding: 8px 12px; }
     .menu-item { width: 160px; left: -80px; font-size: 0.75rem; }

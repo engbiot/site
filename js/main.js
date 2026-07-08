@@ -48,14 +48,14 @@ document.addEventListener('touchmove', (e) => {
     const distance = currentY - pStartY;
 
     if (distance > 0) {
+        // Atrasar um pouco o movimento (fricção)
         let pullDistance = Math.min(distance * 0.5, MAX_PULL);
+        
         ptrOverlay.style.opacity = '1';
         ptrOverlay.style.pointerEvents = 'all';
         
-        // Limita a descida do fundo de vidro a exatos 160px
-        let glassDescent = Math.min(pullDistance, 160);
-        ptrPanelBg.style.transform = `translateY(${glassDescent}px)`;
-        
+        // Mover o painel e o logo
+        ptrPanelBg.style.transform = `translateY(${100 + (pullDistance / window.innerHeight * 100)}vh)`;
         ptrContent.style.transform = `translateY(${-50 + pullDistance}px)`;
         ptrContent.style.opacity = Math.min(pullDistance / THRESHOLD, 1);
     }
