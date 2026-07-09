@@ -152,7 +152,7 @@ body.light-mode .cta-secondary:hover {
 
 /* Slides posicionados 15px abaixo da altura total do logo (75 + 80 = 155; 155 + 15 = 170px) */
 #presentation-container {
-    position: fixed; top: 170px; left: 0; width: 100vw; height: calc(100vh - 170px); 
+    position: fixed; top: 160px; left: 0; width: 100vw; height: calc(100vh - 170px); 
     perspective: 1500px; display: flex; align-items: center; justify-content: center; 
     z-index: 10; pointer-events: none; 
 }
@@ -245,14 +245,14 @@ h2 { font-size: 1.6rem; color: var(--neon-blue); }
 p { line-height: 1.6; font-size: 1.1rem; color: var(--text-muted); }
 ul { line-height: 1.8; color: var(--text-muted); }
 
-.cta-button { display: inline-block; margin-top: 10px; padding: 12px 25px; background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue); border-radius: 8px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.4s; text-decoration: none; text-align: center; }
+.cta-button { display: inline-block; margin-top: 10px; padding: 12px 25px; background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue); border-radius: 8px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.4s; text-decoration: none; text-align: center; font-size: 0.8rem; }
 .cta-button:hover { background: var(--neon-blue) !important; color: #010a60 !important; box-shadow: 0 0 20px var(--neon-blue); }
-.cta-secondary { display: inline-block; margin-top: 20px; padding: 12px 25px; background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue); border-radius: 8px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.4s; text-decoration: none; text-align: center; }
+.cta-secondary { display: inline-block; margin-top: 20px; padding: 12px 25px; background: transparent; color: var(--neon-blue); border: 2px solid var(--neon-blue); border-radius: 8px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.4s; text-decoration: none; text-align: center; font-size: 0.8rem; }
 .cta-secondary:hover { background: var(--neon-blue) !important; color: #010a60 !important; box-shadow: 0 0 20px var(--neon-blue); }
 .btn-voltar { border: 1px solid rgba(255,255,255,0.4); color: var(--text-color); margin-bottom: 20px; padding: 8px 20px; font-size: 0.8rem; display: inline-block; cursor: pointer; border-radius: 4px; transition: 0.3s;}
 
 .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-.service-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background-color 0.5s; cursor: pointer; position: relative; }
+.service-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s, background-color 0.5s; cursor: pointer; position: relative; font-size: 0.8rem;}
 .service-card:hover { transform: translateY(-5px); border-color: var(--neon-green); box-shadow: 0 5px 20px rgba(0, 255, 204, 0.1); }
 .content-split { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; margin-top: 20px; }
 .content-img { width: 100%; max-height: 350px; object-fit: cover; border: 2px solid var(--border-color); box-shadow: 0 0 25px rgba(0, 243, 255, 0.1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; animation: morphBlob 8s ease-in-out infinite alternate; }
@@ -269,7 +269,7 @@ ul { line-height: 1.8; color: var(--text-muted); }
     padding: 12px; 
     border-radius: 8px; 
     text-align: center; 
-    font-size: 0.8rem; 
+    font-size: 0.7rem; 
     color: var(--neon-green); 
     cursor: pointer; 
     transition: all 0.3s ease; 
@@ -330,7 +330,7 @@ body.light-mode .selected-item-web { background: rgba(0, 102, 255, 0.05); border
     /* Repassando a lógica de centralização: Menu (55), Respiro(15), Logo(80), Respiro(15) */
     #menu-wrapper { height: 55px; }
     #logo-wrapper { top: 70px; height: 80px; } 
-    #presentation-container { top: 165px; height: calc(100vh - 165px); align-items: flex-start; } 
+    #presentation-container { top: 160px; height: calc(100vh - 165px); align-items: flex-start; } 
     
     #site-logo { font-size: 1.8rem; }
     .pulse-light { width: 300px; height: 100px; }
@@ -345,11 +345,11 @@ body.light-mode .selected-item-web { background: rgba(0, 102, 255, 0.05); border
     .content-img { width: 85%; max-height: 280px; margin: 0 auto; display: block; }
     .service-card { padding: 15px; }
     .service-card h3 { font-size: 1rem; margin-bottom: 8px;}
-    .cta-button, .cta-secondary { display: block; text-align: center; box-sizing: border-box; font-size: 0.85rem;}
+    .cta-button, .cta-secondary { display: block; text-align: center; box-sizing: border-box; font-size: 0.7rem; }
     #classic-menu-overlay { height: 100vh;}
     #classic-menu-overlay a { font-size: 1.2rem; }
     .form-actions { flex-direction: column; }
-    #fixed-contact-btn { bottom: 20px; right: 20px; padding: 10px 15px; font-size: 0.8rem; border-width: 1px;}
+    #fixed-contact-btn { bottom: 20px; right: 20px; padding: 10px 15px; font-size: 0.7rem; border-width: 1px;}
     
     .splash-text-top h1 { font-size: 2rem; }
     .splash-text-bottom p { font-size: 1rem; letter-spacing: 1px; }
