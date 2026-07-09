@@ -55,7 +55,7 @@ body.light-mode .menu-item:hover, body.light-mode .menu-item.active { color: var
 body.light-mode .slide { border: 1px solid #0169fa; box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
 body.light-mode h1, body.light-mode h2, body.light-mode h3 { text-shadow: none; }
 body.light-mode p, body.light-mode ul { color: var(--text-muted); }
-body.light-mode .service-card { border-color: #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+body.light-mode .service-card { border-color: #006eff; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 body.light-mode .service-card:hover { border-color: var(--neon-blue); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 body.light-mode .pulse-light { background: radial-gradient(ellipse, rgba(0, 102, 255, 0.1) 0%, rgba(0, 179, 0, 0.05) 40%, transparent 70%); }
 body.light-mode .logo-blue { text-shadow: none; }
@@ -260,11 +260,29 @@ ul { line-height: 1.8; color: var(--text-muted); }
 
 .compact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 30px; }
 .compact-card { background: rgba(0,0,0,0.03); padding: 20px; border-radius: 8px; border-left: 3px solid var(--neon-blue); display: flex; flex-direction: column;}
-.main-catalog-btn { display: block; border: 2px solid var(--neon-green); background: rgba(0, 255, 204, 0.05); padding: 12px; border-radius: 8px; text-align: center; font-size: 0.7rem; color: var(--neon-green); cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+.main-catalog-btn {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border: 2px solid var(--neon-green); 
+    background: rgba(0, 255, 204, 0.05); 
+    padding: 12px; 
+    border-radius: 8px; 
+    text-align: center; 
+    font-size: 0.8rem; 
+    color: var(--neon-green); 
+    cursor: pointer; 
+    transition: all 0.3s ease; 
+    margin-bottom: 20px; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); 
+}
 .main-catalog-btn:hover { background: var(--neon-green); color: #fff; box-shadow: 0 0 20px var(--neon-green); text-shadow: none; }
 .compact-card a { display: block; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; cursor: pointer; transition: 0.3s; padding-left: 10px;}
 .compact-card a:hover { color: var(--neon-blue); transform: translateX(5px); }
-.chat-quick-btn { flex: 0 0 45px !important; height: 45px; margin: 0 !important; padding: 0 !important; display: flex !important; align-items: center; justify-content: center; font-size: 1.2rem; border-radius: 8px; }
+.chat-quick-btn { flex: 0 0 45px !important; height: 45px; margin: 0 !important; padding: 0 !important; display: flex !important; align-items: center; justify-content: center; font-size: 1.2rem; border-radius: 5px; }
 
 /* ==========================================
    [SEÇÃO 7] ELEMENTOS DO FORMULÁRIO (GERAL E DROPDOWN)
@@ -306,7 +324,7 @@ body.light-mode .selected-item-web { background: rgba(0, 102, 255, 0.05); border
 /* ==========================================
    [SEÇÃO 8] RESPONSIVIDADE E MATEMÁTICA DE TELAS MÉDIAS
    ========================================== */
-@media (max-width: 888px) {
+@media (max-width: 930px) {
     .mobile-break { display: block; }
     
     /* Repassando a lógica de centralização: Menu (55), Respiro(15), Logo(80), Respiro(15) */
