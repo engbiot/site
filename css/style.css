@@ -324,7 +324,7 @@ body.light-mode .selected-item-web { background: rgba(0, 102, 255, 0.05); border
 /* ==========================================
    [SEÇÃO 8] RESPONSIVIDADE E MATEMÁTICA DE TELAS MÉDIAS
    ========================================== */
-@media (max-width: 930px) {
+@media (max-width: 1005px) {
     .mobile-break { display: block; }
     
     /* Repassando a lógica de centralização: Menu (55), Respiro(15), Logo(80), Respiro(15) */
