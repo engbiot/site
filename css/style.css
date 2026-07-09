@@ -2,7 +2,7 @@
    [SEÇÃO 1] RESET E VARIÁVEIS MODERNAS (DARK MODE)
    Cores baseadas em Cyberpunk e Dark UI
    ========================================== */
-:root {
+:root { 
     --neon-blue: #00f3ff;
     --neon-green: #00ffcc;
     --dark-bg: #03050a;
