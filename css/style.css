@@ -260,7 +260,7 @@ ul { line-height: 1.8; color: var(--text-muted); }
 
 .compact-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 30px; }
 .compact-card { background: rgba(0,0,0,0.03); padding: 20px; border-radius: 8px; border-left: 3px solid var(--neon-blue); display: flex; flex-direction: column;}
-.main-catalog-btn { display: block; border: 2px solid var(--neon-green); background: rgba(0, 255, 204, 0.05); padding: 12px; border-radius: 8px; text-align: center; font-size: 1.05rem; color: var(--neon-green); cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
+.main-catalog-btn { display: block; border: 2px solid var(--neon-green); background: rgba(0, 255, 204, 0.05); padding: 12px; border-radius: 8px; text-align: center; font-size: 0.7rem; color: var(--neon-green); cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); }
 .main-catalog-btn:hover { background: var(--neon-green); color: #fff; box-shadow: 0 0 20px var(--neon-green); text-shadow: none; }
 .compact-card a { display: block; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; cursor: pointer; transition: 0.3s; padding-left: 10px;}
 .compact-card a:hover { color: var(--neon-blue); transform: translateX(5px); }
@@ -306,7 +306,7 @@ body.light-mode .selected-item-web { background: rgba(0, 102, 255, 0.05); border
 /* ==========================================
    [SEÇÃO 8] RESPONSIVIDADE E MATEMÁTICA DE TELAS MÉDIAS
    ========================================== */
-@media (max-width: 768px) {
+@media (max-width: 888px) {
     .mobile-break { display: block; }
     
     /* Repassando a lógica de centralização: Menu (55), Respiro(15), Logo(80), Respiro(15) */
