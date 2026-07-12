@@ -91,7 +91,8 @@ function closeSplash() {
 }
 
 // ==========================================
-// [SEÇÃO 4] NAVEGAÇÃO HISTORY API E INJEÇÃO DE RODAPÉS (ATUALIZADO PARA PATHS NOMEADOS)
+// [SEÇÃO 4] NAVEGAÇÃO HISTORY API E INJEÇÃO DE RODAPÉS
+// Permite o uso do botão de voltar do celular/navegador sem quebrar o site e insere footer dinâmico.
 // ==========================================
 window.addEventListener('popstate', function(e) {
     if (e.state !== null && typeof e.state.slide !== 'undefined') {
@@ -103,11 +104,22 @@ window.addEventListener('popstate', function(e) {
 
 document.addEventListener("DOMContentLoaded", () => {
     let startSlide = 'inicio';
+    let path = '';
     
-    // Captura a rota atual com base no nome do caminho
-    let path = window.location.pathname.replace(/^\/|\/$/g, ''); 
+    // --- TRATAMENTO PARA GITHUB PAGES (Vindo do 404.html) ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectedPath = urlParams.get('p');
     
-    // Suporte aos hashes antigos do site caso o usuário acesse por links velhos salvos (ex: #s3 -> contato)
+    if (redirectedPath) {
+        // Se o usuário veio pelo redirecionamento, limpa a URL na barra (remove o ?p=)
+        window.history.replaceState(null, null, redirectedPath);
+        path = redirectedPath.replace(/^\/|\/$/g, '');
+    } else {
+        // Acesso normal na raiz ou navegação interna
+        path = window.location.pathname.replace(/^\/|\/$/g, ''); 
+    }
+
+    // Suporte aos hashes antigos do site caso o usuário acesse por links velhos salvos
     const hash = window.location.hash;
     if (hash && hash.startsWith('#s')) {
         const slideIndex = parseInt(hash.replace('#s', ''), 10);
