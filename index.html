@@ -19,16 +19,9 @@
     <!-- ========================================== -->
     <!-- [NOVO] META TAGS DE COMPARTILHAMENTO (OPEN GRAPH) -->
     <!-- ========================================== -->
-    <!-- Define o título que aparece em negrito no chat -->
     <meta property="og:title" content="TekPrax | Engenharia Biotecnológica e Inovação">
-    
-    <!-- Define a frase descritiva que aparece logo abaixo do título -->
     <meta property="og:description" content="Otimização de processos, adequação regulatória, perícia e soluções digitais exclusivas para escalar a sua indústria com segurança.">
-    
-    <!-- URL absoluta da imagem de capa do compartilhamento -->
     <meta property="og:image" content="https://engbiot.github.io/site/img/imagem-de-compartilhamento.jpg">
-    
-    <!-- O link principal do seu site -->
     <meta property="og:url" content="https://engbiot.github.io/site/">
     <meta property="og:type" content="website">
 
@@ -131,12 +124,12 @@
         </div>
     </div>
 
-    <a id="fixed-contact-btn" onclick="navigateTo(3)">💬 Solicitar Orçamento</a>
+    <a id="fixed-contact-btn" onclick="navigateTo('contato')">💬 Solicitar Orçamento</a>
 
     <!-- [SEÇÃO: LOGOTIPO CENTRALIZADO] Estrutura do Logo animado -->
     <div id="logo-wrapper">
         <div class="pulse-light"></div>
-        <div id="site-logo" onclick="navigateTo(0)">
+        <div id="site-logo" onclick="navigateTo('inicio')">
             <svg viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg" class="logo-animado-inline">
                 <defs>
                     <linearGradient id="blueNeonHeader" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -163,13 +156,13 @@
 
     <!-- [SEÇÃO: MENUS] Overlay de celular e Menu 3D Superior -->
     <div id="classic-menu-overlay">
-        <a onclick="navigateFromClassic(0)">Início</a>
-        <a onclick="navigateFromClassic(1)">Sobre o Engenheiro</a>
-        <a onclick="navigateFromClassic(2)">Catálogo de Serviços</a>
-        <a onclick="navigateFromClassic(4)">Adequação Regulatória</a>
-        <a onclick="navigateFromClassic(5)">Otimização de Bioprocessos</a>
-        <a onclick="navigateFromClassic(6)">Soluções Digitais e Dados</a>
-        <a onclick="navigateFromClassic(3)">Contato</a>
+        <a onclick="navigateFromClassic('inicio')">Início</a>
+        <a onclick="navigateFromClassic('sobre')">Sobre o Engenheiro</a>
+        <a onclick="navigateFromClassic('servicos')">Catálogo de Serviços</a>
+        <a onclick="navigateFromClassic('adequacao-regulatoria')">Adequação Regulatória</a>
+        <a onclick="navigateFromClassic('otimizacao-de-bioprocessos')">Otimização de Bioprocessos</a>
+        <a onclick="navigateFromClassic('solucoes-digitais')">Soluções Digitais e Dados</a>
+        <a onclick="navigateFromClassic('contato')">Contato</a>
     </div>
 
     <div id="menu-wrapper">
@@ -180,19 +173,19 @@
     <div id="presentation-container">
 
         <!-- Slide 0: Início -->
-        <div class="slide active" id="slide-0">
+        <div class="slide active" id="inicio">
             <div class="slide-inner-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 55vh; padding-top: 10px;">
                 <h1 id="title-main">Bem-vindo à <span class="nowrap">TekPrax</span></h1>
                 <h2 id="subtitle-main" style="margin-bottom: 30px;">Engenharia Biotecnológica para <span class="nowrap">Indústrias e Empresas</span></h2>
                 <p style="margin-bottom: 30px; max-width: 750px;">
                     A TekPrax oferece consultoria em Engenharia Biotecnológica para empresas que buscam conformidade regulatória, otimização de processos, controle de qualidade e desenvolvimento de soluções técnicas. Atuamos com base em critérios científicos, normas técnicas e práticas de engenharia para promover maior eficiência, segurança e confiabilidade operacional.
                 </p>
-                <a onclick="navigateTo(2)" class="cta-button" style="padding: 15px 20px; margin-top: 25px; box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);">Conheça nossos serviços</a>
+                <a onclick="navigateTo('servicos')" class="cta-button" style="padding: 15px 20px; margin-top: 25px; box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);">Conheça nossos serviços</a>
             </div>
         </div>
 
         <!-- Slide 1: Sobre -->
-        <div class="slide" id="slide-1">
+        <div class="slide" id="sobre">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Sobre o Engenheiro</h1>
@@ -201,7 +194,7 @@
                     <div>
                         <p>Minha atuação integra conhecimentos em Engenharia Biotecnológica, pesquisa científica e aplicação industrial. Desenvolvo soluções para otimização de processos, análise de dados, modelagem matemática, valorização de resíduos, controle microbiológico e adequação regulatória, sempre considerando as necessidades técnicas de cada projeto.</p>
                         <p>O objetivo é oferecer suporte especializado para aumentar a eficiência dos processos, atender às exigências legais e contribuir para a tomada de decisões fundamentadas em dados.</p>
-                        <a onclick="navigateTo(3)" class="cta-button">Contato Direto</a>
+                        <a onclick="navigateTo('contato')" class="cta-button">Contato Direto</a>
                     </div>
                     <div>
                         <img src="img/1.png" class="content-img" alt="Foto profissional do Engenheiro de Biotecnologia">
@@ -211,7 +204,7 @@
         </div>
 
         <!-- Slide 2: Serviços (Catálogo) -->
-        <div class="slide" id="slide-2">
+        <div class="slide" id="servicos">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Catálogo de Serviços</h1>
@@ -221,40 +214,40 @@
                 <div class="compact-grid">
                     <div class="compact-card">
                         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px;" onclick="navigateTo(4)">Adequação Regulatória</div>
-                            <a class="cta-button chat-quick-btn" onclick="navigateTo(3)" title="Contato Rápido">💬</a>
+                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px;" onclick="navigateTo('adequacao-regulatoria')">Adequação Regulatória</div>
+                            <a class="cta-button chat-quick-btn" onclick="navigateTo('contato')" title="Contato Rápido">💬</a>
                         </div>
-                        <a onclick="navigateTo(7)">↳ Responsabilidade Técnica (ART)</a>
-                        <a onclick="navigateTo(8)">↳ Plano de Gerenciamento <span class="nowrap">de Resíduos Sólidos (PGRS)</span></a>
-                        <a onclick="navigateTo(9)">↳ Boas Práticas de Fabricação (BPF)</a>
-                        <a onclick="navigateTo(10)">↳ Perícia e Assistência Técnica</a>
+                        <a onclick="navigateTo('responsabilidade-tecnica')">↳ Responsabilidade Técnica (ART)</a>
+                        <a onclick="navigateTo('pgrs')">↳ Plano de Gerenciamento <span class="nowrap">de Resíduos Sólidos (PGRS)</span></a>
+                        <a onclick="navigateTo('bpf')">↳ Boas Práticas de Fabricação (BPF)</a>
+                        <a onclick="navigateTo('pericia')">↳ Perícia e Assistência Técnica</a>
                     </div>
                     <div class="compact-card">
                         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px;" onclick="navigateTo(5)">Otimização de Bioprocessos</div>
-                            <a class="cta-button chat-quick-btn" onclick="navigateTo(3)" title="Contato Rápido">💬</a>
+                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px;" onclick="navigateTo('otimizacao-de-bioprocessos')">Otimização de Bioprocessos</div>
+                            <a class="cta-button chat-quick-btn" onclick="navigateTo('contato')" title="Contato Rápido">💬</a>
                         </div>
-                        <a onclick="navigateTo(11)">↳ Previsibilidade de Produção</a>
-                        <a onclick="navigateTo(12)">↳ Bebidas Fermentadas</a>
-                        <a onclick="navigateTo(13)">↳ Panificação e Fermentação</a>
-                        <a onclick="navigateTo(14)">↳ Maturação de Laticínios</a>
-                        <a onclick="navigateTo(15)">↳ Controle Microbiológico</a>
-                        <a onclick="navigateTo(16)">↳ Valorização de Resíduos</a>
+                        <a onclick="navigateTo('previsibilidade-de-producao')">↳ Previsibilidade de Produção</a>
+                        <a onclick="navigateTo('bebidas-fermentadas')">↳ Bebidas Fermentadas</a>
+                        <a onclick="navigateTo('panificacao')">↳ Panificação e Fermentação</a>
+                        <a onclick="navigateTo('maturacao-de-laticinios')">↳ Maturação de Laticínios</a>
+                        <a onclick="navigateTo('controle-microbiologico')">↳ Controle Microbiológico</a>
+                        <a onclick="navigateTo('valorizacao-de-residuos')">↳ Valorização de Resíduos</a>
                     </div>
                     <div class="compact-card">
                         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px;" onclick="navigateTo(6)">Web e Dados</div>
-                            <a class="cta-button chat-quick-btn" onclick="navigateTo(3)" title="Contato Rápido Web">💬</a>
+                            <div class="main-catalog-btn" style="flex: 1; margin: 0; padding: 10px 5px;" onclick="navigateTo('solucoes-digitais')">Web e Dados</div>
+                            <a class="cta-button chat-quick-btn" onclick="navigateTo('contato')" title="Contato Rápido Web">💬</a>
                         </div>
-                        <a onclick="navigateTo(18)">↳ Desenvolvimento de Sites e Sistemas</a>
-                        <a onclick="navigateTo(17)">↳ Modelagem Matemática e Estatística</a>
+                        <a onclick="navigateTo('desenvolvimento-web')">↳ Desenvolvimento de Sites e Sistemas</a>
+                        <a onclick="navigateTo('modelagem-matematica')">↳ Modelagem Matemática e Estatística</a>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Slide 3: Contato Profissional -->
-        <div class="slide" id="slide-3">
+        <div class="slide" id="contato">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Contato</h1>
@@ -323,91 +316,91 @@
         </div>
 
         <!-- Slide 4: Regulatória -->
-        <div class="slide" id="slide-4">
+        <div class="slide" id="adequacao-regulatoria">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Adequação Regulatória</h1>
                 <h2>Suporte técnico para <span class="nowrap">conformidade legal</span></h2>
                 <p>Auxiliamos empresas na implementação de documentos, procedimentos e requisitos técnicos necessários para atender à legislação vigente e às normas aplicáveis ao setor.</p>
                 <div class="services-grid">
-                    <div class="service-card" onclick="navigateTo(7)">
+                    <div class="service-card" onclick="navigateTo('responsabilidade-tecnica')">
                         <h3 style="text-align: center; margin: auto;">Responsabilidade Técnica (ART)</h3>
                     </div>
-                    <div class="service-card" onclick="navigateTo(8)">
+                    <div class="service-card" onclick="navigateTo('pgrs')">
                         <h3 style="text-align: center; margin: auto;">Plano de Gerenciamento <span class="nowrap">de Resíduos Sólido (PGRS)</span> </h3>
                     </div>
-                    <div class="service-card" onclick="navigateTo(9)">
+                    <div class="service-card" onclick="navigateTo('bpf')">
                         <h3 style="text-align: center; margin: auto;">Boas Práticas de Fabricação (BPF)</h3>
                     </div>
-                    <div class="service-card" onclick="navigateTo(10)">
+                    <div class="service-card" onclick="navigateTo('pericia')">
                         <h3 style="text-align: center; margin: auto;">Perícia e Assistência Técnica</h3>
                     </div>
                 </div>
                 <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                    <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
-                    <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                    <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
+                    <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                 </div>
             </div>
         </div>
 
         <!-- Slide 5: Bioprocessos -->
-        <div class="slide" id="slide-5">
+        <div class="slide" id="otimizacao-de-bioprocessos">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Otimização de <span class="nowrap">Bioprocessos</span></h1>
                 <h2>Melhoria do <span class="nowrap">desempenho produtivo</span></h2>
                 <p>Desenvolvemos soluções para aumentar a estabilidade dos processos, reduzir perdas, padronizar a produção e melhorar o controle das etapas industriais.</p>
                 <div class="services-grid">
-                    <div class="service-card" onclick="navigateTo(11)">
+                    <div class="service-card" onclick="navigateTo('previsibilidade-de-producao')">
                         <h3 style="text-align: center; margin: auto;">Previsibilidade de produção</h3>
                     </div>
-                    <div class="service-card" onclick="navigateTo(12)">
+                    <div class="service-card" onclick="navigateTo('bebidas-fermentadas')">
                         <h3 style="text-align: center; margin: auto;">Bebidas fermentadas</h3>
                     </div>
-                    <div class="service-card" onclick="navigateTo(13)">
+                    <div class="service-card" onclick="navigateTo('panificacao')">
                         <h3 style="text-align: center; margin: auto;">Panificação</h3>
                     </div>
-                    <div class="service-card" onclick="navigateTo(14)">
+                    <div class="service-card" onclick="navigateTo('maturacao-de-laticinios')">
                         <h3 style="text-align: center; margin: auto;">Maturação de laticínios</h3>
                     </div>
-                    <div class="service-card" onclick="navigateTo(15)">
+                    <div class="service-card" onclick="navigateTo('controle-microbiologico')">
                         <h3 style="text-align: center; margin: auto;">Controle microbiológico</h3>
                     </div>
-                    <div class="service-card" onclick="navigateTo(16)">
+                    <div class="service-card" onclick="navigateTo('valorizacao-de-residuos')">
                         <h3 style="text-align: center; margin: auto;">Valorização de resíduos</h3>
                     </div>
                 </div>
                 <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                    <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
-                    <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                    <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
+                    <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                 </div>
             </div>
         </div>
 
         <!-- Slide 6: Soluções Digitais -->
-        <div class="slide" id="slide-6">
+        <div class="slide" id="solucoes-digitais">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Soluções Digitais <span class="nowrap">e Dados</span></h1>
                 <h2>Tecnologia aplicada à <span class="nowrap">engenharia</span></h2>
                 <p>Utilizamos ferramentas computacionais para análise de dados, modelagem matemática e desenvolvimento de aplicações voltadas ao ambiente industrial e empresarial.</p>
                 <div class="services-grid">
-                    <div class="service-card" onclick="navigateTo(17)">
+                    <div class="service-card" onclick="navigateTo('modelagem-matematica')">
                         <h3 style="text-align: center; margin: auto;">Modelagem matemática e estatística</h3>
                     </div>
-                    <div class="service-card" onclick="navigateTo(18)">
+                    <div class="service-card" onclick="navigateTo('desenvolvimento-web')">
                         <h3 style="text-align: center; margin: auto;">Desenvolvimento de sites e sistemas</h3>
                     </div>
                 </div>
                 <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                    <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
-                    <a onclick="navigateTo(19)" class="cta-button" style="margin-top: 0; border-color: var(--neon-blue); color: var(--neon-blue);">Contato </a>
+                    <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Catálogo Geral</a>
+                    <a onclick="navigateTo('orcamento-web')" class="cta-button" style="margin-top: 0; border-color: var(--neon-blue); color: var(--neon-blue);">Contato </a>
                 </div>
             </div>
         </div>
 
         <!-- Slides 7 a 18 (Detalhes) -->
-        <div class="slide" id="slide-7">
+        <div class="slide" id="responsabilidade-tecnica">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Responsabilidade <span class="nowrap">Técnica (ART)</span></h1>
@@ -422,8 +415,8 @@
                             <li>Suporte técnico para atividades de engenharia.</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Solicitar Proposta</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Solicitar Proposta</a>
                         </div>
                     </div>
                     <div><img src="img/2.png" class="content-img" alt="Documentos técnicos e conformidade"></div>
@@ -431,7 +424,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-8">
+        <div class="slide" id="pgrs">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Plano de Gerenciamento <span class="nowrap">de Resíduos Sólidos (PGRS)</span></h1>
@@ -446,8 +439,8 @@
                             <li>Atendimento às exigências legais.</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
                     <div><img src="img/3.png" class="content-img" alt="Sustentabilidade e gestão ambiental"></div>
@@ -455,7 +448,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-9">
+        <div class="slide" id="bpf">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Boas Práticas de <span class="nowrap">Fabricação (BPF)</span></h1>
@@ -470,8 +463,8 @@
                             <li>Sistemas de rastreabilidade.</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
                     <div><img src="img/4.png" class="content-img" alt="Pranchetas, inspeção laboratorial"></div>
@@ -479,7 +472,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-10">
+        <div class="slide" id="pericia">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Perícia e <span class="nowrap">Assistência Técnica</span></h1>
@@ -494,8 +487,8 @@
                             <li>Análise de documentos e laudos.</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
                     <div><img src="img/11.png" class="content-img" alt="Balança pericial e análise tecnológica"></div>
@@ -503,7 +496,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-11">
+        <div class="slide" id="previsibilidade-de-producao">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Previsibilidade <span class="nowrap">de Produção</span></h1>
@@ -513,8 +506,8 @@
                         <p>Aplicamos ferramentas de engenharia para compreender o comportamento dos processos produtivos, reduzir variações e apoiar a padronização das operações.</p>
                         <p>As análises incluem avaliação de parâmetros físico-químicos, acompanhamento de processos e interpretação de dados para subsidiar decisões técnicas.</p>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
                     <div><img src="img/5.png" class="content-img" alt="Gráficos de dados industriais"></div>
@@ -522,7 +515,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-12">
+        <div class="slide" id="bebidas-fermentadas">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Bebidas <span class="nowrap">Fermentadas</span></h1>
@@ -537,8 +530,8 @@
                             <li>Padronização do processo produtivo.</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
                     <div><img src="img/6.png" class="content-img" alt="Biorreatores e processos fermentativos"></div>
@@ -546,7 +539,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-13">
+        <div class="slide" id="panificacao">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Panificação e <span class="nowrap">Fermentação</span></h1>
@@ -561,8 +554,8 @@
                             <li>Adequação das condições de fermentação.</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
                     <div><img src="img/7.png" class="content-img" alt="Fornos industriais ou leveduras de panificação"></div>
@@ -570,7 +563,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-14">
+        <div class="slide" id="maturacao-de-laticinios">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Maturação de <span class="nowrap">Laticínios</span></h1>
@@ -585,8 +578,8 @@
                             <li>Análise de parâmetros de qualidade.</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
                     <div><img src="img/8.png" class="content-img" alt="Câmaras de maturação de queijos iluminadas"></div>
@@ -594,7 +587,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-15">
+        <div class="slide" id="controle-microbiologico">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Controle <span class="nowrap">Microbiológico</span></h1>
@@ -609,8 +602,8 @@
                             <li>Apoio ao aumento da vida útil dos produtos.</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
                     <div><img src="img/9.png" class="content-img" alt="Análises laboratoriais sob luz neon"></div>
@@ -618,7 +611,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-16">
+        <div class="slide" id="valorizacao-de-residuos">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Valorização de <span class="nowrap">Resíduos</span></h1>
@@ -633,8 +626,8 @@
                             <li>Estudos de viabilidade técnica.</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
                     <div><img src="img/10.png" class="content-img" alt="Estruturas nanotecnológicas sustentáveis"></div>
@@ -642,7 +635,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-17">
+        <div class="slide" id="modelagem-matematica">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Modelagem Matemática <span class="nowrap">e Dados</span></h1>
@@ -657,8 +650,8 @@
                             <li>Desenvolvimento de rotinas computacionais.</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
-                            <a onclick="navigateTo(3)" class="cta-button" style="margin-top: 0;">Contato</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="margin-top: 0;">Ver Catálogo</a>
+                            <a onclick="navigateTo('contato')" class="cta-button" style="margin-top: 0;">Contato</a>
                         </div>
                     </div>
                     <div><img src="img/12.png" class="content-img" alt="Matemática e linguagens de programação"></div>
@@ -666,7 +659,7 @@
             </div>
         </div>
 
-        <div class="slide" id="slide-18">
+        <div class="slide" id="desenvolvimento-web">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1>Programação e <span class="nowrap">Desenvolvimento de Sites</span></h1>
@@ -682,8 +675,8 @@
                             <li>Otimização para mecanismos de busca (SEO).</li>
                         </ul>
                         <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                            <a onclick="navigateTo(2)" class="cta-secondary" style="color: var(--neon-blue);">Ver Catálogo</a>
-                            <a onclick="navigateTo(19)" class="cta-secondary" style="color: var(--neon-blue);">Contratar</a>
+                            <a onclick="navigateTo('servicos')" class="cta-secondary" style="color: var(--neon-blue);">Ver Catálogo</a>
+                            <a onclick="navigateTo('orcamento-web')" class="cta-secondary" style="color: var(--neon-blue);">Contratar</a>
                         </div>
                     </div>
                     <div><img src="img/13.png" class="content-img" alt="Layout responsivo web design"></div>
@@ -692,7 +685,7 @@
         </div>
 
         <!-- Slide 19: Formulário focado em Web Design -->
-        <div class="slide" id="slide-19">
+        <div class="slide" id="orcamento-web">
             <div class="slide-inner-content">
                 <a onclick="goBack()" class="btn-voltar">← Voltar</a>
                 <h1 style="color: var(--neon-blue); text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);">Solicite um <span class="nowrap">Orçamento</span></h1>

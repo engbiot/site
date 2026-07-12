@@ -48,13 +48,11 @@ document.addEventListener('touchmove', (e) => {
     const distance = currentY - pStartY;
 
     if (distance > 0) {
-        // Atrasar um pouco o movimento (fricção)
         let pullDistance = Math.min(distance * 0.5, MAX_PULL);
         
         ptrOverlay.style.opacity = '1';
         ptrOverlay.style.pointerEvents = 'all';
         
-        // Mover o painel e o logo
         ptrPanelBg.style.transform = `translateY(${100 + (pullDistance / window.innerHeight * 100)}vh)`;
         ptrContent.style.transform = `translateY(${-50 + pullDistance}px)`;
         ptrContent.style.opacity = Math.min(pullDistance / THRESHOLD, 1);
@@ -84,7 +82,6 @@ document.addEventListener('touchend', () => {
 
 // ==========================================
 // [SEÇÃO 3] TELA DE ABERTURA (SPLASH SCREEN)
-// Animação inicial ao entrar no site para carregamento da interface pesada (3D e CSS).
 // ==========================================
 function closeSplash() {
     const splash = document.getElementById('splash-screen');
@@ -94,31 +91,40 @@ function closeSplash() {
 }
 
 // ==========================================
-// [SEÇÃO 4] NAVEGAÇÃO HISTORY API E INJEÇÃO DE RODAPÉS
-// Permite o uso do botão de voltar do celular/navegador sem quebrar o site e insere footer dinâmico.
+// [SEÇÃO 4] NAVEGAÇÃO HISTORY API E INJEÇÃO DE RODAPÉS (ATUALIZADO PARA PATHS NOMEADOS)
 // ==========================================
 window.addEventListener('popstate', function(e) {
     if (e.state !== null && typeof e.state.slide !== 'undefined') {
         navigateTo(e.state.slide, false);
     } else {
-        navigateTo(0, false);
+        navigateTo('inicio', false);
     }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    let startSlide = 0;
-    const hash = window.location.hash;
+    let startSlide = 'inicio';
     
+    // Captura a rota atual com base no nome do caminho
+    let path = window.location.pathname.replace(/^\/|\/$/g, ''); 
+    
+    // Suporte aos hashes antigos do site caso o usuário acesse por links velhos salvos (ex: #s3 -> contato)
+    const hash = window.location.hash;
     if (hash && hash.startsWith('#s')) {
         const slideIndex = parseInt(hash.replace('#s', ''), 10);
-        if (!isNaN(slideIndex)) {
-            startSlide = slideIndex;
+        const legacyMap = ['inicio', 'sobre', 'servicos', 'contato', 'adequacao-regulatoria', 'otimizacao-de-bioprocessos', 'solucoes-digitais', 'responsabilidade-tecnica', 'pgrs', 'bpf', 'pericia', 'previsibilidade-de-producao', 'bebidas-fermentadas', 'panificacao', 'maturacao-de-laticinios', 'controle-microbiologico', 'valorizacao-de-residuos', 'modelagem-matematica', 'desenvolvimento-web', 'orcamento-web'];
+        if (!isNaN(slideIndex) && legacyMap[slideIndex]) {
+            path = legacyMap[slideIndex];
         }
     }
 
-    history.replaceState({ slide: startSlide }, '', hash || window.location.pathname);
+    // Se o path corresponder a uma ID de seção existente, aciona ela
+    if (path !== '' && document.getElementById(path)) {
+        startSlide = path;
+    }
+
+    history.replaceState({ slide: startSlide }, '', '/' + (startSlide === 'inicio' ? '' : startSlide));
     
-    if (startSlide !== 0) {
+    if (startSlide !== 'inicio') {
         navigateTo(startSlide, false);
     }
 
@@ -129,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p>
                 &copy; 2026 • Mike Jonathan dos Santos Brito<br>
                 • Engenheiro de Biotecnologia <span class="nowrap">• CREA-SP: 5071801530<br></span>
-                <a onclick="navigateTo(18)" class="discreet-link">Gostou da interface imersiva? <span class="nowrap">Solicite o desenvolvimento do seu site!</span></a>
+                <a onclick="navigateTo('desenvolvimento-web')" class="discreet-link">Gostou da interface imersiva? <span class="nowrap">Solicite o desenvolvimento do seu site!</span></a>
             </p>
         </div>
     `;
@@ -140,7 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ==========================================
 // [SEÇÃO 5] VALIDAÇÕES, MÁSCARAS E PREVENÇÕES
-// Máscaras de telefone e bloqueio contra download de imagens.
 // ==========================================
 const phoneInputs = document.querySelectorAll('.telefone-mask');
 phoneInputs.forEach(input => {
@@ -157,7 +162,6 @@ document.querySelectorAll('img').forEach(img => {
 
 // ==========================================
 // [SEÇÃO 6] LÓGICA DE FORMULÁRIO E DROPDOWNS CUSTOMIZADOS
-// Cria as seleções em caixas multiescolhas nos formulários de contato.
 // ==========================================
 function toggleServiceDropdown() { 
     document.getElementById('service-dropdown').classList.toggle('visible'); 
@@ -229,40 +233,39 @@ if(webCheckboxes && selectedContainerWeb && dropdownAnchorWeb) {
 
 // ==========================================
 // [SEÇÃO 7] TRANSIÇÃO DE TELAS (ZUI NAVIGATION - ZOOM USER INTERFACE)
-// Navegação baseada em transformações 3D ativando os "slides".
 // ==========================================
-let currentSlide = 0; 
+let currentSlide = 'inicio'; 
 
 function toggleClassicMenu() {
     document.getElementById('hamburger-btn').classList.toggle('open');
     document.getElementById('classic-menu-overlay').classList.toggle('open');
 }
 
-function navigateFromClassic(index) {
-    toggleClassicMenu(); navigateTo(index); 
-    const carouselIndex = carouselData.findIndex(item => item.id === index);
+function navigateFromClassic(path) {
+    toggleClassicMenu(); 
+    navigateTo(path); 
+    const carouselIndex = carouselData.findIndex(item => item.id === path);
     if (carouselIndex !== -1) { targetAngle = -carouselIndex * theta; }
 }
 
 function goBack() { history.back(); }
 
-function navigateTo(index, recordHistory = true) {
-    if (recordHistory && currentSlide !== index) {
-        history.pushState({ slide: index }, '', '#s' + index);
+function navigateTo(path, recordHistory = true) {
+    if (recordHistory && currentSlide !== path) {
+        history.pushState({ slide: path }, '', '/' + (path === 'inicio' ? '' : path));
     }
     
     let previousSlide = currentSlide;
-    currentSlide = index;
+    currentSlide = path;
 
     const slides = document.querySelectorAll('.slide');
     slides.forEach(slide => {
         slide.classList.remove('active', 'passed');
-        let slideId = slide.id.split('-')[1];
-        let numId = parseInt(slideId);
+        let slideId = slide.id;
         
-        if (numId === currentSlide) { 
+        if (slideId === currentSlide) { 
             slide.classList.add('active'); 
-        } else if (numId === previousSlide || numId === 0 || (numId !== currentSlide && recordHistory === false)) { 
+        } else if (slideId === previousSlide || slideId === 'inicio' || (slideId !== currentSlide && recordHistory === false)) { 
             slide.classList.add('passed'); 
         } 
     });
@@ -270,16 +273,15 @@ function navigateTo(index, recordHistory = true) {
 
 // ==========================================
 // [SEÇÃO 8] MOTOR DO CARROSSEL 3D (MENU SUPERIOR)
-// Posiciona matematicamente e rotaciona os itens do menu cilíndrico.
 // ==========================================
 const menuItensConfig = [
-    { id: 0, text: "Início", icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' }, 
-    { id: 1, text: "Sobre", icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' }, 
-    { id: 2, text: "Serviços", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>' }, 
-    { id: 4, text: "Regulatória", icon: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>' }, 
-    { id: 5, text: "Bioprocessos", icon: '<svg viewBox="0 0 24 24"><path d="M10 2v7.31l-6 10.39A2 2 0 0 0 5.73 23h12.54a2 2 0 0 0 1.73-3.3l-6-10.39V2h-4z"></path><line x1="8.5" y1="14" x2="15.5" y2="14"></line></svg>' }, 
-    { id: 6, text: "Digitais", icon: '<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>' }, 
-    { id: 3, text: "Contato", icon: '<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>' }
+    { id: 'inicio', text: "Início", icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' }, 
+    { id: 'sobre', text: "Sobre", icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' }, 
+    { id: 'servicos', text: "Serviços", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>' }, 
+    { id: 'adequacao-regulatoria', text: "Regulatória", icon: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>' }, 
+    { id: 'otimizacao-de-bioprocessos', text: "Bioprocessos", icon: '<svg viewBox="0 0 24 24"><path d="M10 2v7.31l-6 10.39A2 2 0 0 0 5.73 23h12.54a2 2 0 0 0 1.73-3.3l-6-10.39V2h-4z"></path><line x1="8.5" y1="14" x2="15.5" y2="14"></line></svg>' }, 
+    { id: 'solucoes-digitais', text: "Digitais", icon: '<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>' }, 
+    { id: 'contato', text: "Contato", icon: '<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>' }
 ];
 
 const carouselData = [...menuItensConfig]; 
@@ -350,7 +352,6 @@ function updateCarouselCSS() {
 
 // ==========================================
 // [SEÇÃO 9] ANIMAÇÃO DE BACKGROUND VIA CANVAS 3D (PARTÍCULAS)
-// Desenha os hexágonos e reage ao tema claro/escuro.
 // ==========================================
 const canvas = document.getElementById('bgCanvas'); const ctx = canvas.getContext('2d');
 
