@@ -92,7 +92,6 @@ function closeSplash() {
 
 // ==========================================
 // [SEÇÃO 4] NAVEGAÇÃO HISTORY API E INJEÇÃO DE RODAPÉS
-// Permite o uso do botão de voltar do celular/navegador sem quebrar o site e insere footer dinâmico.
 // ==========================================
 window.addEventListener('popstate', function(e) {
     if (e.state !== null && typeof e.state.slide !== 'undefined') {
@@ -103,45 +102,26 @@ window.addEventListener('popstate', function(e) {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+    // 1. Captura a rota atual diretamente do navegador (ex: "sobre", "contato")
+    let path = window.location.pathname.replace(/^\/|\/$/g, ''); 
     let startSlide = 'inicio';
-    let path = '';
-    
-    // --- TRATAMENTO PARA GITHUB PAGES (Vindo do 404.html) ---
-    const urlParams = new URLSearchParams(window.location.search);
-    const redirectedPath = urlParams.get('p');
-    
-    if (redirectedPath) {
-        // Se o usuário veio pelo redirecionamento, limpa a URL na barra (remove o ?p=)
-        window.history.replaceState(null, null, redirectedPath);
-        path = redirectedPath.replace(/^\/|\/$/g, '');
-    } else {
-        // Acesso normal na raiz ou navegação interna
-        path = window.location.pathname.replace(/^\/|\/$/g, ''); 
-    }
 
-    // Suporte aos hashes antigos do site caso o usuário acesse por links velhos salvos
-    const hash = window.location.hash;
-    if (hash && hash.startsWith('#s')) {
-        const slideIndex = parseInt(hash.replace('#s', ''), 10);
-        const legacyMap = ['inicio', 'sobre', 'servicos', 'contato', 'adequacao-regulatoria', 'otimizacao-de-bioprocessos', 'solucoes-digitais', 'responsabilidade-tecnica', 'pgrs', 'bpf', 'pericia', 'previsibilidade-de-producao', 'bebidas-fermentadas', 'panificacao', 'maturacao-de-laticinios', 'controle-microbiologico', 'valorizacao-de-residuos', 'modelagem-matematica', 'desenvolvimento-web', 'orcamento-web'];
-        if (!isNaN(slideIndex) && legacyMap[slideIndex]) {
-            path = legacyMap[slideIndex];
-        }
-    }
-
-    // Se o path corresponder a uma ID de seção existente, aciona ela
+    // 2. Se a URL não estiver vazia e a section existir no HTML, define ela como ponto de partida
     if (path !== '' && document.getElementById(path)) {
         startSlide = path;
     }
 
+    // 3. Atualiza o histórico do navegador para garantir a URL limpa
     history.replaceState({ slide: startSlide }, '', '/' + (startSlide === 'inicio' ? '' : startSlide));
     
+    // 4. Navega visualmente para o slide correto
     if (startSlide !== 'inicio') {
         navigateTo(startSlide, false);
     }
 
     setTimeout(closeSplash, 4000);
 
+    // 5. Injeta o rodapé
     const footerHTML = `
         <div class="slide-footer">
             <p>
