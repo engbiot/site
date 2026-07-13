@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function toggleTheme() {
     document.body.classList.toggle('light-mode');
     
-    // Verifica qual tema ficou ativo após o clique e salva no navegador
     const currentTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
     localStorage.setItem('theme', currentTheme);
 }
@@ -91,53 +90,80 @@ function closeSplash() {
 }
 
 // ==========================================
-// [SEÇÃO 4] NAVEGAÇÃO HISTORY API E INJEÇÃO DE RODAPÉS
-// Permite o uso do botão de voltar do celular/navegador sem quebrar o site e insere footer dinâmico.
+// [SEÇÃO 4] NAVEGAÇÃO HISTORY API E INJEÇÃO DE RODAPÉS (CORRIGIDO E BLINDADO)
 // ==========================================
-window.addEventListener('popstate', function(e) {
-    if (e.state !== null && typeof e.state.slide !== 'undefined') {
-        navigateTo(e.state.slide, false);
-    } else {
-        navigateTo('inicio', false);
-    }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-    let startSlide = 'inicio';
-    let path = '';
+// Função centralizada para ler a URL de forma infalível e retornar o slide correto
+function getRouteFromURL() {
+    let route = 'inicio';
     
-    // --- TRATAMENTO PARA GITHUB PAGES (Vindo do 404.html) ---
+    // 1. Verifica se há um parâmetro ?p= (Caso o navegador ainda guarde o cache do código antigo)
     const urlParams = new URLSearchParams(window.location.search);
-    const redirectedPath = urlParams.get('p');
+    const pParam = urlParams.get('p');
     
-    if (redirectedPath) {
-        // Se o usuário veio pelo redirecionamento, limpa a URL na barra (remove o ?p=)
-        window.history.replaceState(null, null, redirectedPath);
-        path = redirectedPath.replace(/^\/|\/$/g, '');
+    if (pParam) {
+        route = pParam.replace(/^\/|\/$/g, '');
     } else {
-        // Acesso normal na raiz ou navegação interna
-        path = window.location.pathname.replace(/^\/|\/$/g, ''); 
+        // 2. Lê o caminho real (ex: /contato)
+        let path = window.location.pathname.replace(/^\/|\/$/g, '');
+        // Se estiver em subpastas, garante que pega apenas o nome da página
+        let pathParts = path.split('/');
+        route = pathParts[pathParts.length - 1] || 'inicio';
     }
 
-    // Suporte aos hashes antigos do site caso o usuário acesse por links velhos salvos
+    // 3. Suporte aos hashes velhos de quem salvou o site antes da atualização (ex: #s3)
     const hash = window.location.hash;
     if (hash && hash.startsWith('#s')) {
         const slideIndex = parseInt(hash.replace('#s', ''), 10);
         const legacyMap = ['inicio', 'sobre', 'servicos', 'contato', 'adequacao-regulatoria', 'otimizacao-de-bioprocessos', 'solucoes-digitais', 'responsabilidade-tecnica', 'pgrs', 'bpf', 'pericia', 'previsibilidade-de-producao', 'bebidas-fermentadas', 'panificacao', 'maturacao-de-laticinios', 'controle-microbiologico', 'valorizacao-de-residuos', 'modelagem-matematica', 'desenvolvimento-web', 'orcamento-web'];
         if (!isNaN(slideIndex) && legacyMap[slideIndex]) {
-            path = legacyMap[slideIndex];
+            route = legacyMap[slideIndex];
         }
     }
 
-    // Se o path corresponder a uma ID de seção existente, aciona ela
-    if (path !== '' && document.getElementById(path)) {
-        startSlide = path;
+    return route;
+}
+
+window.addEventListener('popstate', function(e) {
+    if (e.state !== null && typeof e.state.slide !== 'undefined') {
+        navigateTo(e.state.slide, false);
+    } else {
+        // Em vez de forçar o início se o estado for nulo, lê a rota atual
+        navigateTo(getRouteFromURL(), false);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    let startSlide = getRouteFromURL();
+
+    // Valida se o slide realmente existe no HTML. Se tentarem acessar um link quebrado, vai pro início.
+    if (startSlide !== 'inicio' && !document.getElementById(startSlide)) {
+        startSlide = 'inicio';
     }
 
-    history.replaceState({ slide: startSlide }, '', '/' + (startSlide === 'inicio' ? '' : startSlide));
+    // Atualiza a URL limpando o lixo (como ?p= ou #s) sem recarregar a página
+    try {
+        history.replaceState({ slide: startSlide }, '', '/' + (startSlide === 'inicio' ? '' : startSlide));
+    } catch(e) {
+        console.warn("History API bloqueada (comum ao testar o arquivo HTML localmente).");
+    }
     
+    // Aplica o slide visualmente DE FORMA SILENCIOSA para não "piscar" a home page
     if (startSlide !== 'inicio') {
-        navigateTo(startSlide, false);
+        const slides = document.querySelectorAll('.slide');
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+            slide.classList.add('passed');
+        });
+        
+        const activeEl = document.getElementById(startSlide);
+        if(activeEl) {
+            activeEl.classList.remove('passed');
+            activeEl.classList.add('active');
+        }
+        
+        // Sincroniza a variável global do ZUI para não quebrar os próximos cliques
+        currentSlide = startSlide;
     }
 
     setTimeout(closeSplash, 4000);
@@ -244,7 +270,7 @@ if(webCheckboxes && selectedContainerWeb && dropdownAnchorWeb) {
 }
 
 // ==========================================
-// [SEÇÃO 7] TRANSIÇÃO DE TELAS (ZUI NAVIGATION - ZOOM USER INTERFACE)
+// [SEÇÃO 7] TRANSIÇÃO DE TELAS (ZUI NAVIGATION)
 // ==========================================
 let currentSlide = 'inicio'; 
 
@@ -264,7 +290,9 @@ function goBack() { history.back(); }
 
 function navigateTo(path, recordHistory = true) {
     if (recordHistory && currentSlide !== path) {
-        history.pushState({ slide: path }, '', '/' + (path === 'inicio' ? '' : path));
+        try {
+            history.pushState({ slide: path }, '', '/' + (path === 'inicio' ? '' : path));
+        } catch(e) {}
     }
     
     let previousSlide = currentSlide;
