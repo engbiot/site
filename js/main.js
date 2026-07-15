@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSlide = startSlide;
     }
 
-    setTimeout(closeSplash, 4000);
+    setTimeout(closeSplash, 1000);
 
     const footerHTML = `
         <div class="slide-footer">
