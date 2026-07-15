@@ -152,7 +152,7 @@ body.light-mode .cta-secondary:hover {
 
 /* Slides posicionados 15px abaixo da altura total do logo (75 + 80 = 155; 155 + 15 = 170px) */
 #presentation-container {
-    position: fixed; top: 173px; left: 0; width: 100vw; height: calc(100vh - 170px); 
+    position: fixed; top: 155px; left: 0; width: 100vw; height: calc(100vh - 165px); 
     perspective: 1500px; display: flex; align-items: center; justify-content: center; 
     z-index: 10; pointer-events: none; 
 }
@@ -330,7 +330,7 @@ body.light-mode .selected-item-web { background: rgba(0, 102, 255, 0.05); border
     /* Repassando a lógica de centralização: Menu (55), Respiro(15), Logo(80), Respiro(15) */
     #menu-wrapper { height: 55px; }
     #logo-wrapper { top: 70px; height: 70px; } 
-    #presentation-container { top: 150px; height: calc(100vh - 165px); align-items: flex-start; } 
+    #presentation-container { top: 155px; height: calc(100vh - 165px); align-items: flex-start; } 
     
     #site-logo { font-size: 1.8rem; letter-spacing: 1px;}
     .pulse-light { width: 300px; height: 100px; }
@@ -363,7 +363,7 @@ body.light-mode .selected-item-web { background: rgba(0, 102, 255, 0.05); border
     /* Mantendo a constante: Menu (55), Respiro(15), Logo(70), Respiro(15) */
     #menu-wrapper { height: 55px; } 
     #logo-wrapper { top: 70px; height: 70px; } 
-    #presentation-container { top: 150px; height: calc(100vh - 155px); align-items: flex-start; } 
+    #presentation-container { top: 155px; height: calc(100vh - 165px); align-items: flex-start; } 
     
     #site-logo { font-size: 1.8rem; letter-spacing: 1px; }
     .pulse-light { width: 240px; height: 80px; }
