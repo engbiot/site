@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function toggleTheme() {
     document.body.classList.toggle('light-mode');
-    
+
     const currentTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
     localStorage.setItem('theme', currentTheme);
 }
@@ -28,8 +28,8 @@ let isPulling = false;
 const ptrOverlay = document.getElementById('ptr-overlay');
 const ptrPanelBg = document.getElementById('ptr-panel-bg');
 const ptrContent = document.getElementById('ptr-content');
-const MAX_PULL = 180; 
-const THRESHOLD = 120; 
+const MAX_PULL = 180;
+const THRESHOLD = 120;
 
 document.addEventListener('touchstart', (e) => {
     const activeSlide = document.querySelector('.slide.active');
@@ -48,12 +48,12 @@ document.addEventListener('touchmove', (e) => {
 
     if (distance > 0) {
         let pullDistance = Math.min(distance * 0.5, MAX_PULL);
-        
+
         ptrOverlay.style.opacity = '1';
         ptrOverlay.style.pointerEvents = 'all';
-        
-        ptrPanelBg.style.transform = `translateY(${100 + (pullDistance / window.innerHeight * 100)}vh)`;
-        ptrContent.style.transform = `translateY(${-50 + pullDistance}px)`;
+
+        ptrPanelBg.style.transform = `translateY(${pullDistance}px)`;
+        ptrContent.style.transform = `translateY(${-100 + pullDistance}px)`;
         ptrContent.style.opacity = Math.min(pullDistance / THRESHOLD, 1);
     }
 
@@ -62,19 +62,19 @@ document.addEventListener('touchmove', (e) => {
 document.addEventListener('touchend', () => {
     if (!isPulling) return;
     isPulling = false;
-    
+
     ptrPanelBg.style.transition = 'transform 0.4s ease-out';
     ptrContent.style.transition = 'transform 0.4s ease-out, opacity 0.4s';
-    
+
     const currentY = parseFloat(ptrContent.style.transform.replace(/[^\d.-]/g, '')) || 0;
-    if (currentY > (THRESHOLD - 50)) {
+    if (currentY > (THRESHOLD - 100)) {
         ptrContent.innerHTML = '<span>Atualizando...</span>';
         setTimeout(() => { location.reload(); }, 500);
     } else {
         ptrOverlay.style.opacity = '0';
         ptrOverlay.style.pointerEvents = 'none';
         ptrPanelBg.style.transform = 'translateY(0)';
-        ptrContent.style.transform = 'translateY(-50px)';
+        ptrContent.style.transform = 'translateY(-100px)';
         ptrContent.style.opacity = '0';
     }
 });
@@ -84,9 +84,9 @@ document.addEventListener('touchend', () => {
 // ==========================================
 function closeSplash() {
     const splash = document.getElementById('splash-screen');
-    if(!splash || splash.classList.contains('splitting')) return;
+    if (!splash || splash.classList.contains('splitting')) return;
     splash.classList.add('splitting');
-    setTimeout(() => { splash.style.display = 'none'; }, 1000); 
+    setTimeout(() => { splash.style.display = 'none'; }, 1000);
 }
 
 // ==========================================
@@ -96,11 +96,11 @@ function closeSplash() {
 // Função centralizada para ler a URL de forma infalível e retornar o slide correto
 function getRouteFromURL() {
     let route = 'inicio';
-    
+
     // 1. Verifica se há um parâmetro ?p= (Caso o navegador ainda guarde o cache do código antigo)
     const urlParams = new URLSearchParams(window.location.search);
     const pParam = urlParams.get('p');
-    
+
     if (pParam) {
         route = pParam.replace(/^\/|\/$/g, '');
     } else {
@@ -124,7 +124,7 @@ function getRouteFromURL() {
     return route;
 }
 
-window.addEventListener('popstate', function(e) {
+window.addEventListener('popstate', function (e) {
     if (e.state !== null && typeof e.state.slide !== 'undefined') {
         navigateTo(e.state.slide, false);
     } else {
@@ -144,10 +144,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Atualiza a URL limpando o lixo (como ?p= ou #s) sem recarregar a página
     try {
         history.replaceState({ slide: startSlide }, '', '/' + (startSlide === 'inicio' ? '' : startSlide));
-    } catch(e) {
+    } catch (e) {
         console.warn("History API bloqueada (comum ao testar o arquivo HTML localmente).");
     }
-    
+
     // Aplica o slide visualmente DE FORMA SILENCIOSA para não "piscar" a home page
     if (startSlide !== 'inicio') {
         const slides = document.querySelectorAll('.slide');
@@ -155,13 +155,13 @@ document.addEventListener("DOMContentLoaded", () => {
             slide.classList.remove('active');
             slide.classList.add('passed');
         });
-        
+
         const activeEl = document.getElementById(startSlide);
-        if(activeEl) {
+        if (activeEl) {
             activeEl.classList.remove('passed');
             activeEl.classList.add('active');
         }
-        
+
         // Sincroniza a variável global do ZUI para não quebrar os próximos cliques
         currentSlide = startSlide;
     }
@@ -201,19 +201,19 @@ document.querySelectorAll('img').forEach(img => {
 // ==========================================
 // [SEÇÃO 6] LÓGICA DE FORMULÁRIO E DROPDOWNS CUSTOMIZADOS
 // ==========================================
-function toggleServiceDropdown() { 
-    document.getElementById('service-dropdown').classList.toggle('visible'); 
+function toggleServiceDropdown() {
+    document.getElementById('service-dropdown').classList.toggle('visible');
 }
-function toggleServiceDropdownWeb() { 
-    document.getElementById('service-dropdown-web').classList.toggle('visible'); 
+function toggleServiceDropdownWeb() {
+    document.getElementById('service-dropdown-web').classList.toggle('visible');
 }
 
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     const dropdown = document.getElementById('service-dropdown');
     if (dropdown && dropdown.classList.contains('visible') && !dropdown.contains(event.target)) {
         dropdown.classList.remove('visible');
     }
-    
+
     const dropdownWeb = document.getElementById('service-dropdown-web');
     if (dropdownWeb && dropdownWeb.classList.contains('visible') && !dropdownWeb.contains(event.target)) {
         dropdownWeb.classList.remove('visible');
@@ -249,7 +249,7 @@ const serviceCheckboxes = document.querySelectorAll('#service-dropdown input[typ
 const selectedContainer = document.getElementById('selected-services-container');
 const dropdownAnchor = document.querySelector('#service-dropdown .anchor');
 
-if(serviceCheckboxes && selectedContainer && dropdownAnchor) {
+if (serviceCheckboxes && selectedContainer && dropdownAnchor) {
     serviceCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', () => {
             updateServicesTags(serviceCheckboxes, selectedContainer, dropdownAnchor, '', 'var(--neon-green)', 'serviço(s)');
@@ -261,7 +261,7 @@ const webCheckboxes = document.querySelectorAll('#service-dropdown-web input[typ
 const selectedContainerWeb = document.getElementById('selected-services-container-web');
 const dropdownAnchorWeb = document.querySelector('#service-dropdown-web .anchor');
 
-if(webCheckboxes && selectedContainerWeb && dropdownAnchorWeb) {
+if (webCheckboxes && selectedContainerWeb && dropdownAnchorWeb) {
     webCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', () => {
             updateServicesTags(webCheckboxes, selectedContainerWeb, dropdownAnchorWeb, 'selected-item-web', 'var(--neon-blue)', 'funcionalidade(s)');
@@ -272,7 +272,7 @@ if(webCheckboxes && selectedContainerWeb && dropdownAnchorWeb) {
 // ==========================================
 // [SEÇÃO 7] TRANSIÇÃO DE TELAS (ZUI NAVIGATION)
 // ==========================================
-let currentSlide = 'inicio'; 
+let currentSlide = 'inicio';
 
 function toggleClassicMenu() {
     document.getElementById('hamburger-btn').classList.toggle('open');
@@ -280,8 +280,8 @@ function toggleClassicMenu() {
 }
 
 function navigateFromClassic(path) {
-    toggleClassicMenu(); 
-    navigateTo(path); 
+    toggleClassicMenu();
+    navigateTo(path);
     const carouselIndex = carouselData.findIndex(item => item.id === path);
     if (carouselIndex !== -1) { targetAngle = -carouselIndex * theta; }
 }
@@ -292,9 +292,9 @@ function navigateTo(path, recordHistory = true) {
     if (recordHistory && currentSlide !== path) {
         try {
             history.pushState({ slide: path }, '', '/' + (path === 'inicio' ? '' : path));
-        } catch(e) {}
+        } catch (e) { }
     }
-    
+
     let previousSlide = currentSlide;
     currentSlide = path;
 
@@ -302,12 +302,12 @@ function navigateTo(path, recordHistory = true) {
     slides.forEach(slide => {
         slide.classList.remove('active', 'passed');
         let slideId = slide.id;
-        
-        if (slideId === currentSlide) { 
-            slide.classList.add('active'); 
-        } else if (slideId === previousSlide || slideId === 'inicio' || (slideId !== currentSlide && recordHistory === false)) { 
-            slide.classList.add('passed'); 
-        } 
+
+        if (slideId === currentSlide) {
+            slide.classList.add('active');
+        } else if (slideId === previousSlide || slideId === 'inicio' || (slideId !== currentSlide && recordHistory === false)) {
+            slide.classList.add('passed');
+        }
     });
 }
 
@@ -316,17 +316,17 @@ function navigateTo(path, recordHistory = true) {
 // ==========================================
 // [Itens do Menu 3D] Configuração de ícones e botões do carrossel superior
 const menuItensConfig = [
-    { id: 'inicio', text: "Início", icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' }, 
-    { id: 'sobre', text: "Sobre", icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' }, 
+    { id: 'inicio', text: "Início", icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' },
+    { id: 'sobre', text: "Sobre", icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' },
     { id: 'servicos', text: "Serviços", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>' },
     { id: 'engenharia-de-processos', text: "Processos", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>' },
-    { id: 'adequacao-regulatoria', text: "Regulatória", icon: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>' }, 
-    { id: 'otimizacao-de-bioprocessos', text: "Bioprocessos", icon: '<svg viewBox="0 0 24 24"><path d="M10 2v7.31l-6 10.39A2 2 0 0 0 5.73 23h12.54a2 2 0 0 0 1.73-3.3l-6-10.39V2h-4z"></path><line x1="8.5" y1="14" x2="15.5" y2="14"></line></svg>' }, 
-    { id: 'solucoes-digitais', text: "Digitais", icon: '<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>' }, 
+    { id: 'adequacao-regulatoria', text: "Regulatória", icon: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>' },
+    { id: 'otimizacao-de-bioprocessos', text: "Bioprocessos", icon: '<svg viewBox="0 0 24 24"><path d="M10 2v7.31l-6 10.39A2 2 0 0 0 5.73 23h12.54a2 2 0 0 0 1.73-3.3l-6-10.39V2h-4z"></path><line x1="8.5" y1="14" x2="15.5" y2="14"></line></svg>' },
+    { id: 'solucoes-digitais', text: "Digitais", icon: '<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>' },
     { id: 'contato', text: "Contato", icon: '<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>' }
 ];
 
-const carouselData = [...menuItensConfig]; 
+const carouselData = [...menuItensConfig];
 const carouselEl = document.getElementById('carousel');
 
 const setRadius = () => {
@@ -337,18 +337,18 @@ const setRadius = () => {
     return 350;
 };
 let radius = setRadius();
-const theta = 360 / carouselData.length; 
+const theta = 360 / carouselData.length;
 
 function buildCarousel() {
     carouselEl.innerHTML = '';
     carouselData.forEach((item, index) => {
         const div = document.createElement('div');
-        div.className = 'menu-item'; 
+        div.className = 'menu-item';
         div.innerHTML = `${item.icon}<span>${item.text}</span>`;
         div.dataset.target = item.id; div.dataset.index = index;
         div.style.transform = `rotateY(${index * theta}deg) translateZ(${radius}px)`;
         div.addEventListener('pointerup', (e) => {
-            if (Math.abs(dragTotalX) > 15) return; 
+            if (Math.abs(dragTotalX) > 15) return;
             navigateTo(item.id); targetAngle = -index * theta;
         });
         carouselEl.appendChild(div);
@@ -359,7 +359,7 @@ buildCarousel();
 
 window.addEventListener('resize', () => {
     const newRadius = setRadius();
-    if(newRadius !== radius) {
+    if (newRadius !== radius) {
         radius = newRadius;
         buildCarousel();
     }
@@ -378,11 +378,11 @@ window.addEventListener('pointermove', (e) => {
 });
 
 function updateCarouselCSS() {
-    currentAngle += (targetAngle - currentAngle) * 0.1; 
-    if (!isDragging) targetAngle -= autoRotateSpeed; 
+    currentAngle += (targetAngle - currentAngle) * 0.1;
+    if (!isDragging) targetAngle -= autoRotateSpeed;
     carouselEl.style.transform = `translateZ(-${radius}px) rotateY(${currentAngle}deg)`;
-    
-    let normalizedAngle = ((currentAngle % 360) + 360) % 360; 
+
+    let normalizedAngle = ((currentAngle % 360) + 360) % 360;
     let frontIndex = Math.round((360 - normalizedAngle) / theta) % carouselData.length;
     const items = document.querySelectorAll('.menu-item');
     items.forEach((item, idx) => {
@@ -398,14 +398,14 @@ const canvas = document.getElementById('bgCanvas'); const ctx = canvas.getContex
 function resizeCanvasBg() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 window.addEventListener('resize', resizeCanvasBg); resizeCanvasBg();
 
-const particles = []; const particleCount = 100; 
+const particles = []; const particleCount = 100;
 
 class Particle {
     constructor() { this.reset(true); }
     reset(initial = false) {
         this.x = (Math.random() - 0.5) * window.innerWidth * 3; this.y = (Math.random() - 0.5) * window.innerHeight * 3;
         this.z = initial ? Math.random() * 2000 : 2000; this.rotation = Math.random() * Math.PI * 2;
-        this.rotationSpeed = (Math.random() - 0.5) * 0.02; this.speed = Math.random() * 4 + 2; 
+        this.rotationSpeed = (Math.random() - 0.5) * 0.02; this.speed = Math.random() * 4 + 2;
     }
     update() { this.z -= this.speed; if (this.z <= 10) this.reset(false); this.rotation += this.rotationSpeed; }
     draw() {
@@ -415,26 +415,26 @@ class Particle {
         ctx.save(); ctx.translate(x2d, y2d); ctx.rotate(this.rotation); ctx.scale(scale, scale);
         ctx.globalAlpha = Math.max(0, Math.min(1, (2000 - this.z) / 500));
         ctx.strokeStyle = 'rgba(0, 255, 204, 0.6)'; ctx.lineWidth = 3;
-        
-        ctx.beginPath(); ctx.arc(0, -20, 5, Math.PI, 0); ctx.lineTo(5, 20);              
+
+        ctx.beginPath(); ctx.arc(0, -20, 5, Math.PI, 0); ctx.lineTo(5, 20);
         ctx.arc(0, 20, 5, 0, Math.PI); ctx.closePath(); ctx.stroke();
         ctx.fillStyle = 'rgba(0, 243, 255, 0.2)'; ctx.fill(); ctx.restore();
     }
 }
 
-for(let i = 0; i < particleCount; i++) particles.push(new Particle());
+for (let i = 0; i < particleCount; i++) particles.push(new Particle());
 
 function animate() {
     updateCarouselCSS();
-    
+
     const isLightMode = document.body.classList.contains('light-mode');
     ctx.fillStyle = isLightMode ? 'rgba(244, 247, 246, 0.5)' : 'rgba(3, 5, 10, 0.3)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
+
     ctx.strokeStyle = isLightMode ? 'rgba(0, 102, 255, 0.4)' : 'rgba(0, 255, 204, 0.6)';
     ctx.fillStyle = isLightMode ? 'rgba(0, 102, 255, 0.1)' : 'rgba(0, 243, 255, 0.2)';
-    
-    particles.forEach(p => { p.update(); p.draw(); }); 
+
+    particles.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(animate);
 }
 animate();
