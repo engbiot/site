@@ -115,7 +115,7 @@ function getRouteFromURL() {
     const hash = window.location.hash;
     if (hash && hash.startsWith('#s')) {
         const slideIndex = parseInt(hash.replace('#s', ''), 10);
-        const legacyMap = ['inicio', 'sobre', 'servicos', 'contato', 'adequacao-regulatoria', 'otimizacao-de-bioprocessos', 'solucoes-digitais', 'responsabilidade-tecnica', 'pgrs', 'bpf', 'pericia', 'previsibilidade-de-producao', 'bebidas-fermentadas', 'panificacao', 'maturacao-de-laticinios', 'controle-microbiologico', 'valorizacao-de-residuos', 'modelagem-matematica', 'desenvolvimento-web', 'orcamento-web'];
+        const legacyMap = ['inicio', 'sobre', 'servicos', 'contato', 'engenharia-de-processos', 'adequacao-regulatoria', 'otimizacao-de-bioprocessos', 'solucoes-digitais', 'responsabilidade-tecnica', 'pgrs', 'bpf', 'pericia', 'previsibilidade-de-producao', 'bebidas-fermentadas', 'panificacao', 'maturacao-de-laticinios', 'controle-microbiologico', 'valorizacao-de-residuos', 'modelagem-matematica', 'desenvolvimento-web', 'orcamento-web'];
         if (!isNaN(slideIndex) && legacyMap[slideIndex]) {
             route = legacyMap[slideIndex];
         }
@@ -166,13 +166,13 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSlide = startSlide;
     }
 
-    setTimeout(closeSplash, 4000);
+    setTimeout(closeSplash, 1000);
 
     const footerHTML = `
         <div class="slide-footer">
             <p>
-                &copy; 2026 • Mike Jonathan dos Santos Brito<br>
-                • Engenheiro de Biotecnologia <span class="nowrap">• CREA-SP: 5071801530<br></span>
+                &copy; 2026 • Mike Jonathan dos Santos Brito
+                <span class="nowrap">• Engenheiro Biotecnológico</span><br> • CREA-SP: 5071801530  <span class="nowrap">• Fone: (11) 93742-2467<br></span>
                 <a onclick="navigateTo('desenvolvimento-web')" class="discreet-link">Gostou da interface imersiva? <span class="nowrap">Solicite o desenvolvimento do seu site!</span></a>
             </p>
         </div>
@@ -314,10 +314,12 @@ function navigateTo(path, recordHistory = true) {
 // ==========================================
 // [SEÇÃO 8] MOTOR DO CARROSSEL 3D (MENU SUPERIOR)
 // ==========================================
+// [Itens do Menu 3D] Configuração de ícones e botões do carrossel superior
 const menuItensConfig = [
     { id: 'inicio', text: "Início", icon: '<svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>' }, 
     { id: 'sobre', text: "Sobre", icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' }, 
-    { id: 'servicos', text: "Serviços", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>' }, 
+    { id: 'servicos', text: "Serviços", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>' },
+    { id: 'engenharia-de-processos', text: "Processos", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>' },
     { id: 'adequacao-regulatoria', text: "Regulatória", icon: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>' }, 
     { id: 'otimizacao-de-bioprocessos', text: "Bioprocessos", icon: '<svg viewBox="0 0 24 24"><path d="M10 2v7.31l-6 10.39A2 2 0 0 0 5.73 23h12.54a2 2 0 0 0 1.73-3.3l-6-10.39V2h-4z"></path><line x1="8.5" y1="14" x2="15.5" y2="14"></line></svg>' }, 
     { id: 'solucoes-digitais', text: "Digitais", icon: '<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>' }, 
@@ -328,9 +330,7 @@ const carouselData = [...menuItensConfig];
 const carouselEl = document.getElementById('carousel');
 
 const setRadius = () => {
-    if (window.innerWidth <= 375) return 140;
-    if (window.innerWidth <= 474) return 150;
-    if (window.innerWidth <= 500) return 160;
+    if (window.innerWidth <= 475) return 170;
     if (window.innerWidth <= 650) return 190;
     if (window.innerWidth <= 768) return 250;
     if (window.innerWidth <= 800) return 300;
