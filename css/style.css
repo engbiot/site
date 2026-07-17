@@ -877,17 +877,17 @@ ul {
     box-shadow: 0 0 20px var(--neon-blue);
 }
 
-.btn-voltar { 
-    border: 1px solid rgba(255,255,255,0.4); 
-    color: var(--text-color); 
-    margin-bottom: 20px; 
-    padding: 8px 20px; 
-    font-size: 0.8rem; 
-    display: inline-block; 
-    cursor: pointer; 
-    border-radius: 4px; 
+.btn-voltar {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: var(--text-color);
+    margin-bottom: 20px;
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px;
     /* Transição ajustada para capturar os movimentos suavemente */
-    transition: all 0.2s ease-in-out; 
+    transition: all 0.2s ease-in-out;
 }
 
 /* Efeito ao passar o mouse: leve destaque e movimento para a esquerda */
