@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="slide-footer">
             <p>
                 &copy; 2026 • Mike Jonathan dos Santos Brito
-                <span class="nowrap">• Engenheiro Biotecnológico</span><br> • CREA-SP: 5071801530  <span class="nowrap">• Fone: (11) 93742-2467<br></span>
+                <span class="nowrap">• Engenheiro Biotecnológico</span><br> • CREA-SP: 5071801530  <span class="nowrap">• Fone: (11) 93742-2467</span> <span class="nowrap">• E-mail: contato@tekprax.com.br</span><br>
                 <a onclick="navigateTo('desenvolvimento-web')" class="discreet-link">Gostou da interface imersiva? <span class="nowrap">Solicite o desenvolvimento do seu site!</span></a>
             </p>
         </div>
