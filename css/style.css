@@ -766,7 +766,7 @@ body.light-mode #hamburger-btn span {
     margin-top: 40px;
     flex-shrink: 0;
     padding-top: 20px;
-    padding-bottom: 100px;
+    padding-bottom: 60px;
     border-top: 1px solid var(--border-color);
     text-align: center;
 }
@@ -1402,6 +1402,10 @@ body.light-mode .selected-item-web {
         font-weight: 300;
         color: var(--text-muted);
     }
+
+    .slide-footer {
+        padding-bottom: 90px;
+    }
 }
 
 /* ==========================================
@@ -1450,7 +1454,7 @@ body.light-mode .selected-item-web {
     }
 
     .slide-footer {
-        padding-bottom: 90px;
+        padding-bottom: 100px;
     }
 
     .service-card {

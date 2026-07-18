@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p>
                 &copy; 2026 • Mike Jonathan dos Santos Brito
                 <span class="nowrap">• Engenheiro Biotecnológico</span><br> • CREA-SP: 5071801530  <span class="nowrap">• Fone: (11) 93742-2467</span> <span class="nowrap">• E-mail: contato@tekprax.com.br</span><br>
-                <a onclick="navigateTo('desenvolvimento-web')" class="discreet-link">Gostou da interface imersiva? <span class="nowrap">Solicite o desenvolvimento do seu site!</span></a>
+                <a onclick="navigateTo('desenvolvimento-web')" class="discreet-link">Gostou da interface imersiva? <span class="nowrap">Solicite o desenvolvimento do seu site!</span></a><br><br>
             </p>
         </div>
     `;
@@ -330,8 +330,8 @@ const carouselData = [...menuItensConfig];
 const carouselEl = document.getElementById('carousel');
 
 const setRadius = () => {
-    if (window.innerWidth <= 430) return 150;
-    if (window.innerWidth <= 650) return 190;
+    if (window.innerWidth <= 390) return 140;
+    if (window.innerWidth <= 650) return 160;
     if (window.innerWidth <= 768) return 250;
     if (window.innerWidth <= 800) return 300;
     return 350;
