@@ -170,7 +170,7 @@ body.light-mode .cta-button {
 body.light-mode .cta-button:hover {
     background: #66a3ff !important;
     color: #ffffff !important;
-    box-shadow: 0 0 15px rgba(102, 163, 255, 0.4);
+    box-shadow: 0 0 10px rgba(102, 163, 255, 0.4);
     border-color: #66a3ff;
 }
 
@@ -417,7 +417,7 @@ body.light-mode .cta-secondary:hover {
 /* Slides posicionados 15px abaixo da altura total do logo (75 + 80 = 155; 155 + 15 = 170px) */
 #presentation-container {
     position: fixed;
-    top: 155px;
+    top: 150px;
     left: 0;
     width: 100vw;
     height: calc(100vh - 165px);
@@ -563,8 +563,8 @@ body.light-mode .cta-secondary:hover {
 .toggle-track {
     width: 50px;
     height: 28px;
-    left: 8px;
-    background: #222;
+    left: 0px;
+    background: #5c5c5c;
     border-radius: 40px;
     position: relative;
     transition: background 0.3s;
@@ -766,7 +766,7 @@ body.light-mode #hamburger-btn span {
     margin-top: 40px;
     flex-shrink: 0;
     padding-top: 20px;
-    padding-bottom: 60px;
+    padding-bottom: 10px;
     border-top: 1px solid var(--border-color);
     text-align: center;
 }
@@ -779,7 +779,7 @@ body.light-mode #hamburger-btn span {
 }
 
 .discreet-link {
-    color: var(--neon-blue);
+    color: var(--neon-green);
     font-size: 0.7rem;
     text-decoration: none;
     cursor: pointer;
@@ -791,7 +791,7 @@ body.light-mode #hamburger-btn span {
 
 .discreet-link:hover {
     transform: scale(1.05);
-    color: var(--neon-green);
+    color: var(--neon-blue);
 }
 
 .slide::-webkit-scrollbar {
@@ -1277,7 +1277,7 @@ body.light-mode .selected-item-web {
     }
 
     #presentation-container {
-        top: 155px;
+        top: 150px;
         height: calc(100vh - 165px);
         align-items: flex-start;
     }
@@ -1424,7 +1424,7 @@ body.light-mode .selected-item-web {
     }
 
     #presentation-container {
-        top: 155px;
+        top: 150px;
         height: calc(100vh - 165px);
         align-items: flex-start;
     }
