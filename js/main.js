@@ -320,9 +320,9 @@ const menuItensConfig = [
     { id: 'sobre', text: "Sobre", icon: '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>' },
     { id: 'servicos', text: "Serviços", icon: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>' },
     { id: 'engenharia-de-processos', text: "Processos", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>' },
-    { id: 'adequacao-regulatoria', text: "Regulatória", icon: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>' },
-    { id: 'otimizacao-de-bioprocessos', text: "Bioprocessos", icon: '<svg viewBox="0 0 24 24"><path d="M10 2v7.31l-6 10.39A2 2 0 0 0 5.73 23h12.54a2 2 0 0 0 1.73-3.3l-6-10.39V2h-4z"></path><line x1="8.5" y1="14" x2="15.5" y2="14"></line></svg>' },
-    { id: 'solucoes-digitais', text: "Digitais", icon: '<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>' },
+    { id: 'adequacao-regulatoria', text: "Adequação", icon: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>' },
+    { id: 'otimizacao-de-bioprocessos', text: "Otimização", icon: '<svg viewBox="0 0 24 24"><path d="M10 2v7.31l-6 10.39A2 2 0 0 0 5.73 23h12.54a2 2 0 0 0 1.73-3.3l-6-10.39V2h-4z"></path><line x1="8.5" y1="14" x2="15.5" y2="14"></line></svg>' },
+    { id: 'solucoes-digitais', text: "Sistemas", icon: '<svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>' },
     { id: 'contato', text: "Contato", icon: '<svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>' }
 ];
 
@@ -330,9 +330,10 @@ const carouselData = [...menuItensConfig];
 const carouselEl = document.getElementById('carousel');
 
 const setRadius = () => {
-    if (window.innerWidth <= 390) return 140;
-    if (window.innerWidth <= 650) return 160;
-    if (window.innerWidth <= 768) return 250;
+    if (window.innerWidth <= 480) return 150;
+    if (window.innerWidth <= 510) return 180;
+    if (window.innerWidth <= 600) return 200;
+    if (window.innerWidth <= 680) return 250;
     if (window.innerWidth <= 800) return 300;
     return 350;
 };

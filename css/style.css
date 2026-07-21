@@ -101,7 +101,8 @@ body.light-mode .service-card {
 }
 
 body.light-mode .service-card:hover {
-    border-color: var(--neon-blue);
+    border: 2px solid;
+    border-color: var(--neon-green);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -164,7 +165,7 @@ body.light-mode #classic-menu-overlay a:hover {
 
 body.light-mode .cta-button {
     color: #005ce6;
-    border-color: #005ce6;
+    border-color: #0267ff;
 }
 
 body.light-mode .cta-button:hover {
@@ -378,7 +379,7 @@ body.light-mode .cta-secondary:hover {
 #menu-wrapper {
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 95%;
     height: 60px;
     background: var(--menu-bg);
     backdrop-filter: blur(5px);
@@ -405,7 +406,6 @@ body.light-mode .cta-secondary:hover {
 #logo-wrapper {
     position: fixed;
     top: 75px;
-    left: 0;
     width: 100%;
     height: 80px;
     display: flex;
@@ -449,7 +449,7 @@ body.light-mode .cta-secondary:hover {
     gap: 8px;
     color: rgba(150, 150, 150, 0.8);
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     cursor: pointer;
@@ -460,8 +460,8 @@ body.light-mode .cta-secondary:hover {
 }
 
 .menu-item svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     stroke: currentColor;
     fill: none;
     stroke-width: 2;
@@ -1176,7 +1176,7 @@ ul {
 .whatsapp-btn {
     border-color: #25D366 !important;
     background: #25D366 !important;
-    color: #006625 !important;
+    color: #003113 !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1263,8 +1263,18 @@ body.light-mode .selected-item-web {
     .menu-item {
         width: 160px;
         left: -80px;
-        font-size: 0.6rem;
+        font-size: 0.85rem;
     }
+
+    .menu-item svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 
     /* Repassando a lógica de centralização: Menu (55), Respiro(15), Logo(80), Respiro(15) */
     #menu-wrapper {
@@ -1474,8 +1484,18 @@ body.light-mode .selected-item-web {
     .menu-item {
         width: 160px;
         left: -80px;
-        font-size: 0.6rem;
+        font-size: 0.7rem;
     }
+
+    .menu-item svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 
     #classic-menu-overlay a {
         font-size: 1.1rem;
