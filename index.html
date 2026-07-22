@@ -19,8 +19,10 @@
     <title>TekPrax</title>
 
     <!-- ========================================== -->
-    <!-- FAVICON (Ícone da aba do navegador) -->
+    <!-- FAVICON (Ícones da aba e das buscas do Google) -->
     <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <!-- PNG de segurança (Fallback) para o Google Search ler corretamente -->
+    <link rel="icon" href="img/favicon-192.png" type="image/png" sizes="192x192">
     <!-- ========================================== -->
 
     <meta name="description"
@@ -201,7 +203,8 @@
         <div id="site-logo" onclick="navigateTo('inicio')">
             <svg viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg" class="logo-animado-inline">
                 <defs>
-                    <linearGradient id="blueNeonHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient id="blueNeonHeader" gradientUnits="userSpaceOnUse" x1="-130" y1="-45" x2="130"
+                        y2="45">
                         <stop offset="0%" stop-color="#00ffff" />
                         <stop offset="100%" stop-color="#0055ff" />
                     </linearGradient>
@@ -209,40 +212,116 @@
                         <stop offset="0%" stop-color="#39ff14" />
                         <stop offset="100%" stop-color="#00b300" />
                     </linearGradient>
+
+                    <!-- Caminho COMPLETO invisível para guiar a animação perfeitamente -->
                     <path id="orbitPathHeader" d="M -130,0 A 130,45 0 1,0 130,0 A 130,45 0 1,0 -130,0" />
+
+                    <!-- Metade SUPERIOR da órbita (y negativo) -> Ficará ATRÁS da folha -->
+                    <path id="orbitTop" d="M 130,0 A 130,45 0 1,0 -130,0" />
+
+                    <!-- Metade INFERIOR da órbita (y positivo) -> Ficará NA FRENTE da folha -->
+                    <path id="orbitBottom" d="M -130,0 A 130,45 0 1,0 130,0" />
                 </defs>
-                <g transform="rotate(45)">
-                    <use href="#orbitPathHeader" fill="none" stroke="url(#blueNeonHeader)" stroke-width="12"
-                        opacity="0.8" />
-                    <circle r="18" fill="#00ffff">
-                        <animateMotion dur="4s" repeatCount="indefinite" begin="0s">
-                            <mpath href="#orbitPathHeader" />
-                        </animateMotion>
-                    </circle>
-                    <circle r="18" fill="#00ffff">
-                        <animateMotion dur="4s" repeatCount="indefinite" begin="-2s">
-                            <mpath href="#orbitPathHeader" />
-                        </animateMotion>
-                    </circle>
+
+                <!-- ========================================== -->
+                <!-- 1. CAMADA TRASEIRA (Renderizada ATRÁS da folha) -->
+                <!-- ========================================== -->
+                <g id="camada-traseira">
+                    <!-- Órbita Diagonal Direita -->
+                    <g transform="rotate(45)">
+                        <use href="#orbitTop" fill="none" stroke="url(#blueNeonHeader)" stroke-width="12"
+                            opacity="0.8" />
+                        <!-- Bolinha visível apenas na metade de cima (50% a 100% da animação) -->
+                        <circle r="18" fill="#00ffff">
+                            <animateMotion dur="4s" repeatCount="indefinite" begin="0s">
+                                <mpath href="#orbitPathHeader" />
+                            </animateMotion>
+                            <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.5;1" calcMode="discrete"
+                                dur="4s" repeatCount="indefinite" begin="0s" />
+                        </circle>
+                        <circle r="18" fill="#00ffff">
+                            <animateMotion dur="4s" repeatCount="indefinite" begin="-2s">
+                                <mpath href="#orbitPathHeader" />
+                            </animateMotion>
+                            <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.5;1" calcMode="discrete"
+                                dur="4s" repeatCount="indefinite" begin="-2s" />
+                        </circle>
+                    </g>
+                    <!-- Órbita Diagonal Esquerda -->
+                    <g transform="rotate(-45)">
+                        <use href="#orbitTop" fill="none" stroke="url(#blueNeonHeader)" stroke-width="12"
+                            opacity="0.8" />
+                        <circle r="18" fill="#00ffff">
+                            <animateMotion dur="4s" repeatCount="indefinite" begin="-1s">
+                                <mpath href="#orbitPathHeader" />
+                            </animateMotion>
+                            <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.5;1" calcMode="discrete"
+                                dur="4s" repeatCount="indefinite" begin="-1s" />
+                        </circle>
+                        <circle r="18" fill="#00ffff">
+                            <animateMotion dur="4s" repeatCount="indefinite" begin="-3s">
+                                <mpath href="#orbitPathHeader" />
+                            </animateMotion>
+                            <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.5;1" calcMode="discrete"
+                                dur="4s" repeatCount="indefinite" begin="-3s" />
+                        </circle>
+                    </g>
                 </g>
-                <g transform="rotate(-45)">
-                    <use href="#orbitPathHeader" fill="none" stroke="url(#blueNeonHeader)" stroke-width="12"
-                        opacity="0.8" />
-                    <circle r="18" fill="#00ffff">
-                        <animateMotion dur="4s" repeatCount="indefinite" begin="-1s">
-                            <mpath href="#orbitPathHeader" />
-                        </animateMotion>
-                    </circle>
-                    <circle r="18" fill="#00ffff">
-                        <animateMotion dur="4s" repeatCount="indefinite" begin="-3s">
-                            <mpath href="#orbitPathHeader" />
-                        </animateMotion>
-                    </circle>
+
+                <!-- ========================================== -->
+                <!-- 2. CAMADA DO MEIO (A folha verde) -->
+                <!-- ========================================== -->
+                <g id="camada-folha">
+                    <path d="M 0 55 C -45 10, -65 -45, 0 -100 C 65 -45, 45 10, 0 55 Z" fill="url(#greenNeonHeader)"
+                        opacity="0.9" />
+                    <path d="M 0 -95 L 0 50 M 0 -20 Q 25 -45 30 -55 M 0 15 Q -25 -10 -30 -20 M 0 40 Q 20 20 25 10"
+                        fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" />
                 </g>
-                <path d="M 0 55 C -45 10, -65 -45, 0 -100 C 65 -45, 45 10, 0 55 Z" fill="url(#greenNeonHeader)"
-                    opacity="0.9" />
-                <path d="M 0 -95 L 0 50 M 0 -20 Q 25 -45 30 -55 M 0 15 Q -25 -10 -30 -20 M 0 40 Q 20 20 25 10"
-                    fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" />
+
+                <!-- ========================================== -->
+                <!-- 3. CAMADA FRONTAL (Renderizada NA FRENTE da folha) -->
+                <!-- ========================================== -->
+                <g id="camada-frontal">
+                    <!-- Órbita Diagonal Direita -->
+                    <g transform="rotate(45)">
+                        <use href="#orbitBottom" fill="none" stroke="url(#blueNeonHeader)" stroke-width="12"
+                            opacity="0.8" />
+                        <!-- Bolinha visível apenas na metade de baixo (0% a 50% da animação) -->
+                        <circle r="18" fill="#00ffff">
+                            <animateMotion dur="4s" repeatCount="indefinite" begin="0s">
+                                <mpath href="#orbitPathHeader" />
+                            </animateMotion>
+                            <animate attributeName="opacity" values="1;0;1" keyTimes="0;0.5;1" calcMode="discrete"
+                                dur="4s" repeatCount="indefinite" begin="0s" />
+                        </circle>
+                        <circle r="18" fill="#00ffff">
+                            <animateMotion dur="4s" repeatCount="indefinite" begin="-2s">
+                                <mpath href="#orbitPathHeader" />
+                            </animateMotion>
+                            <animate attributeName="opacity" values="1;0;1" keyTimes="0;0.5;1" calcMode="discrete"
+                                dur="4s" repeatCount="indefinite" begin="-2s" />
+                        </circle>
+                    </g>
+                    <!-- Órbita Diagonal Esquerda -->
+                    <g transform="rotate(-45)">
+                        <use href="#orbitBottom" fill="none" stroke="url(#blueNeonHeader)" stroke-width="12"
+                            opacity="0.8" />
+                        <circle r="18" fill="#00ffff">
+                            <animateMotion dur="4s" repeatCount="indefinite" begin="-1s">
+                                <mpath href="#orbitPathHeader" />
+                            </animateMotion>
+                            <animate attributeName="opacity" values="1;0;1" keyTimes="0;0.5;1" calcMode="discrete"
+                                dur="4s" repeatCount="indefinite" begin="-1s" />
+                        </circle>
+                        <circle r="18" fill="#00ffff">
+                            <animateMotion dur="4s" repeatCount="indefinite" begin="-3s">
+                                <mpath href="#orbitPathHeader" />
+                            </animateMotion>
+                            <animate attributeName="opacity" values="1;0;1" keyTimes="0;0.5;1" calcMode="discrete"
+                                dur="4s" repeatCount="indefinite" begin="-3s" />
+                        </circle>
+                    </g>
+                </g>
             </svg>
             <div style="display: flex;">
                 <span class="logo-blue">Tek</span>

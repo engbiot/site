@@ -330,6 +330,7 @@ const carouselData = [...menuItensConfig];
 const carouselEl = document.getElementById('carousel');
 
 const setRadius = () => {
+    if (window.innerWidth <= 400) return 138;
     if (window.innerWidth <= 480) return 150;
     if (window.innerWidth <= 510) return 180;
     if (window.innerWidth <= 600) return 200;

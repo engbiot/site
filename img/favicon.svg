@@ -1,33 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="80 80 240 240" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
   <defs>
-    <linearGradient id="blueNeon" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="50%" stop-color="#0059ffff"/>
-      <stop offset="100%" stop-color="#01259bff"/>
+    <!-- Gradiente de azul ajustado para tons mais escuros -->
+    <linearGradient id="blueDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0055ff" />
+      <stop offset="100%" stop-color="#001188" />
     </linearGradient>
+    
+    <!-- Gradiente verde da folha -->
     <linearGradient id="greenNeon" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="100%" stop-color="#39ff14"/>
-      <stop offset="100%" stop-color="#00b300"/>
+      <stop offset="0%" stop-color="#39ff14" />
+      <stop offset="100%" stop-color="#00b300" />
     </linearGradient>
-    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
-  <rect width="0" height="100" fill="#ffffffff" rx="50"/>
-  <g transform="translate(200, 200)" filter="url(#neonGlow)">
-    <ellipse cx="0" cy="0" rx="130" ry="55" fill="none" stroke="url(#blueNeon)" stroke-width="13" transform="rotate(45)"/>
-    <ellipse cx="0" cy="0" rx="130" ry="55" fill="none" stroke="url(#blueNeon)" stroke-width="13" transform="rotate(-45)"/>
-    <circle cx="92" cy="92" r="10" fill="#000000ff"/>
-    <circle cx="-92" cy="-92" r="10" fill="#000000ff"/>
-    <circle cx="92" cy="-92" r="10" fill="#000000ff"/>
-    <circle cx="-92" cy="92" r="10" fill="#000000ff"/>
-    <path d="M 0 55 C -45 10, -65 -45, 0 -100 C 65 -45, 45 10, 0 55 Z" fill="url(#greenNeon)" opacity="0.9"/>
-    <path d="M 0 -95 L 0 50" fill="none" stroke="#0b0c10" stroke-width="5" stroke-linecap="round"/>
-    <path d="M 0 -20 Q 25 -45 30 -55" fill="none" stroke="#0b0c10" stroke-width="5" stroke-linecap="round"/>
-    <path d="M 0 15 Q -25 -10 -30 -20" fill="none" stroke="#0b0c10" stroke-width="5" stroke-linecap="round"/>
-    <path d="M 0 40 Q 20 20 25 10" fill="none" stroke="#0b0c10" stroke-width="4" stroke-linecap="round"/>
+
+  <g transform="translate(200, 200)">
+    <!-- Órbitas mais grossas e com azul mais escuro para visibilidade em ícones pequenos -->
+    <ellipse cx="0" cy="0" rx="130" ry="45" fill="none" stroke="url(#blueDark)" stroke-width="18" transform="rotate(45)" />
+    <ellipse cx="0" cy="0" rx="130" ry="45" fill="none" stroke="url(#blueDark)" stroke-width="18" transform="rotate(-45)" />
+
+    <!-- Bolinhas proporcionais ao novo tamanho das órbitas -->
+    <circle cx="92" cy="92" r="18" fill="#0055ff" />
+    <circle cx="-92" cy="-92" r="18" fill="#0055ff" />
+    <circle cx="92" cy="-92" r="18" fill="#0055ff" />
+    <circle cx="-92" cy="92" r="18" fill="#0055ff" />
+
+    <!-- Folha com 100% de opacidade (sem transparência) -->
+    <path d="M 0 55 C -45 10, -65 -45, 0 -100 C 65 -45, 45 10, 0 55 Z" fill="url(#greenNeon)" />
+    
+    <!-- Veias da folha em branco para garantir contraste em temas claros e escuros com o fundo transparente -->
+    <path d="M 0 -95 L 0 50" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+    <path d="M 0 -20 Q 25 -45 30 -55" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+    <path d="M 0 15 Q -25 -10 -30 -20" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+    <path d="M 0 40 Q 20 20 25 10" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
   </g>
 </svg>
