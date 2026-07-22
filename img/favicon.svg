@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 224 224" width="100%" height="100%">
   <defs>
     <!-- Gradiente de azul ajustado para tons mais escuros -->
     <linearGradient id="blueDark" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -13,21 +13,22 @@
     </linearGradient>
   </defs>
 
-  <g transform="translate(200, 200)">
-    <!-- Órbitas mais grossas e com azul mais escuro para visibilidade em ícones pequenos -->
+  <!-- Viewbox reduzido para 224x224 e centro ajustado para 112, 112 cortando as bordas transparentes -->
+  <g transform="translate(112, 112)">
+    <!-- Órbitas -->
     <ellipse cx="0" cy="0" rx="130" ry="45" fill="none" stroke="url(#blueDark)" stroke-width="18" transform="rotate(45)" />
     <ellipse cx="0" cy="0" rx="130" ry="45" fill="none" stroke="url(#blueDark)" stroke-width="18" transform="rotate(-45)" />
 
-    <!-- Bolinhas proporcionais ao novo tamanho das órbitas -->
+    <!-- Bolinhas -->
     <circle cx="92" cy="92" r="18" fill="#0055ff" />
     <circle cx="-92" cy="-92" r="18" fill="#0055ff" />
     <circle cx="92" cy="-92" r="18" fill="#0055ff" />
     <circle cx="-92" cy="92" r="18" fill="#0055ff" />
 
-    <!-- Folha com 100% de opacidade (sem transparência) -->
+    <!-- Folha com 100% de opacidade -->
     <path d="M 0 55 C -45 10, -65 -45, 0 -100 C 65 -45, 45 10, 0 55 Z" fill="url(#greenNeon)" />
     
-    <!-- Veias da folha em branco para garantir contraste em temas claros e escuros com o fundo transparente -->
+    <!-- Veias da folha -->
     <path d="M 0 -95 L 0 50" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
     <path d="M 0 -20 Q 25 -45 30 -55" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
     <path d="M 0 15 Q -25 -10 -30 -20" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
