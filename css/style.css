@@ -561,9 +561,8 @@ body.light-mode .cta-secondary:hover {
 }
 
 .toggle-track {
-    width: 50px;
-    height: 28px;
-    left: 0px;
+    width: 48px;
+    height: 26px;
     background: #5c5c5c;
     border-radius: 40px;
     position: relative;
@@ -577,17 +576,18 @@ body.light-mode .toggle-track {
 }
 
 .toggle-thumb {
-    width: 24px;
-    height: 24px;
+    width: 21px;
+    height: 21px;
+    right: 26px;
     border-radius: 50%;
     position: absolute;
-    top: 2px;
+    top: 2.5px;
     background: var(--neon-green);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 body.light-mode .toggle-thumb {
@@ -607,10 +607,10 @@ body.light-mode .toggle-thumb::before {
 
 #hamburger-btn {
     position: fixed;
-    top: 3px;
+    top: 2px;
     left: 10px;
     width: 35px;
-    height: 22px;
+    height: 23px;
     padding: 15px;
     z-index: 300;
     cursor: pointer;
@@ -1303,7 +1303,7 @@ body.light-mode .selected-item-web {
     }
 
     #hamburger-btn {
-        top: 8px;
+        top: 9px;
         padding: 10px;
     }
 
@@ -1425,7 +1425,7 @@ body.light-mode .selected-item-web {
 
     /* Mantendo a constante: Menu (55), Respiro(15), Logo(70), Respiro(15) */
     #menu-wrapper {
-        height: 47px;
+        height: 48px;
     }
 
     #logo-wrapper {
@@ -1435,22 +1435,25 @@ body.light-mode .selected-item-web {
 
     #hamburger-btn {
         position: fixed;
-        top: 0px;
+        top: 3px;
         left: 2px;
         width: 30px;
         height: 20px;
-        padding: 15px;
+        padding: 12px;
     }
 
     .toggle-track {
-        width: 45px;
-        height: 24px;
-        left: 5px;
+        width: 46px;
+        height: 25px;
+        top: 0;
+        right: -5px;
     }
 
     .toggle-thumb {
         width: 21px;
         height: 21px;
+        top: 2.2px;
+        right: 25px;
     }
 
     #presentation-container {
