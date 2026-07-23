@@ -6,7 +6,7 @@
     --neon-blue: #00f3ff;
     --neon-green: #00ffcc;
     --dark-bg: #03050a;
-    --slide-bg: #0a111a;
+    --slide-bg: #0a111ae2;
     --text-color: #ffffff;
     --text-muted: #ddd;
     --card-bg: #111a26;
@@ -15,7 +15,7 @@
     --menu-bg: rgba(3, 5, 10, 0.85);
     --logo-blue-txt: var(--neon-blue);
     --logo-green-txt: var(--neon-green);
-    --info-box-bg: rgba(0, 0, 0, 0.4);
+    --info-box-bg: rgba(48, 248, 228, 0.056);
 }
 
 /* ==========================================
@@ -26,7 +26,7 @@ body.light-mode {
     --neon-blue: #0066ff;
     --neon-green: #00b300;
     --dark-bg: #f4f7f6;
-    --slide-bg: #ffffff;
+    --slide-bg: #ffffffbd;
     --text-color: #2c3e50;
     --text-muted: #4a5568;
     --card-bg: #ffffff;
@@ -35,7 +35,7 @@ body.light-mode {
     --menu-bg: rgba(255, 255, 255, 0.85);
     --logo-blue-txt: #0055cc;
     --logo-green-txt: #008000;
-    --info-box-bg: rgba(0, 0, 0, 0.05);
+    --info-box-bg: rgba(181, 181, 181, 0.062);
 }
 
 body,
@@ -563,7 +563,7 @@ body.light-mode .cta-secondary:hover {
 .toggle-track {
     width: 48px;
     height: 26px;
-    background: #5c5c5c;
+    background: #24fefa57;
     border-radius: 40px;
     position: relative;
     transition: background 0.3s;
@@ -571,7 +571,7 @@ body.light-mode .cta-secondary:hover {
 }
 
 body.light-mode .toggle-track {
-    background: var(--neon-green);
+    background: #3e72ff43;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
@@ -582,7 +582,7 @@ body.light-mode .toggle-track {
     border-radius: 50%;
     position: absolute;
     top: 2.5px;
-    background: var(--neon-green);
+    background: var(--neon-blue);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s;
     display: flex;
     align-items: center;
@@ -592,12 +592,12 @@ body.light-mode .toggle-track {
 
 body.light-mode .toggle-thumb {
     transform: translateX(24px);
-    background: #77ee95;
+    background: var(--neon-blue);
 }
 
 .toggle-thumb::before {
     content: '⚫';
-    font-size: 10px;
+    font-size: 8px;
     transition: opacity 0.3s;
 }
 
@@ -624,10 +624,10 @@ body.light-mode .toggle-thumb::before {
     display: block;
     height: 3px;
     width: 100%;
-    background: var(--neon-green);
+    background: var(--neon-blue);
     border-radius: 3px;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 5px var(--neon-green);
+    box-shadow: 0 0 5px var(--neon-blue);
     pointer-events: none;
 }
 
@@ -980,7 +980,7 @@ ul {
 }
 
 .compact-card {
-    background: rgba(0, 0, 0, 0.03);
+    background: rgba(27, 54, 254, 0.03);
     padding: 20px;
     border-radius: 8px;
     border-left: 3px solid var(--neon-blue);
@@ -1176,7 +1176,7 @@ ul {
 .whatsapp-btn {
     border-color: #25D366 !important;
     background: #25D366 !important;
-    color: #003113 !important;
+    color: #ffffff !important;
     display: flex;
     justify-content: center;
     align-items: center;
